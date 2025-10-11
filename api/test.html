@@ -215,6 +215,11 @@
                         showError('查無此追蹤編號的記錄，請確認編號是否正確。');
                         return;
                     }
+                    if (response.status === 429) {
+                        const errorData = await response.json();
+                        showError(errorData.message || '查詢次數已達上限（每小時 10 次），請稍後再試。');
+                        return;
+                    }
                     throw new Error('Network response was not ok');
                 }
                 
@@ -290,7 +295,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Origin/Destination</span>
-                        <span class="info-value">${shipmentData.origin && shipmentData.destination ? (shipmentData.origin === 'Domestic' && shipmentData.destination === 'Domestic' ? 'Domestic' : `${shipmentData.origin} → ${shipmentData.destination}`) : '—'}</span>
+                        <span class="info-value">${shipmentData.route || '—'}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Package Count</span>

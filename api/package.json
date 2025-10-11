@@ -17,19 +17,18 @@
   "author": "TailorMed",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
+    "airtable": "^0.12.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "airtable": "^0.12.2"
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "optionalDependencies": {
+    "mongoose": "^8.0.0",
     "mysql2": "^3.6.0",
-    "pg": "^8.11.3",
-    "mongoose": "^8.0.0"
+    "pg": "^8.11.3"
   }
 }
-
-

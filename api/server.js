@@ -1,10 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 const trackingRoutes = require('./routes/tracking');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Rate Limiting：每個 IP 每小時最多 10 次查詢
+const apiLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 小時
+  max: 10, // 最多 10 次請求
+  message: {
+    error: 'Too many requests',
+    message: '您已達到查詢次數上限（每小時 10 次），請稍後再試。',
+    retryAfter: '1 hour'
+  },
+  standardHeaders: true, // 返回 RateLimit-* headers
+  legacyHeaders: false, // 禁用 X-RateLimit-* headers
+});
 
 // Middleware
 app.use(cors());
@@ -25,8 +39,8 @@ if (fs.existsSync(staticPath)) {
   console.log('⚠️  靜態檔案路徑不存在，僅提供 API 和測試頁面');
 }
 
-// API Routes
-app.use('/api/tracking', trackingRoutes);
+// API Routes（套用 Rate Limiting）
+app.use('/api/tracking', apiLimiter, trackingRoutes);
 
 // 測試頁面路由（使用內建的測試頁面）
 app.get('/test', (req, res) => {

@@ -29,6 +29,14 @@ async function fetchTrackingData(orderNo, trackingNo) {
       if (response.status === 404) {
         return null; // 找不到資料
       }
+      if (response.status === 429) {
+        // 查詢次數超過限制
+        const errorData = await response.json();
+        return { 
+          error: 'rate_limit', 
+          message: errorData.message || '查詢次數已達上限，請稍後再試。'
+        };
+      }
       throw new Error('Network response was not ok');
     }
 
@@ -49,11 +57,7 @@ function renderShipmentInfo(shipmentData) {
     'Order No.': shipmentData.orderNo || '—',
     'Invoice No.': shipmentData.invoiceNo || '—',
     'MAWB': shipmentData.mawb || '—',
-    'Original/Destination': shipmentData.origin && shipmentData.destination 
-      ? (shipmentData.origin === 'Domestic' && shipmentData.destination === 'Domestic' 
-        ? 'Domestic' 
-        : `${shipmentData.origin} → ${shipmentData.destination}`)
-      : '—',
+    'Original/Destination': shipmentData.route || '—',
     'Package Count': shipmentData.packageCount || '—',
     'Weight': shipmentData.weight ? `${shipmentData.weight} KG` : '—',
     'ETA': shipmentData.eta || '—'
@@ -232,6 +236,12 @@ async function handleFormSubmit(event) {
   // 處理結果
   if (result === 'error') {
     showError(STATUS_MESSAGES.error);
+    return;
+  }
+
+  // 處理查詢次數限制
+  if (result && result.error === 'rate_limit') {
+    showError(result.message);
     return;
   }
 

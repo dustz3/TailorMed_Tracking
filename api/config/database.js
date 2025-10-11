@@ -58,8 +58,7 @@ const db = {
         trackingNo: fields['Tracking No.'],
         invoiceNo: fields['Invoice No.'],
         mawb: fields['MAWB'],
-        origin: this._extractOrigin(fields['Origin/Destination']),
-        destination: this._extractDestination(fields['Origin/Destination']),
+        route: this._extractRouteString(fields['Origin/Destination']),
         packageCount: fields['Package Count'],
         weight: fields['Weight(KG)'],
         eta: this._formatTimeValue(fields['ETA']),
@@ -219,49 +218,18 @@ const db = {
     return String(value);
   },
 
-  // 安全地提取起運地
-  _extractOrigin(originDestination) {
+  // 提取路線字串（直接返回 Airtable 的值）
+  _extractRouteString(originDestination) {
     if (!originDestination) return null;
     
-    let value = originDestination;
-    
-    // 如果是陣列，取第一個元素
+    // 如果是陣列（Lookup 欄位），取第一個元素
     if (Array.isArray(originDestination)) {
-      value = originDestination[0];
+      return originDestination[0] || null;
     }
     
-    // 如果是字串，嘗試分割
-    if (typeof value === 'string') {
-      // 如果是 Domestic（國內運輸），直接返回
-      if (value.toLowerCase().includes('domestic')) {
-        return 'Domestic';
-      }
-      const parts = value.split(' → ');
-      return parts[0] || null;
-    }
-    
-    return null;
-  },
-
-  // 安全地提取目的地
-  _extractDestination(originDestination) {
-    if (!originDestination) return null;
-    
-    let value = originDestination;
-    
-    // 如果是陣列，取第一個元素
-    if (Array.isArray(originDestination)) {
-      value = originDestination[0];
-    }
-    
-    // 如果是字串，嘗試分割
-    if (typeof value === 'string') {
-      // 如果是 Domestic（國內運輸），直接返回
-      if (value.toLowerCase().includes('domestic')) {
-        return 'Domestic';
-      }
-      const parts = value.split(' → ');
-      return parts[1] || null;
+    // 如果是字串，直接返回
+    if (typeof originDestination === 'string') {
+      return originDestination;
     }
     
     return null;
