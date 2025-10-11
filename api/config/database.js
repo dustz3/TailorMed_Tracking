@@ -232,6 +232,10 @@ const db = {
     
     // 如果是字串，嘗試分割
     if (typeof value === 'string') {
+      // 如果是 Domestic（國內運輸），直接返回
+      if (value.toLowerCase().includes('domestic')) {
+        return 'Domestic';
+      }
       const parts = value.split(' → ');
       return parts[0] || null;
     }
@@ -252,6 +256,10 @@ const db = {
     
     // 如果是字串，嘗試分割
     if (typeof value === 'string') {
+      // 如果是 Domestic（國內運輸），直接返回
+      if (value.toLowerCase().includes('domestic')) {
+        return 'Domestic';
+      }
       const parts = value.split(' → ');
       return parts[1] || null;
     }
