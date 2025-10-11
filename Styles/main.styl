@@ -1,0 +1,343 @@
+// TailorMed Shipment Tracking Styles
+// 貨件追蹤系統樣式
+
+// Import TailorMed Variables
+@import 'variables.styl'
+
+// Import Components
+@import 'components/lookupPanel.styl'
+@import 'components/resultsPanel.styl'
+@import 'components/timelinePanel.styl'
+
+// CSS Variables
+:root
+  --primary primary-color
+  --secondary secondary-color
+  --accent accent-color
+  --text-primary primary-color
+  --text-secondary neutral-gray
+  --bg-primary base-white
+  --bg-secondary neutral-light
+  --border-color rgba(primary-color, 0.08)
+
+// Base Styles
+*
+  margin 0
+  padding 0
+  box-sizing border-box
+
+html
+  font-size 16px
+  line-height 1.6
+
+body
+  font-family 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+  font-size 1rem
+  color var(--text-primary)
+  background-color var(--bg-primary)
+  line-height 1.6
+
+// Container
+.container
+  max-width 1200px
+  margin 0 auto
+  padding 0 20px
+
+// Typography
+h1, h2, h3, h4, h5, h6
+  font-weight 600
+  line-height 1.2
+  color base-white
+  margin-bottom 1rem
+
+h1
+  font-size 2.5rem
+
+h2
+  font-size 1.75rem
+
+h3
+  font-size 1.4rem
+
+p
+  margin-bottom 1rem
+  color var(--text-secondary)
+  line-height 1.7
+
+// Buttons
+.btn
+  display inline-flex
+  align-items center
+  justify-content center
+  padding 12px 24px
+  border none
+  border-radius 8px
+  font-size 1rem
+  font-weight 600
+  text-decoration none
+  cursor pointer
+  transition all 0.2s ease
+  text-transform uppercase
+  letter-spacing 0.05em
+
+  &--primary
+    background primary-color
+    color base-white
+
+    &:hover
+      background darken(primary-color, 10%)
+      transform translateY(-2px)
+
+  &--outline
+    background transparent
+    color base-white
+    border 2px solid base-white
+
+    &:hover
+      background rgba(base-white, 0.1)
+      transform translateY(-2px)
+
+  &--large
+    padding 16px 32px
+    font-size 1.2rem
+
+.site-header
+  background white
+  border-bottom 1px solid rgba(15, 23, 42, 0.08)
+  position sticky
+  top 0
+  z-index 10
+  backdrop-filter blur(8px)
+  box-shadow 0 8px 24px rgba(15, 23, 42, 0.05)
+
+  .container
+    display flex
+    align-items center
+    justify-content space-between
+    padding 18px 18px
+    height 60px
+
+.brand-logo
+  display block
+  max-height 44px
+  width 80%
+
+.site-nav
+  display flex
+  gap 18px
+
+  @media (max-width: 768px)
+    margin-left auto
+
+.nav-link
+  color var(--secondary)
+  text-decoration none
+  font-weight 500
+  padding 8px 14px
+  border-radius 999px
+  transition .2s ease
+
+  &:hover
+    transform translateY(-3px)
+    background rgba(37, 99, 235, 0.18)
+    color var(--accent)
+
+  @media (max-width: 768px)
+    text-align right
+    display inline-block
+
+.site-footer
+  background primary-color
+  color base-white
+  padding 28px 0
+
+  .container
+    display flex
+    justify-content center
+
+  .site-footer__copy
+    font-size 1rem
+    text-align center
+    color base-white
+
+@media (max-width: 768px)
+  .site-footer
+    padding 20px 0
+
+    .site-footer__copy
+      font-size 0.8rem
+      color base-white
+
+.hero-banner
+  position relative
+  width 100%
+  min-height 400px
+  background linear-gradient(135deg, primary-color 0%, darken(primary-color, 20%) 100%)
+  background-image url('../images/shipmentTracking.webp')
+  background-size cover
+  background-position center
+  background-repeat no-repeat
+  color base-white
+  display flex
+  align-items center
+  overflow hidden
+
+  .hero-overlay
+    position absolute
+    inset 0
+    background rgba(15, 23, 42, 0.55)
+
+  .container
+    position relative
+    z-index 1
+    display flex
+    align-items center
+    justify-content space-between
+    gap 40px
+    padding 48px 0 78px 0
+
+  .hero-content
+    display grid
+    grid-template-columns 1fr 1fr
+    align-items center
+    gap 40px
+
+  .hero-text
+    max-width 520px
+    text-align left
+
+  .hero-title
+    font-size 2.5rem
+    font-weight 700
+    margin-bottom 16px
+    color base-white
+
+  .hero-subtitle
+    font-size 1.125rem
+    line-height 1.8
+    color rgba(255, 255, 255, 0.85)
+    text-align left
+
+    &--mobile
+      display none
+
+  .hero-actions
+    display flex
+    gap 16px
+
+  .btn--outline
+    border-color white
+    color base-white
+
+    &:hover
+      transform translateY(-3px)
+      background rgba(255, 255, 255, 0.2)
+      color base-white
+
+.hero-summary
+  display flex
+  justify-content center
+  margin-top -60px
+  padding 0 5%
+  flex-direction column
+  align-items center
+  gap 24px
+  margin-bottom 80px
+
+@media (max-width: 768px)
+  .hero-banner
+    min-height 320px
+    background-position 80% center
+
+    .container
+      flex-direction column
+      align-items flex-start
+      gap 24px
+      padding 40px 0
+
+    .hero-content
+      grid-template-columns 1fr
+      gap 24px
+
+    .hero-actions
+      width 100%
+      flex-direction column
+      align-items stretch
+
+    .hero-text
+      width 100%
+      padding 0 5%
+
+      .hero-title
+        font-size 2.1rem
+
+      .hero-subtitle--desktop
+        display none
+
+      .hero-subtitle--mobile
+        display block
+        font-size 1rem
+        margin-top 8px
+        color rgba(255, 255, 255, 0.9)
+
+  .site-header
+    .container
+      padding 18px 5%
+
+  .hero-summary
+    margin-top -40px
+    margin-bottom 48px
+    gap 24px
+
+// Breakpoints
+breakpoints = {
+  desktop: 1280px,
+  laptop: 1024px,
+  tablet: 768px,
+  mobile: 480px
+}
+
+respond(size)
+  breakpoint = breakpoints[size]
+  if breakpoint
+    @media (max-width: breakpoint)
+      {block}
+  else
+    @media (max-width: size)
+      {block}
+
+respond(laptop)
+  .hero-banner
+    min-height 600px
+
+  .hero-content
+    grid-template-columns 1fr
+    gap 24px
+
+respond(tablet)
+  .container
+    padding 0 16px
+
+  .hero-banner
+    min-height 520px
+    padding 40px 0
+
+  .hero-content
+    grid-template-columns 1fr
+    gap 24px
+
+  .hero-actions
+    width 100%
+    flex-direction column
+    align-items stretch
+
+  .hero-text
+    width 100%
+    padding 0 5%
+
+respond(mobile)
+  .hero-summary
+    margin-top -40px
+    margin-bottom 48px
+    gap 0
+
