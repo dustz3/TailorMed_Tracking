@@ -290,7 +290,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Origin/Destination</span>
-                        <span class="info-value">${shipmentData.origin && shipmentData.destination ? `${shipmentData.origin} → ${shipmentData.destination}` : '—'}</span>
+                        <span class="info-value">${shipmentData.origin && shipmentData.destination ? (shipmentData.origin === 'Domestic' && shipmentData.destination === 'Domestic' ? 'Domestic' : `${shipmentData.origin} → ${shipmentData.destination}`) : '—'}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Package Count</span>
