@@ -330,7 +330,7 @@
   height: 55px;
   border: none;
   border-radius: 10px;
-  background: #bb2749;
+  background: #143463;
   color: #fff;
   cursor: pointer;
   font-weight: 700;
@@ -342,7 +342,7 @@
 }
 .results-panel .results-mobile-cta:hover {
   transform: translateY(-3px);
-  background: #a82342;
+  background: #122f59;
 }
 .results-panel .results-mobile-cta:active {
   transform: translateY(0);
@@ -1207,7 +1207,7 @@ body {
   font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 1rem;
   color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: #dfeaf3;
   line-height: 1.6;
 }
 .container {
