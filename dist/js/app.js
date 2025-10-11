@@ -50,7 +50,9 @@ function renderShipmentInfo(shipmentData) {
     'Invoice No.': shipmentData.invoiceNo || '—',
     'MAWB': shipmentData.mawb || '—',
     'Original/Destination': shipmentData.origin && shipmentData.destination 
-      ? `${shipmentData.origin} → ${shipmentData.destination}` 
+      ? (shipmentData.origin === 'Domestic' && shipmentData.destination === 'Domestic' 
+        ? 'Domestic' 
+        : `${shipmentData.origin} → ${shipmentData.destination}`)
       : '—',
     'Package Count': shipmentData.packageCount || '—',
     'Weight': shipmentData.weight ? `${shipmentData.weight} KG` : '—',
