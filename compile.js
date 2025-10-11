@@ -9,14 +9,8 @@ const SCRIPT_DIR = path.join(ROOT_DIR, 'Javascript');
 const DATA_DIR = path.join(ROOT_DIR, 'data');
 const TEMPLATE_DIR = path.join(ROOT_DIR, 'Templates');
 const ASSETS_DIR = path.join(ROOT_DIR, 'Assets');
-const PROJECT_ROOT = path.resolve(ROOT_DIR, '../../../..');
-const DIST_DIR = path.join(
-  PROJECT_ROOT,
-  'dist',
-  'Projects',
-  'TailorMed',
-  'track'
-);
+// 修正：使用相對路徑，避免權限問題
+const DIST_DIR = path.join(ROOT_DIR, 'dist');
 
 function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) {
