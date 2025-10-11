@@ -280,6 +280,10 @@ const db = {
     }
 
     const lastCompleted = completedSteps[completedSteps.length - 1];
+    // 如果最後完成的步驟是 Shipment Delivered，加上彩帶 emoji
+    if (lastCompleted.title.includes('Shipment Delivered')) {
+      return lastCompleted.title; // 已經包含 emoji 了
+    }
     return lastCompleted.title;
   },
 
