@@ -189,12 +189,15 @@ const db = {
       try {
         const date = new Date(value);
         if (!isNaN(date.getTime())) {
+          // 轉換為台灣時間 (UTC+8)
+          const taiwanDate = new Date(date.getTime() + (8 * 60 * 60 * 1000));
+          
           // 格式化為：08/10/2025 14:32
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-          const hours = String(date.getHours()).padStart(2, '0');
-          const minutes = String(date.getMinutes()).padStart(2, '0');
+          const year = taiwanDate.getUTCFullYear();
+          const month = String(taiwanDate.getUTCMonth() + 1).padStart(2, '0');
+          const day = String(taiwanDate.getUTCDate()).padStart(2, '0');
+          const hours = String(taiwanDate.getUTCHours()).padStart(2, '0');
+          const minutes = String(taiwanDate.getUTCMinutes()).padStart(2, '0');
           return `${day}/${month}/${year} ${hours}:${minutes}`;
         }
       } catch (error) {
