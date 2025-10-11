@@ -1,5 +1,8 @@
+# 注意：此配置適用於從 track 目錄直接部署
+# 如果從專案根目錄部署，請在 Netlify 設定中指定 Base directory
+
 [build]
-  # 建置命令 - 在 src/Projects/TailorMed/track 目錄中執行
+  # 建置命令
   command = "npm install && npm run build"
   
   # 發布目錄 - 相對於建置目錄的路徑
