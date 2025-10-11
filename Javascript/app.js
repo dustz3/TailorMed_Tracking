@@ -1,7 +1,7 @@
 // TailorMed 貨件追蹤系統 - API 整合
 
-// API 設定
-const API_BASE_URL = 'http://localhost:3000/api';
+// API 設定（從 config.js 讀取，如果沒有則使用預設值）
+const API_BASE_URL = window.CONFIG?.API_BASE_URL || 'http://localhost:3000/api';
 
 // DOM 元素
 const trackingForm = document.querySelector('.summary-form');

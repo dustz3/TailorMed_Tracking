@@ -1,0 +1,22 @@
+[build]
+  # 發布目錄 - Netlify 會從這裡讀取檔案
+  publish = "../../../dist/Projects/TailorMed/track"
+  
+  # 如果需要編譯，取消下面註解
+  # command = "npm run build"
+
+[[redirects]]
+  # 處理 SPA 路由（如果需要）
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  
+[[headers]]
+  # 為所有頁面添加安全標頭
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+

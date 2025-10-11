@@ -27,7 +27,7 @@ Thumbs.db
 
 # Build 產出（如果有的話）
 build/
-dist/
+# dist/ - 保留 dist 資料夾給 Netlify 部署使用
 
 # 測試覆蓋率
 coverage/
