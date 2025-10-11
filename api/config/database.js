@@ -108,12 +108,12 @@ const db = {
   // 從 Airtable 欄位組合 Timeline 陣列
   _buildTimelineFromFields(fields) {
     const timeline = [];
-    let lastCompletedIndex = -1;
+    let nextProcessingIndex = -1;
 
-    // 找出最後一個已完成的步驟（排除事件步驟）
+    // 找出下一個沒有時間資料的步驟（排除事件步驟）
     TIMELINE_STEPS.forEach((stepDef, index) => {
-      if (fields[stepDef.field] && !stepDef.isEvent) {
-        lastCompletedIndex = index;
+      if (!fields[stepDef.field] && !stepDef.isEvent && nextProcessingIndex === -1) {
+        nextProcessingIndex = index;
       }
     });
 
@@ -133,18 +133,18 @@ const db = {
       let status, time;
 
       if (timeValue) {
-        // 有時間值 = 已完成，但如果是最後一個有時間的步驟，顯示為進行中
-        if (index === lastCompletedIndex && !stepDef.isEvent) {
+        // 有時間值 = 已完成
+        status = 'completed';
+        time = this._formatTimeValue(timeValue);
+      } else {
+        // 沒有時間值 = 如果是最下一個步驟則顯示為進行中，否則為待處理
+        if (index === nextProcessingIndex && !stepDef.isEvent) {
           status = 'active';
           time = 'Processing...';
         } else {
-          status = 'completed';
-          time = this._formatTimeValue(timeValue);
+          status = 'pending';
+          time = 'Pending';
         }
-      } else {
-        // 沒有時間值 = 待處理
-        status = 'pending';
-        time = 'Pending';
       }
 
       const timelineItem = {
