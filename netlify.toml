@@ -1,9 +1,9 @@
 [build]
-  # 發布目錄 - Netlify 會從這裡讀取檔案
-  publish = "../../../dist/Projects/TailorMed/track"
+  # 建置命令 - 在 src/Projects/TailorMed/track 目錄中執行
+  command = "npm install && npm run build"
   
-  # 如果需要編譯，取消下面註解
-  # command = "npm run build"
+  # 發布目錄 - 相對於建置目錄的路徑
+  publish = "dist/Projects/TailorMed/track"
 
 [[redirects]]
   # 處理 SPA 路由（如果需要）
