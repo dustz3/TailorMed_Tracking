@@ -15,19 +15,27 @@ app.use(express.urlencoded({ extended: true }));
 // 使用相對路徑，讓部署環境也能正常工作
 const staticPath = path.join(__dirname, '../../../dist/Projects/TailorMed/track');
 console.log('📁 靜態檔案路徑:', staticPath);
-app.use(express.static(staticPath));
+
+// 檢查靜態檔案路徑是否存在，如果存在則提供靜態檔案服務
+const fs = require('fs');
+if (fs.existsSync(staticPath)) {
+  app.use(express.static(staticPath));
+  console.log('✅ 靜態檔案服務已啟用');
+} else {
+  console.log('⚠️  靜態檔案路徑不存在，僅提供 API 和測試頁面');
+}
 
 // API Routes
 app.use('/api/tracking', trackingRoutes);
 
-// 測試頁面路由
+// 測試頁面路由（使用內建的測試頁面）
 app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, 'test.html'));
 });
 
-// 根路由重定向到 index.html
+// 根路由重定向到測試頁面
 app.get('/', (req, res) => {
-  res.sendFile(path.join(staticPath, 'index.html'));
+  res.redirect('/test');
 });
 
 // Health check
