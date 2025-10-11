@@ -110,6 +110,9 @@ const db = {
     const timeline = [];
     let nextProcessingIndex = -1;
 
+    // 檢查是否已送達完成（Shipment Delivered 有時間資料）
+    const isDelivered = fields['Shipment Delivered'];
+
     // 找出下一個沒有時間資料的步驟（排除事件步驟）
     TIMELINE_STEPS.forEach((stepDef, index) => {
       if (!fields[stepDef.field] && !stepDef.isEvent && nextProcessingIndex === -1) {
@@ -130,15 +133,21 @@ const db = {
       }
 
       const timeValue = fields[stepDef.field];
-      let status, time;
+      let status, time, title;
+
+      // 處理標題（如果是 Shipment Delivered 且已完成，加上彩帶 emoji）
+      title = stepDef.title;
+      if (stepDef.field === 'Shipment Delivered' && timeValue) {
+        title = `${stepDef.title} 🎉`;
+      }
 
       if (timeValue) {
         // 有時間值 = 已完成
         status = 'completed';
         time = this._formatTimeValue(timeValue);
       } else {
-        // 沒有時間值 = 如果是最下一個步驟則顯示為進行中，否則為待處理
-        if (index === nextProcessingIndex && !stepDef.isEvent) {
+        // 沒有時間值 = 如果是最下一個步驟且未送達則顯示為進行中，否則為待處理
+        if (index === nextProcessingIndex && !stepDef.isEvent && !isDelivered) {
           status = 'active';
           time = 'Processing...';
         } else {
@@ -149,7 +158,7 @@ const db = {
 
       const timelineItem = {
         step: stepDef.step,
-        title: stepDef.title,
+        title: title,
         time: time,
         status: status
       };
