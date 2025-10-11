@@ -49,9 +49,15 @@ function renderShipmentInfo(shipmentData) {
     'Order No.': shipmentData.orderNo || '—',
     'Invoice No.': shipmentData.invoiceNo || '—',
     'MAWB': shipmentData.mawb || '—',
-    'Original/Destination': shipmentData.origin && shipmentData.destination 
-      ? `${shipmentData.origin} → ${shipmentData.destination}` 
-      : '—',
+    'Original/Destination': (() => {
+      if (!shipmentData.origin || !shipmentData.destination) return '—';
+      // 如果是 Domestic，只顯示 "Domestic"
+      if (shipmentData.origin === 'Domestic' && shipmentData.destination === 'Domestic') {
+        return 'Domestic';
+      }
+      // 否則顯示 "起運地 → 目的地"
+      return `${shipmentData.origin} → ${shipmentData.destination}`;
+    })(),
     'Package Count': shipmentData.packageCount || '—',
     'Weight': shipmentData.weight ? `${shipmentData.weight} KG` : '—',
     'ETA': shipmentData.eta || '—'
