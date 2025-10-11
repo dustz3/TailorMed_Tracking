@@ -53,7 +53,7 @@ function renderShipmentInfo(shipmentData) {
       ? `${shipmentData.origin} → ${shipmentData.destination}` 
       : '—',
     'Package Count': shipmentData.packageCount || '—',
-    'Weight': shipmentData.weight || '—',
+    'Weight': shipmentData.weight ? `${shipmentData.weight} KG` : '—',
     'ETA': shipmentData.eta || '—'
   };
 
