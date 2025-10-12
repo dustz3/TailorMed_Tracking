@@ -184,7 +184,7 @@ const db = {
 
     // 如果是布林值 true（checkbox 勾選），顯示「已完成」
     if (value === true) {
-      return '已完成';
+      return 'Done';
     }
 
     // 如果是布林值 false，顯示為空
