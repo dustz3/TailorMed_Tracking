@@ -129,13 +129,20 @@ app.get('/api/health', (req, res) => {
 app.get('/api/monitoring/stats', (req, res) => {
   const now = new Date();
   
-  // 修正：直接使用 UTC 時間，因為所有時間戳都是 UTC
-  // 台灣時間的今日開始 = UTC 今日開始 + 8小時
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  // 修正時區計算：使用台灣時間計算今日開始
+  // 台灣時間 = UTC + 8 小時
+  const taiwanTime = new Date(now.getTime() + (8 * 60 * 60 * 1000));
+  const taiwanToday = new Date(taiwanTime.getFullYear(), taiwanTime.getMonth(), taiwanTime.getDate());
+  const taiwanThisMonth = new Date(taiwanTime.getFullYear(), taiwanTime.getMonth(), 1);
+  
+  // 轉換回 UTC 時間作為比較基準
+  const todayStart = new Date(taiwanToday.getTime() - (8 * 60 * 60 * 1000));
+  const thisMonthStart = new Date(taiwanThisMonth.getTime() - (8 * 60 * 60 * 1000));
   
   console.log('統計計算時間點:', {
     now: now.toISOString(),
+    taiwanTime: taiwanTime.toISOString(),
+    taiwanToday: taiwanToday.toISOString(),
     todayStart: todayStart.toISOString(),
     thisMonthStart: thisMonthStart.toISOString(),
     totalRequests: monitoringData.requests.length,
