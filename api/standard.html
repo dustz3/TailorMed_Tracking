@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TailorMed 追蹤系統測試</title>
+    <title>TailorMed Tracking System</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -176,7 +176,7 @@
                 <input type="text" id="trackingNo" name="trackingNo" placeholder="例如: GEXVC2YF" required>
             </div>
             
-            <button type="submit" id="submitBtn">查詢貨件狀態</button>
+            <button type="submit" id="submitBtn">STATUS CHECK</button>
         </form>
         
         <div id="result" class="result">
@@ -197,7 +197,7 @@
             const trackingNo = document.getElementById('trackingNo').value.trim().toUpperCase();
             
             if (!orderNo || !trackingNo) {
-                showError('請輸入完整的 Job No. 和 Tracking No.');
+                showError('Please enter both Job No. and Tracking No.');
                 return;
             }
             
@@ -205,19 +205,19 @@
         });
 
         async function fetchTrackingData(orderNo, trackingNo) {
-            showLoading('正在查詢貨件狀態，請稍候...');
+            showLoading('Checking shipment status, please wait...');
             
             try {
                 const response = await fetch(`/api/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`);
                 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        showError('查無此追蹤編號的記錄，請確認編號是否正確。');
+                        showError('No record found. Please verify the tracking number.');
                         return;
                     }
                     if (response.status === 429) {
                         const errorData = await response.json();
-                        showError(errorData.message || '查詢次數已達上限（每小時 10 次），請稍後再試。');
+                        showError(errorData.message || 'Query limit reached (10 per hour). Please try again later.');
                         return;
                     }
                     throw new Error('Network response was not ok');
@@ -228,25 +228,25 @@
                 if (data.success && data.data) {
                     showSuccess(data.data);
                 } else {
-                    showError('查詢失敗，請稍後再試。');
+                    showError('Query failed. Please try again later.');
                 }
                 
             } catch (error) {
                 console.error('查詢錯誤:', error);
-                showError('服務暫時無法使用，稍候再試或聯絡客服人員。');
+                showError('Service temporarily unavailable. Please try again later or contact support.');
             }
         }
 
         function showLoading(message) {
             result.className = 'result loading';
-            resultContent.innerHTML = `<p>⏳ ${message}</p>`;
+            resultContent.innerHTML = `<p>${message}</p>`;
             result.style.display = 'block';
             submitBtn.disabled = true;
         }
 
         function showError(message) {
             result.className = 'result error';
-            resultContent.innerHTML = `<p>❌ ${message}</p>`;
+            resultContent.innerHTML = `<p>${message}</p>`;
             result.style.display = 'block';
             submitBtn.disabled = false;
         }
@@ -256,7 +256,7 @@
             
             let timelineHtml = '';
             if (shipmentData.timeline && shipmentData.timeline.length > 0) {
-                timelineHtml = '<div class="timeline"><h3>📋 時間軸</h3>';
+                timelineHtml = '<div class="timeline"><h3>TIMELINE</h3>';
                 shipmentData.timeline.forEach(item => {
                     const stepClass = item.isEvent ? 'event' : item.status;
                     const stepDisplay = item.step || '★';
@@ -275,7 +275,7 @@
             }
             
             resultContent.innerHTML = `
-                <h3>✅ 查詢成功</h3>
+                <h3>SUCCESS</h3>
                 <div class="shipment-info">
                     <div class="info-row">
                         <span class="info-label">Job No.</span>
