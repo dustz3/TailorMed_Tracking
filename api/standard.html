@@ -190,6 +190,14 @@
         const resultContent = document.getElementById('resultContent');
         const submitBtn = document.getElementById('submitBtn');
 
+        // 從 URL 讀取 API Key（如果有）
+        const urlParams = new URLSearchParams(window.location.search);
+        const apiKey = urlParams.get('apiKey');
+        
+        if (apiKey) {
+            console.log('✅ API Key detected - Enhanced rate limit active');
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -208,7 +216,13 @@
             showLoading('Checking shipment status, please wait...');
             
             try {
-                const response = await fetch(`/api/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`);
+                // 建立 API URL，如果有 API Key 則附加
+                let apiUrl = `/api/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`;
+                if (apiKey) {
+                    apiUrl += `&apiKey=${encodeURIComponent(apiKey)}`;
+                }
+                
+                const response = await fetch(apiUrl);
                 
                 if (!response.ok) {
                     if (response.status === 404) {

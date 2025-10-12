@@ -14,8 +14,16 @@ const monitoringData = {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Rate Limiting：每個 IP 每小時最多 10 次查詢
-const apiLimiter = rateLimit({
+// API Keys 配置
+const VALID_API_KEYS = {
+  'tm93585598': {
+    name: 'Internal Team',
+    rateLimit: 50 // 50 次/小時
+  }
+};
+
+// Rate Limiting：外部用戶（每個 IP 每小時最多 10 次查詢）
+const externalLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 小時
   max: 10, // 最多 10 次請求
   message: {
@@ -26,6 +34,46 @@ const apiLimiter = rateLimit({
   standardHeaders: true, // 返回 RateLimit-* headers
   legacyHeaders: false, // 禁用 X-RateLimit-* headers
 });
+
+// Rate Limiting：內部用戶（每個 IP 每小時最多 50 次查詢）
+const internalLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 小時
+  max: 50, // 最多 50 次請求
+  message: {
+    error: 'Too many requests',
+    message: 'Query limit reached (50 per hour). Please try again later.',
+    retryAfter: '1 hour'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// API Key 驗證中間件
+const apiKeyAuth = (req, res, next) => {
+  const apiKey = req.query.apiKey;
+  
+  // 檢查是否有有效的 API Key
+  if (apiKey && VALID_API_KEYS[apiKey]) {
+    req.isAuthenticated = true;
+    req.apiKeyInfo = VALID_API_KEYS[apiKey];
+    console.log(`✅ 驗證成功 - API Key: ${apiKey} (${req.apiKeyInfo.name})`);
+  } else {
+    req.isAuthenticated = false;
+  }
+  
+  next();
+};
+
+// 動態 Rate Limiter（根據驗證狀態選擇限制）
+const dynamicRateLimiter = (req, res, next) => {
+  if (req.isAuthenticated) {
+    // 已驗證用戶：使用內部限制（50次/小時）
+    internalLimiter(req, res, next);
+  } else {
+    // 未驗證用戶：使用外部限制（10次/小時）
+    externalLimiter(req, res, next);
+  }
+};
 
 // 監控中間件（記錄 API 請求）
 const monitoringMiddleware = (req, res, next) => {
@@ -122,11 +170,11 @@ if (fs.existsSync(staticPath)) {
   console.log('⚠️  靜態檔案路徑不存在，僅提供 API 和測試頁面');
 }
 
-// API Routes（套用 Rate Limiting）
-app.use('/api/tracking', apiLimiter, trackingRoutes);
+// API Routes（套用 API Key 驗證和動態 Rate Limiting）
+app.use('/api/tracking', apiKeyAuth, dynamicRateLimiter, trackingRoutes);
 
-// 公開查詢路由（不記錄監控，但仍套用 Rate Limiting）
-app.use('/api/tracking-public', apiLimiter, trackingRoutes);
+// 公開查詢路由（不記錄監控，但仍套用 API Key 驗證和動態 Rate Limiting）
+app.use('/api/tracking-public', apiKeyAuth, dynamicRateLimiter, trackingRoutes);
 
 // 標準查詢頁面路由（會記錄監控）
 app.get('/standard', (req, res) => {
