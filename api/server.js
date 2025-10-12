@@ -40,7 +40,39 @@ const monitoringMiddleware = (req, res, next) => {
     if (req.path.startsWith('/api/tracking')) {
       console.log('🔍 記錄追蹤請求:', req.method, req.path);
     }
+    
+    // 攔截響應內容來判斷成功/失敗
+    const originalSend = res.send;
+    const originalJson = res.json;
+    let responseBody = null;
+    
+    res.send = function(data) {
+      responseBody = data;
+      return originalSend.call(this, data);
+    };
+    
+    res.json = function(data) {
+      responseBody = data;
+      return originalJson.call(this, data);
+    };
+    
     res.on('finish', () => {
+      // 判斷追蹤請求的成功/失敗
+      let isSuccess = false;
+      if (req.path.startsWith('/api/tracking')) {
+        if (res.statusCode === 200 && responseBody) {
+          try {
+            const body = typeof responseBody === 'string' ? JSON.parse(responseBody) : responseBody;
+            isSuccess = body.success === true && body.data;
+          } catch (e) {
+            isSuccess = false;
+          }
+        }
+      } else {
+        // 非追蹤請求，使用狀態碼判斷
+        isSuccess = res.statusCode === 200;
+      }
+      
       const requestData = {
         timestamp: new Date().toISOString(),
         method: req.method,
@@ -48,7 +80,8 @@ const monitoringMiddleware = (req, res, next) => {
         statusCode: res.statusCode,
         responseTime: Date.now() - startTime,
         ip: req.ip || req.connection.remoteAddress,
-        userAgent: req.get('User-Agent') || 'Unknown'
+        userAgent: req.get('User-Agent') || 'Unknown',
+        isSuccess: isSuccess // 新增成功/失敗標記
       };
       
       // 除錯：記錄完整路徑
@@ -56,7 +89,9 @@ const monitoringMiddleware = (req, res, next) => {
         originalUrl: req.originalUrl,
         path: req.path,
         url: req.url,
-        method: req.method
+        method: req.method,
+        statusCode: res.statusCode,
+        isSuccess: isSuccess
       });
       
       monitoringData.requests.push(requestData);
@@ -67,11 +102,11 @@ const monitoringMiddleware = (req, res, next) => {
       }
       
       // 簡單的 console 記錄
-      console.log(`[${requestData.timestamp}] ${requestData.method} ${requestData.path} - ${requestData.statusCode} (${requestData.responseTime}ms) - [已儲存到監控]`);
+      console.log(`[${requestData.timestamp}] ${requestData.method} ${requestData.path} - ${requestData.statusCode} (${requestData.responseTime}ms) - [已儲存到監控] - 成功: ${isSuccess}`);
       
       // 特別標記追蹤請求
       if (req.path.startsWith('/api/tracking')) {
-        console.log('✅ 追蹤請求已儲存:', requestData.path);
+        console.log('✅ 追蹤請求已儲存:', requestData.path, '成功:', isSuccess);
       }
     });
   } else {
@@ -188,7 +223,7 @@ app.get('/api/monitoring/stats', (req, res) => {
   );
   
   const successfulRequests = trackingRequests.filter(r => 
-    r.statusCode === 200
+    r.isSuccess === true
   );
   
   const avgResponseTime = trackingRequests.length > 0 
@@ -224,15 +259,16 @@ app.get('/api/monitoring/stats', (req, res) => {
       path: r.path,
       statusCode: r.statusCode,
       responseTime: r.responseTime,
-      isSuccess: r.statusCode === 200
+      isSuccess: r.isSuccess
     })),
     successCount: successfulRequests.length,
     failureCount: trackingRequests.length - successfulRequests.length,
-    failureRequests: trackingRequests.filter(r => r.statusCode !== 200).map(r => ({
+    failureRequests: trackingRequests.filter(r => r.isSuccess !== true).map(r => ({
       time: r.timestamp,
       path: r.path,
       statusCode: r.statusCode,
-      responseTime: r.responseTime
+      responseTime: r.responseTime,
+      isSuccess: r.isSuccess
     }))
   });
   
