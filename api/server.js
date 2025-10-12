@@ -41,33 +41,11 @@ const monitoringMiddleware = (req, res, next) => {
       console.log('🔍 記錄追蹤請求:', req.method, req.path);
     }
     
-    // 攔截響應內容來判斷成功/失敗
-    const originalSend = res.send;
-    const originalJson = res.json;
-    let responseBody = null;
-    
-    res.send = function(data) {
-      responseBody = data;
-      return originalSend.call(this, data);
-    };
-    
-    res.json = function(data) {
-      responseBody = data;
-      return originalJson.call(this, data);
-    };
-    
     res.on('finish', () => {
-      // 判斷追蹤請求的成功/失敗
+      // 簡化判斷：追蹤請求成功 = 200 狀態碼
       let isSuccess = false;
       if (req.path.startsWith('/api/tracking')) {
-        if (res.statusCode === 200 && responseBody) {
-          try {
-            const body = typeof responseBody === 'string' ? JSON.parse(responseBody) : responseBody;
-            isSuccess = body.success === true && body.data;
-          } catch (e) {
-            isSuccess = false;
-          }
-        }
+        isSuccess = res.statusCode === 200;
       } else {
         // 非追蹤請求，使用狀態碼判斷
         isSuccess = res.statusCode === 200;

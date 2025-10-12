@@ -19,12 +19,14 @@ router.get('/', async (req, res) => {
     const shipment = await db.getShipmentByOrderAndTracking(orderNo, trackingNo);
 
     if (!shipment) {
+      console.log('❌ 查詢失敗 - 找不到貨件:', { orderNo, trackingNo });
       return res.status(404).json({ 
         error: 'Not found',
         message: 'No shipment found with the provided information' 
       });
     }
 
+    console.log('✅ 查詢成功 - 找到貨件:', { orderNo, trackingNo, shipmentId: shipment.id });
     res.json({
       success: true,
       data: shipment
