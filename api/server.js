@@ -42,13 +42,13 @@ const monitoringMiddleware = (req, res, next) => {
     }
     
     res.on('finish', () => {
-      // 簡化判斷：追蹤請求成功 = 200 狀態碼
+      // 簡化判斷：追蹤請求成功 = 200 或 304 狀態碼
       let isSuccess = false;
       if (req.path.startsWith('/api/tracking')) {
-        isSuccess = res.statusCode === 200;
+        isSuccess = res.statusCode === 200 || res.statusCode === 304;
       } else {
         // 非追蹤請求，使用狀態碼判斷
-        isSuccess = res.statusCode === 200;
+        isSuccess = res.statusCode === 200 || res.statusCode === 304;
       }
       
       const requestData = {
@@ -201,7 +201,7 @@ app.get('/api/monitoring/stats', (req, res) => {
   );
   
   const successfulRequests = trackingRequests.filter(r => 
-    r.isSuccess === true
+    r.isSuccess === true || r.statusCode === 200 || r.statusCode === 304
   );
   
   const avgResponseTime = trackingRequests.length > 0 
