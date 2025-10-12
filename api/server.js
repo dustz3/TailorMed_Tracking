@@ -44,12 +44,20 @@ const monitoringMiddleware = (req, res, next) => {
       const requestData = {
         timestamp: new Date().toISOString(),
         method: req.method,
-        path: req.path,
+        path: req.originalUrl || req.path, // 使用完整 URL
         statusCode: res.statusCode,
         responseTime: Date.now() - startTime,
         ip: req.ip || req.connection.remoteAddress,
         userAgent: req.get('User-Agent') || 'Unknown'
       };
+      
+      // 除錯：記錄完整路徑
+      console.log('完整請求路徑:', {
+        originalUrl: req.originalUrl,
+        path: req.path,
+        url: req.url,
+        method: req.method
+      });
       
       monitoringData.requests.push(requestData);
       
@@ -174,9 +182,9 @@ app.get('/api/monitoring/stats', (req, res) => {
     return requestTime >= thisMonthStart;
   });
   
-  // 計算貨件查詢請求（監控中間件已經排除監控和健康檢查）
+  // 計算貨件查詢請求（使用完整 URL 匹配）
   const trackingRequests = monitoringData.requests.filter(r => 
-    r.path.startsWith('/api/tracking')
+    r.path && r.path.includes('/api/tracking')
   );
   
   const successfulRequests = trackingRequests.filter(r => 
@@ -200,7 +208,7 @@ app.get('/api/monitoring/stats', (req, res) => {
     todayRequestsCount: todayRequests.length,
     thisMonthRequestsCount: thisMonthRequests.length,
     trackingRequestsCount: trackingRequests.length,
-    todayTrackingQueries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+    todayTrackingQueries: todayRequests.filter(r => r.path && r.path.includes('/api/tracking')).length,
     allRequestPaths: monitoringData.requests.map(r => r.path),
     recentRequestsSample: recentRequests.slice(0, 3).map(r => ({
       time: r.timestamp,
@@ -216,11 +224,11 @@ app.get('/api/monitoring/stats', (req, res) => {
       status: 'running'
     },
     today: {
-      queries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+      queries: todayRequests.filter(r => r.path && r.path.includes('/api/tracking')).length,
       requests: todayRequests.length
     },
     thisMonth: {
-      queries: thisMonthRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+      queries: thisMonthRequests.filter(r => r.path && r.path.includes('/api/tracking')).length,
       requests: thisMonthRequests.length
     },
     tracking: {
