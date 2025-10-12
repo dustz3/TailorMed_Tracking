@@ -119,17 +119,34 @@ app.get('/api/health', (req, res) => {
 // 監控統計 API
 app.get('/api/monitoring/stats', (req, res) => {
   const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  
+  // 使用台灣時間計算今日和本月
+  const taiwanTime = new Date(now.getTime() + (8 * 60 * 60 * 1000)); // UTC+8
+  const today = new Date(taiwanTime.getFullYear(), taiwanTime.getMonth(), taiwanTime.getDate());
+  const thisMonth = new Date(taiwanTime.getFullYear(), taiwanTime.getMonth(), 1);
+  
+  // 轉換回 UTC 時間進行比較
+  const todayUTC = new Date(today.getTime() - (8 * 60 * 60 * 1000));
+  const thisMonthUTC = new Date(thisMonth.getTime() - (8 * 60 * 60 * 1000));
+  
+  console.log('統計計算時間點:', {
+    now: now.toISOString(),
+    taiwanTime: taiwanTime.toISOString(),
+    today: today.toISOString(),
+    todayUTC: todayUTC.toISOString(),
+    thisMonthUTC: thisMonthUTC.toISOString()
+  });
   
   // 計算統計數據
-  const todayRequests = monitoringData.requests.filter(r => 
-    new Date(r.timestamp) >= today
-  );
+  const todayRequests = monitoringData.requests.filter(r => {
+    const requestTime = new Date(r.timestamp);
+    return requestTime >= todayUTC;
+  });
   
-  const thisMonthRequests = monitoringData.requests.filter(r => 
-    new Date(r.timestamp) >= thisMonth
-  );
+  const thisMonthRequests = monitoringData.requests.filter(r => {
+    const requestTime = new Date(r.timestamp);
+    return requestTime >= thisMonthUTC;
+  });
   
   const trackingRequests = monitoringData.requests.filter(r => 
     r.path === '/api/tracking'
@@ -149,6 +166,18 @@ app.get('/api/monitoring/stats', (req, res) => {
   
   // 獲取最近的請求
   const recentRequests = monitoringData.requests.slice(-10).reverse();
+  
+  // 除錯資訊
+  console.log('統計結果:', {
+    totalRequests: monitoringData.requests.length,
+    todayRequestsCount: todayRequests.length,
+    thisMonthRequestsCount: thisMonthRequests.length,
+    trackingRequestsCount: trackingRequests.length,
+    recentRequestsSample: recentRequests.slice(0, 3).map(r => ({
+      time: r.timestamp,
+      path: r.path
+    }))
+  });
   
   const stats = {
     system: {
