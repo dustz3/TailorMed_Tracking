@@ -128,9 +128,9 @@ app.use('/api/tracking', apiLimiter, trackingRoutes);
 // 公開查詢路由（不記錄監控，但仍套用 Rate Limiting）
 app.use('/api/tracking-public', apiLimiter, trackingRoutes);
 
-// 測試頁面路由（使用內建的測試頁面）
-app.get('/test', (req, res) => {
-  res.sendFile(path.join(__dirname, 'test.html'));
+// 標準查詢頁面路由（會記錄監控）
+app.get('/standard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'standard.html'));
 });
 
 // 基本查詢頁面（不記錄監控）
@@ -155,8 +155,8 @@ app.get('/', (req, res) => {
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
-    // 否則重定向到測試頁面
-    res.redirect('/test');
+    // 否則重定向到標準查詢頁面
+    res.redirect('/standard');
   }
 });
 
