@@ -31,10 +31,11 @@ const apiLimiter = rateLimit({
 const monitoringMiddleware = (req, res, next) => {
   const startTime = Date.now();
   
-  // 只監控 API 請求，但排除監控和健康檢查
+  // 只監控 API 請求，但排除監控、健康檢查和公開查詢
   if (req.path.startsWith('/api/') && 
       req.path !== '/api/monitoring/stats' && 
-      req.path !== '/api/health') {
+      req.path !== '/api/health' &&
+      !req.path.startsWith('/api/tracking-public')) {
     
     // 特別記錄追蹤請求
     if (req.path.startsWith('/api/tracking')) {
@@ -124,9 +125,17 @@ if (fs.existsSync(staticPath)) {
 // API Routes（套用 Rate Limiting）
 app.use('/api/tracking', apiLimiter, trackingRoutes);
 
+// 公開查詢路由（不記錄監控，但仍套用 Rate Limiting）
+app.use('/api/tracking-public', apiLimiter, trackingRoutes);
+
 // 測試頁面路由（使用內建的測試頁面）
 app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, 'test.html'));
+});
+
+// 基本查詢頁面（不記錄監控）
+app.get('/basic', (req, res) => {
+  res.sendFile(path.join(__dirname, 'basic.html'));
 });
 
 // 監控儀表板路由
