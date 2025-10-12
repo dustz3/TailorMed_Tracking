@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TailorMed 追蹤系統測試</title>
+    <title>TailorMed Tracking System</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #dfeaf3;
+            background-color: #efefef;
         }
         .container {
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         h1 {
-            color: #2c3e50;
+            color: #333;
             text-align: center;
             margin-bottom: 30px;
         }
@@ -36,7 +36,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #34495e;
+            color: #333;
         }
         input[type="text"] {
             width: 100%;
@@ -48,10 +48,10 @@
         }
         input[type="text"]:focus {
             outline: none;
-            border-color: #3498db;
+            border-color: #d28c00;
         }
         button {
-            background-color: #143463;
+            background-color: #333;
             color: white;
             padding: 12px 30px;
             border: none;
@@ -62,10 +62,10 @@
             margin-top: 10px;
         }
         button:hover {
-            background-color: #0f2847;
+            background-color: #111;
         }
         button:disabled {
-            background-color: #bdc3c7;
+            background-color: #ccc;
             cursor: not-allowed;
         }
         .result {
@@ -76,17 +76,17 @@
         }
         .result.success {
             background-color: #dfeaf3; 
-            color: #143463;
+            color: #333;
         }
         .result.error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background-color: #cfcfcf;
+            border: 1px solid #afafaf;
+            color: #393939;
         }
         .result.loading {
-            background-color: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
+            background-color: #efefef;
+            border: 1px solid #bfbfbf;
+            color: #999;
         }
         .shipment-info {
             background: #f8f9fa;
@@ -135,10 +135,10 @@
             font-weight: bold;
         }
         .timeline-step.completed {
-            background: #143463;
+            background: #333;
         }
         .timeline-step.active {
-            background: #bb2749;
+            background: #d28c00;
             color: #fff;
         }
         .timeline-content {
@@ -154,10 +154,10 @@
         }
         .timeline-item.event {
             background: #e3f2fd;
-            border-left: 4px solid #97d3df;
+            border-left: 4px solid #ccc;
         }
         .timeline-item.event .timeline-step {
-            background: #97d3df;
+            background: #ccc;
         }
     </style>
 </head>
@@ -168,15 +168,15 @@
         <form id="trackingForm">
             <div class="form-group">
                 <label for="orderNo">Job No.</label>
-                <input type="text" id="orderNo" name="orderNo" placeholder="例如: TM111682" required>
+                <input type="text" id="orderNo" name="orderNo" placeholder="EX: TM111682" required>
             </div>
             
             <div class="form-group">
                 <label for="trackingNo">Tracking No.</label>
-                <input type="text" id="trackingNo" name="trackingNo" placeholder="例如: GEXVC2YF" required>
+                <input type="text" id="trackingNo" name="trackingNo" placeholder="EX: GEXVC2YF" required>
             </div>
             
-            <button type="submit" id="submitBtn">查詢貨件狀態</button>
+            <button type="submit" id="submitBtn">STATUS CHECK</button>
         </form>
         
         <div id="result" class="result">
@@ -197,7 +197,7 @@
             const trackingNo = document.getElementById('trackingNo').value.trim().toUpperCase();
             
             if (!orderNo || !trackingNo) {
-                showError('請輸入完整的 Job No. 和 Tracking No.');
+                showError('Please enter both Job No. and Tracking No.');
                 return;
             }
             
@@ -205,19 +205,19 @@
         });
 
         async function fetchTrackingData(orderNo, trackingNo) {
-            showLoading('正在查詢貨件狀態，請稍候...');
+            showLoading('Checking shipment status, please wait...');
             
             try {
                 const response = await fetch(`/api/tracking-public?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`);
                 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        showError('查無此追蹤編號的記錄，請確認編號是否正確。');
+                        showError('No record found. Please verify the tracking number.');
                         return;
                     }
                     if (response.status === 429) {
                         const errorData = await response.json();
-                        showError(errorData.message || '查詢次數已達上限（每小時 10 次），請稍後再試。');
+                        showError(errorData.message || 'Query limit reached (10 per hour). Please try again later.');
                         return;
                     }
                     throw new Error('Network response was not ok');
@@ -228,12 +228,12 @@
                 if (data.success && data.data) {
                     showSuccess(data.data);
                 } else {
-                    showError('查詢失敗，請稍後再試。');
+                    showError('Query failed. Please try again later.');
                 }
                 
             } catch (error) {
-                console.error('查詢錯誤:', error);
-                showError('服務暫時無法使用，稍候再試或聯絡客服人員。');
+                console.error('Query error:', error);
+                showError('Service temporarily unavailable. Please try again later or contact support.');
             }
         }
 
@@ -256,7 +256,7 @@
             
             let timelineHtml = '';
             if (shipmentData.timeline && shipmentData.timeline.length > 0) {
-                timelineHtml = '<div class="timeline"><h3>📋 時間軸</h3>';
+                timelineHtml = '<div class="timeline"><h3>TIMELINE</h3>';
                 shipmentData.timeline.forEach(item => {
                     const stepClass = item.isEvent ? 'event' : item.status;
                     const stepDisplay = item.step || '★';
@@ -275,7 +275,7 @@
             }
             
             resultContent.innerHTML = `
-                <h3>✅ 查詢成功</h3>
+                <h3>SUCCESS</h3>
                 <div class="shipment-info">
                     <div class="info-row">
                         <span class="info-label">Job No.</span>
@@ -325,7 +325,7 @@
             submitBtn.disabled = false;
         }
 
-        // 自動填入測試資料
+        // Auto-fill test data
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('orderNo').value = 'TM111682';
             document.getElementById('trackingNo').value = 'GEXVC2YF';
