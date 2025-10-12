@@ -20,7 +20,7 @@ const apiLimiter = rateLimit({
   max: 10, // 最多 10 次請求
   message: {
     error: 'Too many requests',
-    message: '您已達到查詢次數上限（每小時 10 次），請稍後再試。',
+    message: 'Query limit reached (10 per hour). Please try again later.',
     retryAfter: '1 hour'
   },
   standardHeaders: true, // 返回 RateLimit-* headers
