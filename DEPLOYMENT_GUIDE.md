@@ -43,7 +43,9 @@ sudo npm install -g pm2
 │   │   └── database.js
 │   ├── models/
 │   │   └── Shipment.js
-│   ├── test.html
+│   ├── standard.html
+│   ├── basic.html
+│   ├── admin.html
 │   ├── logo.png
 │   └── package.json
 ├── dist/                    ← 編譯後的前端檔案
@@ -224,7 +226,9 @@ pm2 logs tailormed-tracking
 |------|------|---------|
 | `/` | Under Construction 首頁 | `dist/index.html` |
 | `/tracking_ui.html` | 完整追蹤介面 | `dist/tracking_ui.html` |
-| `/test` | API 測試頁面 | `api/test.html` |
+| `/standard` | 標準查詢頁面（完整版） | `api/standard.html` |
+| `/basic` | 基本查詢頁面（簡化版） | `api/basic.html` |
+| `/admin` | 管理員監控儀表板 | `api/admin.html` |
 | `/api/tracking` | 追蹤 API 端點 | `api/routes/tracking.js` |
 | `/api/health` | 健康檢查 | - |
 

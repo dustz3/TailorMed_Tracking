@@ -113,14 +113,6 @@ copyDir(SCRIPT_DIR, path.join(DIST_DIR, 'js'));
 copyDir(DATA_DIR, path.join(DIST_DIR, 'data'));
 copyDir(ASSETS_DIR, path.join(DIST_DIR, 'images'));
 
-// 4. 複製 test.html 到 dist
-const testHtmlPath = path.join(TEMPLATE_DIR, 'test.html');
-const distTestHtmlPath = path.join(DIST_DIR, 'test.html');
-if (fs.existsSync(testHtmlPath)) {
-  copyFile(testHtmlPath, distTestHtmlPath);
-  console.log('  ✅ 已複製 test.html');
-}
-
 console.log('✅ 靜態資源已就緒');
 
 console.log(

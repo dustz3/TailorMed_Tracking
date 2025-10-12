@@ -13,16 +13,19 @@ api/
 ├── .env                   # 環境變數（不會被 git 追蹤）
 ├── .gitignore            # Git 忽略檔案清單
 ├── render.yaml           # Render 部署配置
+├── standard.html         # 標準查詢頁面（完整版）
+├── basic.html            # 基本查詢頁面（簡化版）
+├── admin.html            # 管理員監控儀表板
 ├── config/
 │   └── database.js       # Airtable 資料庫連接與查詢
 ├── routes/
 │   └── tracking.js       # API 路由定義
-├── models/
-│   └── Shipment.js       # 資料模型
-└── test.html             # API 測試頁面
+└── models/
+    └── Shipment.js       # 資料模型
 
-dist/Projects/TailorMed/track/  # 前端靜態檔案
+dist/  # 前端靜態檔案
 ├── index.html            # 主頁面
+├── tracking_ui.html      # 貨件追蹤介面
 ├── css/                  # 樣式表
 ├── js/                   # JavaScript
 └── images/              # 圖片資源
@@ -53,7 +56,9 @@ npm start
 
 4. **訪問測試頁面**
 ```
-http://localhost:3000/test
+http://localhost:3000/standard  # 標準查詢頁面（完整版）
+http://localhost:3000/basic     # 基本查詢頁面（簡化版）
+http://localhost:3000/admin     # 管理員監控儀表板
 ```
 
 ## 📡 API 端點
