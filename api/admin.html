@@ -270,12 +270,17 @@
         // 載入統計資料
         async function loadStats() {
             try {
+                console.log('正在載入監控資料...');
                 const response = await fetch('/api/monitoring/stats');
+                console.log('API 回應狀態:', response.status);
+                
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 
                 const data = await response.json();
+                console.log('接收到的資料:', data);
+                
                 updateMetrics(data);
                 updateChart(data);
                 updateRecentRequests(data.recentRequests);
@@ -288,84 +293,136 @@
         
         // 更新指標
         function updateMetrics(data) {
-            document.getElementById('todayQueries').textContent = data.today.queries;
-            document.getElementById('monthQueries').textContent = data.thisMonth.queries;
-            document.getElementById('avgResponseTime').textContent = data.tracking.averageResponseTime;
-            document.getElementById('successRate').textContent = data.tracking.successRate;
-            document.getElementById('totalRequests').textContent = data.system.totalRequests;
-            
-            // 計算運行時間
-            const startTime = new Date(data.system.uptime);
-            const now = new Date();
-            const diffMs = now - startTime;
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('uptime').textContent = `${diffHours}h ${diffMinutes}m`;
+            try {
+                console.log('更新指標，資料:', data);
+                
+                // 安全地更新每個指標
+                const elements = {
+                    'todayQueries': data.today?.queries || 0,
+                    'monthQueries': data.thisMonth?.queries || 0,
+                    'avgResponseTime': data.tracking?.averageResponseTime || '0ms',
+                    'successRate': data.tracking?.successRate || '100%',
+                    'totalRequests': data.system?.totalRequests || 0
+                };
+                
+                Object.entries(elements).forEach(([id, value]) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = value;
+                    } else {
+                        console.error('找不到元素:', id);
+                    }
+                });
+                
+                // 計算運行時間
+                if (data.system?.uptime) {
+                    const startTime = new Date(data.system.uptime);
+                    const now = new Date();
+                    const diffMs = now - startTime;
+                    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                    const uptimeElement = document.getElementById('uptime');
+                    if (uptimeElement) {
+                        uptimeElement.textContent = `${diffHours}h ${diffMinutes}m`;
+                    }
+                }
+                
+            } catch (error) {
+                console.error('更新指標時發生錯誤:', error);
+            }
         }
         
         // 更新圖表
         function updateChart(data) {
-            const ctx = document.getElementById('usageChart').getContext('2d');
-            
-            // 銷毀舊圖表
-            if (chart) {
-                chart.destroy();
-            }
-            
-            // 建立簡單的圓餅圖顯示查詢狀態
-            chart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['成功查詢', '失敗查詢'],
-                    datasets: [{
-                        data: [
-                            data.tracking.successfulQueries,
-                            data.tracking.totalQueries - data.tracking.successfulQueries
-                        ],
-                        backgroundColor: [
-                            '#28a745',
-                            '#dc3545'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                font: {
-                                    size: 14
+            try {
+                console.log('更新圖表，資料:', data);
+                
+                const ctx = document.getElementById('usageChart');
+                if (!ctx) {
+                    console.error('找不到圖表元素');
+                    return;
+                }
+                
+                // 銷毀舊圖表
+                if (chart) {
+                    chart.destroy();
+                }
+                
+                // 安全地取得資料
+                const successfulQueries = data.tracking?.successfulQueries || 0;
+                const totalQueries = data.tracking?.totalQueries || 0;
+                const failedQueries = totalQueries - successfulQueries;
+                
+                // 建立簡單的圓餅圖顯示查詢狀態
+                chart = new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['成功查詢', '失敗查詢'],
+                        datasets: [{
+                            data: [successfulQueries, failedQueries],
+                            backgroundColor: [
+                                '#28a745',
+                                '#dc3545'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    font: {
+                                        size: 14
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
+                });
+                
+            } catch (error) {
+                console.error('更新圖表時發生錯誤:', error);
+            }
         }
         
         // 更新最近請求
         function updateRecentRequests(requests) {
-            const container = document.getElementById('recentRequestsList');
-            
-            if (!requests || requests.length === 0) {
-                container.innerHTML = '<div class="loading">暫無請求記錄</div>';
-                return;
-            }
-            
-            container.innerHTML = requests.map(req => `
-                <div class="request-item">
-                    <div class="request-info">
-                        <span class="status-badge status-${req.status}">${req.status}</span>
-                        <span><strong>${req.method}</strong> ${req.path}</span>
-                        <span style="color: #666; font-size: 0.9rem;">${req.time}</span>
+            try {
+                console.log('更新最近請求，資料:', requests);
+                
+                const container = document.getElementById('recentRequestsList');
+                if (!container) {
+                    console.error('找不到最近請求容器');
+                    return;
+                }
+                
+                if (!requests || requests.length === 0) {
+                    container.innerHTML = '<div class="loading">暫無請求記錄</div>';
+                    return;
+                }
+                
+                container.innerHTML = requests.map(req => `
+                    <div class="request-item">
+                        <div class="request-info">
+                            <span class="status-badge status-${req.status || 'unknown'}">${req.status || '?'}</span>
+                            <span><strong>${req.method || 'GET'}</strong> ${req.path || '/'}</span>
+                            <span style="color: #666; font-size: 0.9rem;">${req.time || '未知時間'}</span>
+                        </div>
+                        <div style="color: #666; font-weight: bold;">${req.responseTime || '0ms'}</div>
                     </div>
-                    <div style="color: #666; font-weight: bold;">${req.responseTime}</div>
-                </div>
-            `).join('');
+                `).join('');
+                
+            } catch (error) {
+                console.error('更新最近請求時發生錯誤:', error);
+                const container = document.getElementById('recentRequestsList');
+                if (container) {
+                    container.innerHTML = '<div class="error">載入請求記錄時發生錯誤</div>';
+                }
+            }
         }
         
         // 顯示錯誤
