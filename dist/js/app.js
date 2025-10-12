@@ -3,6 +3,29 @@
 // API 設定（從 config.js 讀取，如果沒有則使用預設值）
 const API_BASE_URL = window.CONFIG?.API_BASE_URL || 'http://localhost:3000/api';
 
+// 使用追蹤功能（最小影響）
+function trackUsage(action, data) {
+  try {
+    // 非阻塞式追蹤，不影響主要功能
+    setTimeout(() => {
+      fetch(`${API_BASE_URL}/usage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: action,
+          data: data,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          referrer: document.referrer,
+          url: window.location.href
+        })
+      }).catch(() => {}); // 靜默處理錯誤，不影響主要功能
+    }, 0);
+  } catch (error) {
+    // 靜默處理，不影響主要功能
+  }
+}
+
 // DOM 元素
 const trackingForm = document.querySelector('.summary-form');
 const orderInput = document.querySelector('input[name="order"]');
@@ -20,6 +43,11 @@ const STATUS_MESSAGES = {
 
 // 查詢貨件資料
 async function fetchTrackingData(orderNo, trackingNo) {
+  // 追蹤查詢嘗試
+  trackUsage('query_attempt', { orderNo, trackingNo });
+  
+  const startTime = Date.now();
+  
   try {
     const response = await fetch(
       `${API_BASE_URL}/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`
@@ -27,9 +55,25 @@ async function fetchTrackingData(orderNo, trackingNo) {
 
     if (!response.ok) {
       if (response.status === 404) {
+        // 追蹤查詢結果（未找到）
+        trackUsage('query_result', { 
+          orderNo, 
+          trackingNo, 
+          success: false, 
+          reason: 'not_found',
+          responseTime: Date.now() - startTime
+        });
         return null; // 找不到資料
       }
       if (response.status === 429) {
+        // 追蹤查詢結果（限制）
+        trackUsage('query_result', { 
+          orderNo, 
+          trackingNo, 
+          success: false, 
+          reason: 'rate_limit',
+          responseTime: Date.now() - startTime
+        });
         // 查詢次數超過限制
         const errorData = await response.json();
         return { 
@@ -41,8 +85,29 @@ async function fetchTrackingData(orderNo, trackingNo) {
     }
 
     const data = await response.json();
-    return data.success ? data.data : null;
+    const result = data.success ? data.data : null;
+    
+    // 追蹤查詢結果（成功）
+    trackUsage('query_result', { 
+      orderNo, 
+      trackingNo, 
+      success: !!result, 
+      reason: result ? 'success' : 'no_data',
+      responseTime: Date.now() - startTime
+    });
+    
+    return result;
   } catch (error) {
+    // 追蹤查詢結果（錯誤）
+    trackUsage('query_result', { 
+      orderNo, 
+      trackingNo, 
+      success: false, 
+      reason: 'error',
+      responseTime: Date.now() - startTime,
+      error: error.message
+    });
+    
     console.error('Fetch tracking data failed:', error);
     return 'error';
   }
@@ -287,6 +352,13 @@ function initFromURL() {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
+  // 追蹤頁面載入
+  trackUsage('page_load', {
+    url: window.location.href,
+    referrer: document.referrer,
+    userAgent: navigator.userAgent
+  });
+  
   // 綁定表單提交事件
   if (trackingForm) {
     trackingForm.addEventListener('submit', handleFormSubmit);
