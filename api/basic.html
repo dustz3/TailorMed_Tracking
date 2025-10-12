@@ -153,7 +153,7 @@
             font-size: 14px;
         }
         .timeline-item.event {
-            background: #e3f2fd;
+            background: #efefef;
             border-left: 4px solid #ccc;
         }
         .timeline-item.event .timeline-step {
@@ -239,14 +239,14 @@
 
         function showLoading(message) {
             result.className = 'result loading';
-            resultContent.innerHTML = `<p>⏳ ${message}</p>`;
+            resultContent.innerHTML = `<p>${message}</p>`;
             result.style.display = 'block';
             submitBtn.disabled = true;
         }
 
         function showError(message) {
             result.className = 'result error';
-            resultContent.innerHTML = `<p>❌ ${message}</p>`;
+            resultContent.innerHTML = `<p>${message}</p>`;
             result.style.display = 'block';
             submitBtn.disabled = false;
         }
@@ -257,19 +257,48 @@
             let timelineHtml = '';
             if (shipmentData.timeline && shipmentData.timeline.length > 0) {
                 timelineHtml = '<div class="timeline"><h3>TIMELINE</h3>';
+                
+                // 定義 Basic 版本的 6 個必要步驟
+                const basicSteps = [
+                    'Order Created',
+                    'Shipment Collected', 
+                    'In Transit',
+                    'Import Released',
+                    'Out for Delivery',
+                    'Shipment Delivered'
+                ];
+                
+                // 過濾並只顯示基本步驟
                 shipmentData.timeline.forEach(item => {
-                    const stepClass = item.isEvent ? 'event' : item.status;
-                    const stepDisplay = item.step || '★';
+                    // 排除事件（isEvent）和加值項目（如 Dry ice）
+                    if (item.isEvent || 
+                        item.title.includes('Dry ice') || 
+                        item.title.includes('Refilled') ||
+                        item.title.includes('Customs Process') ||
+                        item.title.includes('Export Released')) {
+                        return; // 跳過這個項目
+                    }
                     
-                    timelineHtml += `
-                        <div class="timeline-item ${stepClass}">
-                            <div class="timeline-step ${item.status}">${stepDisplay}</div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">${item.title}</div>
-                                <div class="timeline-time">${item.time}</div>
+                    // 檢查是否為基本步驟
+                    const isBasicStep = basicSteps.some(step => 
+                        item.title.toLowerCase().includes(step.toLowerCase()) ||
+                        item.title.toLowerCase().includes(step.toLowerCase().replace(' ', ''))
+                    );
+                    
+                    if (isBasicStep) {
+                        const stepClass = item.status;
+                        const stepDisplay = item.step || '★';
+                        
+                        timelineHtml += `
+                            <div class="timeline-item ${stepClass}">
+                                <div class="timeline-step ${item.status}">${stepDisplay}</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">${item.title}</div>
+                                    <div class="timeline-time">${item.time}</div>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    }
                 });
                 timelineHtml += '</div>';
             }
@@ -288,22 +317,6 @@
                     <div class="info-row">
                         <span class="info-label">Invoice No.</span>
                         <span class="info-value">${shipmentData.invoiceNo || '—'}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">MAWB</span>
-                        <span class="info-value">${shipmentData.mawb || '—'}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Origin/Destination</span>
-                        <span class="info-value">${shipmentData.route || '—'}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Package Count</span>
-                        <span class="info-value">${shipmentData.packageCount || '—'}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Weight</span>
-                        <span class="info-value">${shipmentData.weight ? `${shipmentData.weight} KG` : '—'}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">ETA</span>
