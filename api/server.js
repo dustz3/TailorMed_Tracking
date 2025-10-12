@@ -143,8 +143,11 @@ app.get('/api/monitoring/stats', (req, res) => {
     return requestTime >= thisMonthStart;
   });
   
+  // 只計算真正的貨件查詢，排除監控和健康檢查
   const trackingRequests = monitoringData.requests.filter(r => 
-    r.path.startsWith('/api/tracking')
+    r.path.startsWith('/api/tracking') && 
+    r.path !== '/api/monitoring/stats' && 
+    r.path !== '/api/health'
   );
   
   const successfulRequests = trackingRequests.filter(r => 
@@ -168,7 +171,11 @@ app.get('/api/monitoring/stats', (req, res) => {
     todayRequestsCount: todayRequests.length,
     thisMonthRequestsCount: thisMonthRequests.length,
     trackingRequestsCount: trackingRequests.length,
-    todayTrackingQueries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+    todayTrackingQueries: todayRequests.filter(r => 
+      r.path.startsWith('/api/tracking') && 
+      r.path !== '/api/monitoring/stats' && 
+      r.path !== '/api/health'
+    ).length,
     allRequestPaths: monitoringData.requests.map(r => r.path),
     recentRequestsSample: recentRequests.slice(0, 3).map(r => ({
       time: r.timestamp,
@@ -184,11 +191,19 @@ app.get('/api/monitoring/stats', (req, res) => {
       status: 'running'
     },
     today: {
-      queries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+      queries: todayRequests.filter(r => 
+        r.path.startsWith('/api/tracking') && 
+        r.path !== '/api/monitoring/stats' && 
+        r.path !== '/api/health'
+      ).length,
       requests: todayRequests.length
     },
     thisMonth: {
-      queries: thisMonthRequests.filter(r => r.path.startsWith('/api/tracking')).length,
+      queries: thisMonthRequests.filter(r => 
+        r.path.startsWith('/api/tracking') && 
+        r.path !== '/api/monitoring/stats' && 
+        r.path !== '/api/health'
+      ).length,
       requests: thisMonthRequests.length
     },
     tracking: {
