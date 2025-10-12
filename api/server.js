@@ -138,7 +138,12 @@ app.get('/api/monitoring/stats', (req, res) => {
     now: now.toISOString(),
     todayStart: todayStart.toISOString(),
     thisMonthStart: thisMonthStart.toISOString(),
-    totalRequests: monitoringData.requests.length
+    totalRequests: monitoringData.requests.length,
+    sampleRequestTimes: monitoringData.requests.slice(-3).map(r => ({
+      time: r.timestamp,
+      path: r.path,
+      isAfterToday: new Date(r.timestamp) >= todayStart
+    }))
   });
   
   // 計算統計數據
