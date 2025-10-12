@@ -217,6 +217,25 @@ app.get('/api/monitoring/stats', (req, res) => {
     }))
   });
   
+  // 詳細的追蹤請求分析
+  console.log('🔍 追蹤請求詳細分析:', {
+    allTrackingRequests: trackingRequests.map(r => ({
+      time: r.timestamp,
+      path: r.path,
+      statusCode: r.statusCode,
+      responseTime: r.responseTime,
+      isSuccess: r.statusCode === 200
+    })),
+    successCount: successfulRequests.length,
+    failureCount: trackingRequests.length - successfulRequests.length,
+    failureRequests: trackingRequests.filter(r => r.statusCode !== 200).map(r => ({
+      time: r.timestamp,
+      path: r.path,
+      statusCode: r.statusCode,
+      responseTime: r.responseTime
+    }))
+  });
+  
   const stats = {
     system: {
       uptime: monitoringData.startTime,
