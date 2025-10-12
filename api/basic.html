@@ -75,7 +75,7 @@
             display: none;
         }
         .result.success {
-            background-color: #dfeaf3; 
+            background-color: #cfcfcf; 
             color: #333;
         }
         .result.error {
@@ -268,7 +268,10 @@
                     'Shipment Delivered'
                 ];
                 
-                // 過濾並只顯示基本步驟
+                // 過濾並只顯示基本步驟，重新編號為 1-6
+                let stepCounter = 1;
+                const filteredItems = [];
+                
                 shipmentData.timeline.forEach(item => {
                     // 排除事件（isEvent）和加值項目（如 Dry ice）
                     if (item.isEvent || 
@@ -286,19 +289,27 @@
                     );
                     
                     if (isBasicStep) {
-                        const stepClass = item.status;
-                        const stepDisplay = item.step || '★';
-                        
-                        timelineHtml += `
-                            <div class="timeline-item ${stepClass}">
-                                <div class="timeline-step ${item.status}">${stepDisplay}</div>
-                                <div class="timeline-content">
-                                    <div class="timeline-title">${item.title}</div>
-                                    <div class="timeline-time">${item.time}</div>
-                                </div>
-                            </div>
-                        `;
+                        filteredItems.push({
+                            ...item,
+                            newStepNumber: stepCounter++
+                        });
                     }
+                });
+                
+                // 顯示重新編號的步驟
+                filteredItems.forEach(item => {
+                    const stepClass = item.status;
+                    const stepDisplay = item.newStepNumber; // 使用新的編號 1-6
+                    
+                    timelineHtml += `
+                        <div class="timeline-item ${stepClass}">
+                            <div class="timeline-step ${item.status}">${stepDisplay}</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">${item.title}</div>
+                                <div class="timeline-time">${item.time}</div>
+                            </div>
+                        </div>
+                    `;
                 });
                 timelineHtml += '</div>';
             }
