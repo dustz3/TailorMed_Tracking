@@ -35,6 +35,11 @@ const monitoringMiddleware = (req, res, next) => {
   if (req.path.startsWith('/api/') && 
       req.path !== '/api/monitoring/stats' && 
       req.path !== '/api/health') {
+    
+    // 特別記錄追蹤請求
+    if (req.path.startsWith('/api/tracking')) {
+      console.log('🔍 記錄追蹤請求:', req.method, req.path);
+    }
     res.on('finish', () => {
       const requestData = {
         timestamp: new Date().toISOString(),
@@ -54,7 +59,12 @@ const monitoringMiddleware = (req, res, next) => {
       }
       
       // 簡單的 console 記錄
-      console.log(`[${requestData.timestamp}] ${requestData.method} ${requestData.path} - ${requestData.statusCode} (${requestData.responseTime}ms)`);
+      console.log(`[${requestData.timestamp}] ${requestData.method} ${requestData.path} - ${requestData.statusCode} (${requestData.responseTime}ms) - [已儲存到監控]`);
+      
+      // 特別標記追蹤請求
+      if (req.path.startsWith('/api/tracking')) {
+        console.log('✅ 追蹤請求已儲存:', requestData.path);
+      }
     });
   } else {
     // 對於監控和健康檢查請求，只記錄 console，不儲存到 monitoringData
