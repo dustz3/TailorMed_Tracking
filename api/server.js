@@ -31,8 +31,10 @@ const apiLimiter = rateLimit({
 const monitoringMiddleware = (req, res, next) => {
   const startTime = Date.now();
   
-  // 只監控 API 請求
-  if (req.path.startsWith('/api/')) {
+  // 只監控 API 請求，但排除監控和健康檢查
+  if (req.path.startsWith('/api/') && 
+      req.path !== '/api/monitoring/stats' && 
+      req.path !== '/api/health') {
     res.on('finish', () => {
       const requestData = {
         timestamp: new Date().toISOString(),
@@ -54,6 +56,13 @@ const monitoringMiddleware = (req, res, next) => {
       // 簡單的 console 記錄
       console.log(`[${requestData.timestamp}] ${requestData.method} ${requestData.path} - ${requestData.statusCode} (${requestData.responseTime}ms)`);
     });
+  } else {
+    // 對於監控和健康檢查請求，只記錄 console，不儲存到 monitoringData
+    if (req.path.startsWith('/api/')) {
+      res.on('finish', () => {
+        console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} - ${res.statusCode} (${Date.now() - startTime}ms) - [監控請求，不儲存]`);
+      });
+    }
   }
   
   next(); // 繼續執行原有邏輯
@@ -143,11 +152,9 @@ app.get('/api/monitoring/stats', (req, res) => {
     return requestTime >= thisMonthStart;
   });
   
-  // 只計算真正的貨件查詢，排除監控和健康檢查
+  // 計算貨件查詢請求（監控中間件已經排除監控和健康檢查）
   const trackingRequests = monitoringData.requests.filter(r => 
-    r.path.startsWith('/api/tracking') && 
-    r.path !== '/api/monitoring/stats' && 
-    r.path !== '/api/health'
+    r.path.startsWith('/api/tracking')
   );
   
   const successfulRequests = trackingRequests.filter(r => 
@@ -171,11 +178,7 @@ app.get('/api/monitoring/stats', (req, res) => {
     todayRequestsCount: todayRequests.length,
     thisMonthRequestsCount: thisMonthRequests.length,
     trackingRequestsCount: trackingRequests.length,
-    todayTrackingQueries: todayRequests.filter(r => 
-      r.path.startsWith('/api/tracking') && 
-      r.path !== '/api/monitoring/stats' && 
-      r.path !== '/api/health'
-    ).length,
+    todayTrackingQueries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
     allRequestPaths: monitoringData.requests.map(r => r.path),
     recentRequestsSample: recentRequests.slice(0, 3).map(r => ({
       time: r.timestamp,
@@ -191,19 +194,11 @@ app.get('/api/monitoring/stats', (req, res) => {
       status: 'running'
     },
     today: {
-      queries: todayRequests.filter(r => 
-        r.path.startsWith('/api/tracking') && 
-        r.path !== '/api/monitoring/stats' && 
-        r.path !== '/api/health'
-      ).length,
+      queries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
       requests: todayRequests.length
     },
     thisMonth: {
-      queries: thisMonthRequests.filter(r => 
-        r.path.startsWith('/api/tracking') && 
-        r.path !== '/api/monitoring/stats' && 
-        r.path !== '/api/health'
-      ).length,
+      queries: thisMonthRequests.filter(r => r.path.startsWith('/api/tracking')).length,
       requests: thisMonthRequests.length
     },
     tracking: {
