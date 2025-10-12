@@ -144,7 +144,7 @@ app.get('/api/monitoring/stats', (req, res) => {
   });
   
   const trackingRequests = monitoringData.requests.filter(r => 
-    r.path === '/api/tracking'
+    r.path.startsWith('/api/tracking')
   );
   
   const successfulRequests = trackingRequests.filter(r => 
@@ -168,7 +168,7 @@ app.get('/api/monitoring/stats', (req, res) => {
     todayRequestsCount: todayRequests.length,
     thisMonthRequestsCount: thisMonthRequests.length,
     trackingRequestsCount: trackingRequests.length,
-    todayTrackingQueries: todayRequests.filter(r => r.path === '/api/tracking').length,
+    todayTrackingQueries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
     allRequestPaths: monitoringData.requests.map(r => r.path),
     recentRequestsSample: recentRequests.slice(0, 3).map(r => ({
       time: r.timestamp,
@@ -184,11 +184,11 @@ app.get('/api/monitoring/stats', (req, res) => {
       status: 'running'
     },
     today: {
-      queries: todayRequests.filter(r => r.path === '/api/tracking').length,
+      queries: todayRequests.filter(r => r.path.startsWith('/api/tracking')).length,
       requests: todayRequests.length
     },
     thisMonth: {
-      queries: thisMonthRequests.filter(r => r.path === '/api/tracking').length,
+      queries: thisMonthRequests.filter(r => r.path.startsWith('/api/tracking')).length,
       requests: thisMonthRequests.length
     },
     tracking: {
