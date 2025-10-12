@@ -17,6 +17,8 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .header {
@@ -90,6 +92,9 @@
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
+            height: 400px;
+            max-height: 400px;
+            overflow: hidden;
         }
         
         .chart-title {
@@ -104,6 +109,8 @@
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 500px;
+            overflow-y: auto;
         }
         
         .recent-requests h3 {
@@ -370,6 +377,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        aspectRatio: 1,
                         plugins: {
                             legend: {
                                 position: 'bottom',
@@ -379,6 +387,12 @@
                                         size: 14
                                     }
                                 }
+                            }
+                        },
+                        layout: {
+                            padding: {
+                                top: 20,
+                                bottom: 20
                             }
                         }
                     }
@@ -443,8 +457,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadStats();
             
-            // 每30秒自動重新整理
-            setInterval(loadStats, 30000);
+            // 暫時停用自動重新整理，避免頁面問題
+            // setInterval(loadStats, 30000);
         });
     </script>
 </body>
