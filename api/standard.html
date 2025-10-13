@@ -168,12 +168,12 @@
         <form id="trackingForm">
             <div class="form-group">
                 <label for="orderNo">Job No.</label>
-                <input type="text" id="orderNo" name="orderNo" placeholder="例如: TM111682" required>
+                <input type="text" id="orderNo" name="orderNo" placeholder="e.g., TM111682" required>
             </div>
             
             <div class="form-group">
                 <label for="trackingNo">Tracking No.</label>
-                <input type="text" id="trackingNo" name="trackingNo" placeholder="例如: GEXVC2YF" required>
+                <input type="text" id="trackingNo" name="trackingNo" placeholder="e.g., GEXVC2YF" required>
             </div>
             
             <button type="submit" id="submitBtn">STATUS CHECK</button>
@@ -190,7 +190,7 @@
         const resultContent = document.getElementById('resultContent');
         const submitBtn = document.getElementById('submitBtn');
 
-        // 從 URL 讀取 API Key（如果有）
+        // Read API Key from URL (if provided)
         const urlParams = new URLSearchParams(window.location.search);
         const apiKey = urlParams.get('apiKey');
         
@@ -216,7 +216,7 @@
             showLoading('Checking shipment status, please wait...');
             
             try {
-                // 建立 API URL，如果有 API Key 則附加
+                // Build API URL, append API Key if available
                 let apiUrl = `/api/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`;
                 if (apiKey) {
                     apiUrl += `&apiKey=${encodeURIComponent(apiKey)}`;
@@ -246,7 +246,7 @@
                 }
                 
             } catch (error) {
-                console.error('查詢錯誤:', error);
+                console.error('Error:', error);
                 showError('Service temporarily unavailable. Please try again later or contact support.');
             }
         }
@@ -339,7 +339,7 @@
             submitBtn.disabled = false;
         }
 
-        // 自動填入測試資料
+        // Auto-fill test data
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('orderNo').value = 'TM111682';
             document.getElementById('trackingNo').value = 'GEXVC2YF';
