@@ -1,9 +1,9 @@
-// Status Panel Component
-// 貨件狀態面板組件
+// Status Panel Component V2
+// 貨件狀態面板組件 V2
 
 @import 'variables'
 
-.status-panel
+.status-panel-v2
   width 100%
   max-width 1200px
   background base-white
@@ -24,11 +24,11 @@
 
   .timeline-container
     position relative
-    padding 20px 0
+    padding 100px 0
 
   .timeline-track
     position absolute
-    top 50%
+    top 41%
     left 0
     right 0
     height 4px
@@ -114,7 +114,7 @@
     top 50%
     transform translate(-50%, -50%)
     z-index 5
-    background base-white
+    background #97d3df
     border-radius 50%
     width 35px
     height 35px
@@ -122,31 +122,27 @@
     align-items center
     justify-content center
     box-shadow 0 2px 8px rgba(0, 0, 0, 0.15)
-    transition all 0.3s ease
     cursor default
-
-    &:hover
-      background secondary-color
-      box-shadow 0 4px 16px shadow-secondary
 
     &.scale-up
       transform translate(-50%, -50%) scale(1.3)
-      background secondary-color
+      background #97d3df
       box-shadow 0 4px 16px shadow-secondary
 
     img
       width 70%
       height auto
       display block
-      object-fit contain 
+      object-fit contain
+      filter brightness(0) invert(1) 
 
   .timeline-node
     position relative
     display flex
+    flex-direction column
     align-items center
-    justify-content center
+    justify-content flex-start
     width 40px
-    height 40px
     z-index 2
 
     .node-dot
@@ -158,28 +154,48 @@
       transition all 0.3s ease
       position relative
       z-index 2
+      display flex
+      align-items center
+      justify-content center
 
     &.scale-up .node-dot
       transform scale(1.3)
       box-shadow 0 4px 16px rgba(0, 0, 0, 0.2)
 
     .node-icon
-      position absolute
-      font-size 1rem
+      position relative
+      font-size 1.2rem
       font-weight 400
       color base-white
       opacity 1
-      padding-top 2px
+      margin-top 2px
       transition opacity 0.3s ease
       z-index 3
 
-    .node-pulse
-      position absolute
-      width 40px
-      height 40px
-      border-radius 50%
-      background rgba(37, 99, 235, 0.3)
-      animation pulse 1.25s infinite
+    .node-datetime
+      display flex
+      flex-direction column
+      align-items center
+      margin-top 10px
+      text-align center
+      
+      .datetime-month
+        font-size 0.65rem
+        font-weight 600
+        letter-spacing 0.05em
+        line-height 1
+        margin-bottom 2px
+        
+      .datetime-day
+        font-size 1.5rem
+        font-weight 700
+        line-height 1
+        margin-bottom 2px
+        
+      .datetime-time
+        font-size 0.7rem
+        font-weight 500
+        line-height 1
 
     &.completed
       .node-dot
@@ -188,15 +204,30 @@
 
       .node-icon
         color base-white
+        
+      .node-datetime
+        .datetime-month,
+        .datetime-day,
+        .datetime-time
+          color primary-color
 
     &.active
       .node-dot
         background accent-color
-        box-shadow 0 2px 16px shadow-accent-strong
-        animation glow 1.5s infinite, pulseScale 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 
+        box-shadow 0 0 0 0 rgba(accent-color, 0.7),
+                   0 0 0 8px rgba(accent-color, 0.4),
+                   0 0 0 16px rgba(accent-color, 0.2),
+                   0 0 20px rgba(accent-color, 0.5)
+        animation radiate 2s ease-out infinite
 
       .node-icon
         color base-white
+        
+      .node-datetime
+        .datetime-month,
+        .datetime-day,
+        .datetime-time
+          color accent-color
 
     &.pending
       .node-dot
@@ -204,26 +235,151 @@
 
       .node-icon
         color base-white
+        
+      .node-datetime
+        .datetime-month,
+        .datetime-day,
+        .datetime-time
+          color neutral-light
 
-  .timeline-labels
+  .timeline-cards
+    position absolute
+    width 100%
     display flex
-    flex-direction column
-    gap 16px
-    margin-top 32px
+    justify-content space-between
+    align-items center
+    left 0
+    padding 0 2%
 
-  .timeline-row
-    display grid
-    grid-template-columns repeat(5, 1fr)
-    gap 12px
+    &.top
+      top -80px
+      z-index 10
+
+    &.bottom
+      bottom -80px
+      z-index 10
 
   .timeline-card
     background base-white
     border-radius 8px
     display flex
-    flex-direction column
-    padding 16px
-    gap 12px
+    flex-direction row
+    align-items center
+    padding 12px 16px
+    gap 8px
     transition all 0.3s ease
+    position relative
+    box-shadow 0 2px 8px rgba(0, 0, 0, 0.1)
+    white-space nowrap
+
+    // 上方卡片的連接線
+    &.top::after
+      content ''
+      position absolute
+      top 100%
+      left 50%
+      transform translateX(-50%)
+      width 1px
+      height 20px
+      background neutral-light
+      transition background-color 0.3s ease
+
+    // 下方卡片的連接線
+    &.bottom::after
+      content ''
+      position absolute
+      bottom 100%
+      left 50%
+      transform translateX(-50%)
+      width 1px
+      height 20px
+      background neutral-light
+      transition background-color 0.3s ease
+
+    // 已完成的步驟直接顯示白底藍邊框效果
+    &.completed
+      background #fff
+      border 1px solid #143463
+      
+      .card-number
+        color #143463
+        background #fff
+        border-color #143463
+      
+      .card-title
+        color #143463
+      
+      .card-time
+        color #143463
+
+      // 已完成的卡片連接線效果
+      &.top::after
+        background-color #143463
+      
+      &.bottom::after
+        background-color #143463
+
+      // Step1 特定位置調整
+      &[data-step="1"].top::after
+        left 17%
+
+      // Step2 特定位置調整
+      &[data-step="2"].bottom::after
+        left 76%
+
+      // Step3 特定位置調整
+      &[data-step="3"].top::after
+        left 34%
+
+      // Step4 特定位置調整
+      &[data-step="4"].bottom::after
+        left 95%
+
+      // Step5 特定位置調整
+      &[data-step="5"].top::after
+        left 46%
+
+      // Step6 特定位置調整
+      &[data-step="6"].bottom::after
+        left 96%
+
+      // Step7 特定位置調整
+      &[data-step="7"].top::after
+        left 78%
+
+      // Step9 特定位置調整
+      &[data-step="9"].top::after
+        left 85.5% !important
+        transform translateX(-50%) !important
+
+    // 為 pending 狀態的 Step9 也添加相同的位置調整
+    &.pending[data-step="9"].top::after
+      left 85.5% !important
+      transform translateX(-50%) !important
+
+    // 乾冰卡片 pending 狀態（半透明效果）
+    &.event.pending
+      opacity 0.2
+      background #97d3df
+      
+      .card-icon-wrapper
+        .card-icon-img
+          filter brightness(0) invert(1)
+      
+      .card-title
+        color base-white
+      
+      .card-time
+        color base-white
+      
+      // Event 卡片的連接線效果
+      &.top::after
+        background-color #97d3df
+      
+      &.bottom::after
+        background-color #97d3df
+        left 92%
+        height 90px
 
     &:hover
       background primary-color
@@ -239,26 +395,18 @@
       .card-time
         color base-white
 
-    &.event:hover
-      background secondary-color
-      box-shadow 0 4px 16px shadow-secondary
-      
-      .card-number
-        color secondary-color
-        background base-white
-        border-color base-white
-      
-      .card-title
-        color base-white
-      
-      .card-time
-        color base-white
-      
-      .card-icon-img
-        filter brightness(0) invert(1)
+    // 上方卡片的 hover 連接線效果
+    &.top:hover::after
+      background-color primary-color
+    
+    // 下方卡片的 hover 連接線效果
+    &.bottom:hover::after
+      background-color primary-color
 
+    // 乾冰卡片固定顯示完成效果（淺藍底白字）
+    &.event,
     &.event.highlight
-      background secondary-color
+      background #97d3df
       box-shadow 0 4px 16px shadow-secondary
       
       .card-icon-wrapper
@@ -270,6 +418,15 @@
       
       .card-time
         color base-white
+      
+      // Event 卡片的連接線效果
+      &.top::after
+        background-color #97d3df
+      
+      &.bottom::after
+        background-color #97d3df
+        left 92%
+        height 90px
 
     &.completed.highlight
       background primary-color
@@ -284,6 +441,36 @@
 
       .card-time
         color base-white
+      
+      // Completed 卡片的 highlight 連接線效果
+      &.top::after
+        background-color primary-color
+      
+      &.bottom::after
+        background-color primary-color
+
+    &.active
+      background accent-color
+      box-shadow 0 4px 16px shadow-accent
+
+      .card-number
+        color accent-color
+        background base-white
+        border-color base-white
+
+      .card-title
+        color base-white
+
+      .card-time
+        color base-white
+      
+      // Active 卡片的固定連接線效果
+      &.top::after
+        background-color accent-color
+      
+      &.bottom::after
+        background-color accent-color
+        left 15%
 
     .card-number
       width 36px
@@ -298,7 +485,6 @@
       align-items center
       justify-content center
       flex-shrink 0
-      align-self flex-start
 
     .card-icon
       width 36px
@@ -429,12 +615,29 @@
   100%
     transform scale(1)
 
+@keyframes radiate
+  0%
+    box-shadow 0 0 0 0 rgba(accent-color, 0.7),
+               0 0 0 0 rgba(accent-color, 0.4),
+               0 0 0 0 rgba(accent-color, 0.2),
+               0 0 20px rgba(accent-color, 0.5)
+  50%
+    box-shadow 0 0 0 4px rgba(accent-color, 0.5),
+               0 0 0 12px rgba(accent-color, 0.3),
+               0 0 0 20px rgba(accent-color, 0.1),
+               0 0 25px rgba(accent-color, 0.6)
+  100%
+    box-shadow 0 0 0 0 rgba(accent-color, 0),
+               0 0 0 8px rgba(accent-color, 0),
+               0 0 0 16px rgba(accent-color, 0),
+               0 0 20px rgba(accent-color, 0.5)
+
 // Desktop Specific Styles
 @media (min-width: 769px)
-  .status-panel
+  .status-panel-v2
     .timeline-track
-      top 11%
-      transform none
+      top 41%
+      transform translateY(-50%)
 
     .timeline-progress
       background linear-gradient(90deg, primary-color 0%, accent-color 100%)
@@ -446,24 +649,32 @@
     .timeline-event-icon
       // 固定在步驟 7-8 之間
       left 80%
-      top 11%
+      top 41%
       transform translate(-50%, -50%)
 
-    .timeline-labels
-      flex-direction column
-      gap 16px
-      margin-top 32px
+    .timeline-cards
+      position absolute
+      width 100%
+      display flex
+      justify-content space-around
+      align-items center
+      left 0
+      padding 0 2%
 
-    .timeline-row
-      display grid
-      grid-template-columns repeat(5, 1fr)
-      gap 12px
+      &.top
+        top 120px
+        z-index 10
+
+      &.bottom
+        bottom 50px
+        z-index 10
 
     .timeline-card
-      padding 16px
+      padding 12px 16px
       background base-white
-      box-shadow shadow
-      gap 12px
+      box-shadow 0 2px 8px rgba(0, 0, 0, 0.1)
+      gap 8px
+      position relative
 
       &.event
         .card-icon-img
@@ -475,7 +686,7 @@
 
 // Mobile Specific Styles
 @media (max-width: 768px)
-  .status-panel
+  .status-panel-v2
     padding 32px 20px
 
     .status-title
@@ -647,4 +858,5 @@
 
       .card-icon-wrapper
         display none
+
 

@@ -1,0 +1,77 @@
+//- Timeline Track Component
+//- 時間軸軌道組件
+
+.timeline-track-panel
+  h2.panel-title Timeline Track
+  p.panel-description 這是一個新的時間軸軌道組件，用於開發和測試
+  
+  .timeline-track-container.timeline-domestic
+    .timeline-horizontal-line
+    .timeline-nodes
+      .timeline-node.completed(data-step="1")
+      .timeline-node.processing(data-step="2")
+      .timeline-node.pending(data-step="3")
+      .timeline-node.pending(data-step="4")
+    .track-content
+      p 
+        | DOMESTIC
+        br
+        | 4 Steps
+      
+  .timeline-track-container.timeline-import_export
+    .timeline-horizontal-line
+    .timeline-nodes
+      .timeline-node(data-step="1")
+      .timeline-node(data-step="2")
+      .timeline-node(data-step="3")
+      .timeline-node(data-step="4")
+      .timeline-node(data-step="5")
+      .timeline-node(data-step="6")
+      .timeline-node(data-step="7")
+    .timeline-events
+      .timeline-event(data-event="event-1")
+      .timeline-event(data-event="event-2")
+    .track-content
+      p 
+        | IMPORT/EXPORT
+        br
+        | 7 Steps with 2 Events
+      
+  .timeline-track-container.timeline-cross_trade_layered
+    .track-content
+      p
+        | CROSS TRADE
+        br
+        | Origin:4 Steps / Transit:2 Steps / Destination:4 Steps 
+
+    // Transit 階段 (橙色，2 節點) - 移到上方
+    .timeline-layer.timeline-transit-layer.transit-stage
+      .timeline-horizontal-line
+      .timeline-nodes
+        .timeline-node.timeline-transit(data-step="5")
+        .timeline-node.timeline-transit(data-step="6")
+      .track-content
+    
+    // Origin 和 Destination 容器 (100% 寬度)
+    .timeline-main-layers
+      // Origin 階段 (綠色，4 節點)
+      .timeline-origin-wrapper
+        .timeline-layer.timeline-origin-layer.origin-stage
+          .timeline-horizontal-line
+          .timeline-nodes
+            .timeline-node.timeline-origin(data-step="1")
+            .timeline-node.timeline-origin(data-step="2")
+            .timeline-node.timeline-origin(data-step="3")
+            .timeline-node.timeline-origin(data-step="4")
+          .track-content
+      
+      // Destination 階段 (藍色，4 節點)
+      .timeline-destination-wrapper
+        .timeline-layer.timeline-destination-layer.destination-stage
+          .timeline-horizontal-line
+          .timeline-nodes
+            .timeline-node.timeline-destination(data-step="7")
+            .timeline-node.timeline-destination(data-step="8")
+            .timeline-node.timeline-destination(data-step="9")
+            .timeline-node.timeline-destination(data-step="10")
+          .track-content 
