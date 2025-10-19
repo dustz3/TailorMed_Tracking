@@ -92,7 +92,7 @@
           right -16px
           height 16px
           transform translateY(-50%)
-          z-index 4
+          z-index 1
         
         // Import/Export 專用的分段式連接線 (7個節點，6段間距)
         .timeline-horizontal-line
@@ -102,7 +102,7 @@
             top 0
             left 0
             height 100%
-            width 70.67%  // 1-5 節點之間 (調整寬度)
+            width 52%  // 1-4 節點之間 (前3段 + 2%)
             background linear-gradient(to right, primary-color, accent-color)
             border-radius 10px
             z-index 3
@@ -111,9 +111,9 @@
             content ''
             position absolute
             top -1px
-            left 70.67%  // 從第5個節點開始
+            left 52%  // 從第4個節點開始
             height 100%
-            width 29.33%  // 5-7 節點之間 (100% - 70.67% = 29.33%)
+            width 48%  // 4-7 節點之間 (後3段 - 2%)
             background neutral-light
             border 1px solid neutral-light
             z-index 2
@@ -127,7 +127,7 @@
     &.timeline-cross_trade_layered
       display flex
       flex-direction column
-      gap 0
+      gap 40px
       
       // Origin 和 Destination 主容器 (100% 寬度)
       .timeline-main-layers
@@ -152,6 +152,17 @@
             background primary-color
             transform translateY(-50%)
             z-index 1
+            
+        // Transit 階段專用樣式 - 線段和節點只對應 Origin 寬度並置中
+        &.timeline-transit-layer
+          .timeline-visual-container
+            .timeline-horizontal-line
+              left 0
+              background primary-color
+              
+            .timeline-nodes
+              left 0
+              justify-content space-between  // 兩個節點平均分佈
             
           .timeline-nodes
             position absolute
@@ -214,14 +225,14 @@
         .track-content
           color primary-color
       
-      // Transit 階段獨立控制 (20%)
+      // Transit 階段獨立控制 (16.1%)
       .transit-stage
-        width 20%
+        width 16.1%
         margin 0 auto
         
         .timeline-nodes
-          left -16px
-          right -16px
+          left 0
+          right 0
           justify-content space-between
       
       // Destination 包裝器 (50% 寬度)
@@ -273,22 +284,41 @@
       
       
     .timeline-node
-      width 32px
-      height 32px
-      background primary-color
-      border-radius 50%
-      border 2px solid base-white
       position relative
       flex-shrink 0
       display flex
+      flex-direction column
       align-items center
       justify-content center
+      gap 10px
       
-      // Completed 狀態 (預設)
-      &.completed
+      // Node Circle - 與 timeline-node 相同的樣式
+      .node-circle
+        width 32px
+        height 32px
         background primary-color
+        border-radius 50%
+        border 2px solid base-white
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        z-index 6
         
-        // 完成節點的勾選符號
+        // 內層白色圓圈
+        &::before
+          content ''
+          position absolute
+          top 50%
+          left 50%
+          width 24px
+          height 24px
+          background base-white
+          border-radius 50%
+          transform translate(-50%, -50%)
+          z-index 1
+          
+        // 圖標層 (勾選符號)
         &::after
           content ''
           position absolute
@@ -301,76 +331,12 @@
           background-size contain
           background-repeat no-repeat
           background-position center
-          z-index 5
-          
-        // 完成節點的日期色彩
-        .node-date
-          color primary-color
+          z-index 2
         
-      // In Progress 狀態
-      &.in-progress
-        background primary-color
-        border 2px solid warning-color
-        box-shadow 0 0 8px rgba(255, 165, 0, 0.5)
-        
-      // Processing 狀態
-      &.processing
-        background accent-color
-        
-        // 處理中節點的日期色彩
-        .node-date
-          color accent-color
-          
-        // 處理中節點的卡車圖標
-        &::after
-          content ''
-          position absolute
-          top 54%
-          left 51%
-          transform translate(-50%, -50%)
-          width 18px
-          height 11px
-          background-image url('../images/icon-truck.svg')
-          background-size contain
-          background-repeat no-repeat
-          background-position center
-          z-index 5
-        
-      // Pending 狀態
-      &.pending
-        background neutral-light
-        
-        // 待處理節點的日期色彩和樣式
-        .node-date
-          color neutral-light
-          opacity 0.6
-          font-style italic
-          border 1px dashed neutral-light
-          padding 2px 6px
-          border-radius 4px
-          
-        // 待處理節點的狀態文字和時間色彩
-        .node-status
-          .status-text
-            color neutral-light
-          .status-time
-            color neutral-light
-        
-      &::before
-        content ''
-        position absolute
-        top 50%
-        left 50%
-        width 24px
-        height 24px
-        background base-white
-        border-radius 50%
-        transform translate(-50%, -50%)
-      
       // 節點日期樣式
       .node-date
         position absolute
-        top -35px
+        top -45px
         left 50%
         transform translateX(-50%)
         font-size 0.9rem
@@ -381,7 +347,7 @@
       // 節點狀態樣式
       .node-status
         position absolute
-        top 45px
+        top 25px
         left 50%
         transform translateX(-50%)
         text-align center
@@ -402,7 +368,164 @@
           font-size 0.65rem
           font-weight 500
           color neutral-gray
-          line-height 1
+      
+      // Completed 狀態 (預設)
+      &.completed
+        // 完成節點的日期色彩
+        .node-date
+          color primary-color
+          
+        // 完成節點的圓圈樣式
+        .node-circle
+          background primary-color
+          
+          // 完成節點的勾選符號
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 10px
+            height 10px
+            background-image url('../images/icon-check.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // Completed hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 primary-color
+            &::before
+              background primary-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+        
+      // In Progress 狀態
+      &.in-progress
+        background primary-color
+        border 2px solid warning-color
+        box-shadow 0 0 8px rgba(255, 165, 0, 0.5)
+        
+      // Processing 狀態
+      &.processing
+        // 處理中節點的日期色彩
+        .node-date
+          color accent-color
+          
+        // 處理中節點的圓圈樣式
+        .node-circle
+          background accent-color
+          
+          // 處理中節點的卡車圖標
+          &::after
+            content ''
+            position absolute
+            top 54%
+            left 51%
+            transform translate(-50%, -50%)
+            width 18px
+            height 11px
+            background-image url('../images/icon-truck.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // Processing hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 accent-color
+            &::before
+              background accent-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+              
+      // IMPORT/EXPORT 專用的 In Transit 狀態 (第4個節點)
+      &.in-transit
+        // In Transit 節點的日期色彩
+        .node-date
+          color accent-color
+          
+        // In Transit 節點的圓圈樣式
+        .node-circle
+          background accent-color
+          
+          // In Transit 節點的專用圖標
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 16px
+            height 16px
+            background-image url('../images/icon-inTransit.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // In Transit hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 accent-color
+            &::before
+              background accent-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+        
+      // Pending 狀態
+      &.pending
+        // 待處理節點的日期色彩和樣式
+        .node-date
+          color neutral-light
+          opacity 0.6
+          font-style italic
+          border 1px dashed neutral-light
+          padding 2px 6px
+          border-radius 4px
+          
+        // 待處理節點的狀態文字和時間色彩
+        .node-status
+          .status-text
+            color neutral-light
+          .status-time
+            color neutral-light
+            
+        // 待處理節點的圓圈樣式
+        .node-circle
+          background neutral-light
+          border 2px dashed neutral-light
+          
+          // 待處理節點沒有圖標，隱藏 ::after
+          &::after
+            display none
+        
+      &::before
+        content ''
+        position absolute
+        top 50%
+        left 50%
+        width 24px
+        height 24px
+        background base-white
+        border-radius 50%
+        transform translate(-50%, -50%)
     
     // Event 節點樣式 (比原節點小 50%，定位在節點之間)
     .timeline-event
