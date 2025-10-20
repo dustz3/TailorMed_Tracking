@@ -103,7 +103,9 @@ try {
 
         const outputName = file.replace(/\.styl$/, '.css');
         fs.writeFileSync(path.join(cssDir, outputName), css);
-        console.log(`  ✅ 已生成 dist/Projects/TailorMed/track/css/${outputName}`);
+        console.log(
+          `  ✅ 已生成 dist/Projects/TailorMed/track/css/${outputName}`
+        );
       });
   });
 } catch (error) {
@@ -119,4 +121,6 @@ copyDir(ASSETS_DIR, path.join(DIST_DIR, 'images'));
 
 console.log('✅ 靜態資源已就緒');
 
-console.log('🎉 編譯完成！可以在 dist/Projects/TailorMed/track/index.html 預覽貨件追蹤 MVP');
+console.log(
+  '🎉 編譯完成！可以在 dist/Projects/TailorMed/track/index.html 預覽貨件追蹤 MVP'
+);

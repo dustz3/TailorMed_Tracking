@@ -7,16 +7,16 @@ html(lang="zh-TW")
     link(rel="preconnect", href="https://fonts.googleapis.com")
     link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
     link(href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap", rel="stylesheet")
-    link(rel="stylesheet", href="/Projects/TailorMed/track/css/main.css")
-    script(src="/Projects/TailorMed/track/js/config.js")
-    script(src="/Projects/TailorMed/track/js/app.js", defer)
+    link(rel="stylesheet", href="./css/main.css")
+    script(src="./js/config.js")
+    script(src="./js/app.js", defer)
   body
     header.site-header
       .container
         .brand
-          img.brand-logo(src="/Projects/TailorMed/track/images/logo.png", alt="TailorMed")
+          img.brand-logo(src="./images/logo.png", alt="TailorMed")
         nav.site-nav
-          a.nav-link(href="/Projects/TailorMed/track/index.html") Back to Home
+          a.nav-link(href="./index.html") Back to Home
           a.nav-link(href="https://tailormed.com.tw", target="_blank", rel="noopener") Back to TailorMed
 
     section.hero-banner
@@ -44,13 +44,13 @@ html(lang="zh-TW")
       include components/timelineExport.pug
       
       //- Domestic Timeline
-      //- include components/timelineDomestic.pug
+      include components/timelineDomestic.pug
       
       //- Cross Trade Timeline
-      //- include components/timelineCrossTrade.pug
+      include components/timelineCrossTrade.pug
       
       //- Order Completion Timeline
-      //- include components/timelineOrderCompletion.pug
+      include components/timelineOrderCompletion.pug
       
       //- 原始完整 Timeline (可選)
       //- include components/timelineTrack.pug
