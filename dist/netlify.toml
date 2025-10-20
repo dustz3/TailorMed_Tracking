@@ -1,5 +1,5 @@
 [build]
-  publish = "dist"
+  publish = "dist/Projects/TailorMed/track"
   command = ""
 
 [build.environment]
