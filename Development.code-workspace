@@ -1,0 +1,87 @@
+{
+    "folders": [
+        {
+            "name": "Development",
+            "path": "."
+        },
+        {
+            "name": "TailorMed Track",
+            "path": "./src/Projects/TailorMed/track"
+        },
+        {
+            "name": "Dist Output",
+            "path": "./dist"
+        }
+    ],
+    "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true
+        },
+        "files.associations": {
+            "*.pug": "pug",
+            "*.styl": "stylus"
+        },
+        "emmet.includeLanguages": {
+            "pug": "html"
+        },
+        "liveServer.settings.port": 3000,
+        "liveServer.settings.root": "/dist/Projects/TailorMed/track",
+        "terminal.integrated.cwd": "${workspaceFolder}/src/Projects/TailorMed/track"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.vscode-json",
+            "bradlc.vscode-tailwindcss",
+            "ms-vscode.vscode-typescript-next",
+            "ritwickdey.liveserver",
+            "ms-vscode.vscode-eslint"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Compile Track Project",
+                "type": "shell",
+                "command": "node",
+                "args": ["compile.js"],
+                "options": {
+                    "cwd": "${workspaceFolder}/src/Projects/TailorMed/track"
+                },
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            },
+            {
+                "label": "Start Live Server",
+                "type": "shell",
+                "command": "live-server",
+                "args": ["--port=3000", "--open=tracking_ui.html"],
+                "options": {
+                    "cwd": "${workspaceFolder}/dist/Projects/TailorMed/track"
+                },
+                "group": "test",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            },
+            {
+                "label": "Build and Preview",
+                "dependsOrder": "sequence",
+                "dependsOn": [
+                    "Compile Track Project",
+                    "Start Live Server"
+                ],
+                "group": "build"
+            }
+        ]
+    }
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TailorMed Tracking System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #dfeaf3;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            display: block;
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        button {
+            background-color: #143463;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0f2847;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .result.success {
+            background-color: #dfeaf3; 
+            color: #143463;
+        }
+        .result.error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .result.loading {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .shipment-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .info-value {
+            color: #6c757d;
+        }
+        .timeline {
+            margin-top: 20px;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+        .timeline-step {
+            background: #ccc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .timeline-step.completed {
+            background: #143463;
+        }
+        .timeline-step.active {
+            background: #bb2749;
+            color: #fff;
+        }
+        .timeline-content {
+            flex: 1;
+        }
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .timeline-time {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .timeline-item.event {
+            background: #e3f2fd;
+            border-left: 4px solid #97d3df;
+        }
+        .timeline-item.event .timeline-step {
+            background: #97d3df;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://track.tailormed-intl.com/images/logo.png" alt="TailorMed" class="logo">
+        
+        <form id="trackingForm">
+            <div class="form-group">
+                <label for="orderNo">Job No.</label>
+                <input type="text" id="orderNo" name="orderNo" placeholder="e.g., TM111682" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="trackingNo">Tracking No.</label>
+                <input type="text" id="trackingNo" name="trackingNo" placeholder="e.g., GEXVC2YF" required>
+            </div>
+            
+            <button type="submit" id="submitBtn">STATUS CHECK</button>
+        </form>
+        
+        <div id="result" class="result">
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('trackingForm');
+        const result = document.getElementById('result');
+        const resultContent = document.getElementById('resultContent');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Read API Key from URL (if provided)
+        const urlParams = new URLSearchParams(window.location.search);
+        const apiKey = urlParams.get('apiKey');
+        
+        if (apiKey) {
+            console.log('✅ API Key detected - Enhanced rate limit active');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const orderNo = document.getElementById('orderNo').value.trim().toUpperCase();
+            const trackingNo = document.getElementById('trackingNo').value.trim().toUpperCase();
+            
+            if (!orderNo || !trackingNo) {
+                showError('Please enter both Job No. and Tracking No.');
+                return;
+            }
+            
+            await fetchTrackingData(orderNo, trackingNo);
+        });
+
+        async function fetchTrackingData(orderNo, trackingNo) {
+            showLoading('Checking shipment status, please wait...');
+            
+            try {
+                // Build API URL, append API Key if available
+                let apiUrl = `/api/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`;
+                if (apiKey) {
+                    apiUrl += `&apiKey=${encodeURIComponent(apiKey)}`;
+                }
+                
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        showError('No record found. Please verify the tracking number.');
+                        return;
+                    }
+                    if (response.status === 429) {
+                        const errorData = await response.json();
+                        showError(errorData.message || 'Query limit reached (10 per hour). Please try again later.');
+                        return;
+                    }
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    showSuccess(data.data);
+                } else {
+                    showError('Query failed. Please try again later.');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Service temporarily unavailable. Please try again later or contact support.');
+            }
+        }
+
+        function showLoading(message) {
+            result.className = 'result loading';
+            resultContent.innerHTML = `<p>${message}</p>`;
+            result.style.display = 'block';
+            submitBtn.disabled = true;
+        }
+
+        function showError(message) {
+            result.className = 'result error';
+            resultContent.innerHTML = `<p>${message}</p>`;
+            result.style.display = 'block';
+            submitBtn.disabled = false;
+        }
+
+        function showSuccess(shipmentData) {
+            result.className = 'result success';
+            
+            let timelineHtml = '';
+            if (shipmentData.timeline && shipmentData.timeline.length > 0) {
+                timelineHtml = '<div class="timeline"><h3>TIMELINE</h3>';
+                shipmentData.timeline.forEach(item => {
+                    const stepClass = item.isEvent ? 'event' : item.status;
+                    const stepDisplay = item.step || '★';
+                    
+                    timelineHtml += `
+                        <div class="timeline-item ${stepClass}">
+                            <div class="timeline-step ${item.status}">${stepDisplay}</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">${item.title}</div>
+                                <div class="timeline-time">${item.time}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                timelineHtml += '</div>';
+            }
+            
+            resultContent.innerHTML = `
+                <h3>SUCCESS</h3>
+                <div class="shipment-info">
+                    <div class="info-row">
+                        <span class="info-label">Job No.</span>
+                        <span class="info-value">${shipmentData.orderNo || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Tracking No.</span>
+                        <span class="info-value">${shipmentData.trackingNo || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Invoice No.</span>
+                        <span class="info-value">${shipmentData.invoiceNo || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">MAWB</span>
+                        <span class="info-value">${shipmentData.mawb || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Origin/Destination</span>
+                        <span class="info-value">${shipmentData.route || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Package Count</span>
+                        <span class="info-value">${shipmentData.packageCount || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Weight</span>
+                        <span class="info-value">${shipmentData.weight ? `${shipmentData.weight} KG` : '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">ETA</span>
+                        <span class="info-value">${shipmentData.eta || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Status</span>
+                        <span class="info-value">${shipmentData.status || '—'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Last Update</span>
+                        <span class="info-value">${shipmentData.lastUpdate || '—'}</span>
+                    </div>
+                </div>
+                ${timelineHtml}
+            `;
+            
+            result.style.display = 'block';
+            submitBtn.disabled = false;
+        }
+
+        // Auto-fill test data
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('orderNo').value = 'TM111682';
+            document.getElementById('trackingNo').value = 'GEXVC2YF';
+        });
+    </script>
+</body>
+</html>
