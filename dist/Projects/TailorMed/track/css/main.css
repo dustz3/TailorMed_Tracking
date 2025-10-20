@@ -64,7 +64,7 @@
   transition: all 0.2s ease;
 }
 .tracking-lookup-panel .summary-search .summary-form .input-group input::placeholder {
-  color: #666;
+  color: #ccc;
 }
 .tracking-lookup-panel .summary-search .summary-form .input-group input:focus {
   border-color: #bb2749;
@@ -85,6 +85,9 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-size: 1.2rem;
+  border: none;
+  height: 100%;
+  border-radius: 10px;
 }
 @media (max-width: 768px) {
   .tracking-lookup-panel {
@@ -200,7 +203,9 @@
   gap: 6px;
   position: relative;
   z-index: 1;
-  align-items: flex-start;
+}
+.results-panel .status-info .summary-field align-items flex-start:nth-child(1) .field-value {
+  font-size: 1.4rem;
 }
 .results-panel .status-info .summary-field .field-label {
   font-size: 0.75rem;
@@ -2391,7 +2396,7 @@
   border-radius: 12px;
   padding: 24px;
   position: relative;
-  margin: 0 auto 100px auto;
+  margin: 0 auto 50px auto;
 }
 .timeline-track-panel .timeline-track-container .timeline-visual-container {
   position: relative;
@@ -2441,6 +2446,9 @@
   transform: translateY(-50%);
   z-index: 1;
 }
+.timeline-track-panel .timeline-track-container.timeline-import_export .timeline-visual-container .timeline-events .timeline-event:nth-child(1) {
+  left: 57%;
+}
 .timeline-track-panel .timeline-track-container.timeline-import_export .timeline-visual-container .timeline-horizontal-line::before {
   content: '';
   position: absolute;
@@ -2465,6 +2473,20 @@
 }
 .timeline-track-panel .timeline-track-container.timeline-import_export .timeline-visual-container .timeline-horizontal-line::before {
   box-shadow: 10px 0 0 #bb2749;
+}
+.timeline-track-panel .timeline-track-container.timeline-progress-5 .timeline-visual-container .timeline-horizontal-line::before {
+  width: 67%;
+}
+.timeline-track-panel .timeline-track-container.timeline-progress-5 .timeline-visual-container .timeline-horizontal-line::after {
+  left: 67%;
+  width: 33%;
+}
+.timeline-track-panel .timeline-track-container.timeline-progress-6 .timeline-visual-container .timeline-horizontal-line::before {
+  width: 50%;
+}
+.timeline-track-panel .timeline-track-container.timeline-progress-6 .timeline-visual-container .timeline-horizontal-line::after {
+  left: 50%;
+  width: 50%;
 }
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-nodes {
   left: -16px;
@@ -2704,7 +2726,7 @@
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  width: 110px;
+  width: 120px;
   z-index: 4;
 }
 .timeline-track-panel .timeline-track-container .timeline-node .node-status .status-text {
@@ -2766,7 +2788,7 @@
 .timeline-track-panel .timeline-track-container .timeline-node.processing .node-circle::after {
   content: '';
   position: absolute;
-  top: 54%;
+  top: 50%;
   left: 51%;
   transform: translate(-50%, -50%);
   width: 18px;

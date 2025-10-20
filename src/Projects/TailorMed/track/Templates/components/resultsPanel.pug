@@ -1,0 +1,60 @@
+//- Results Panel Component
+//- 查詢結果面板組件
+
+.results-panel
+  .results-title Latest shipment updates
+  
+  .results-description Review the most recent update TailorMed has received for this shipment
+  
+  .results-container
+    .results-highlight
+      .summary-grid
+        .summary-field
+          .field-label Order Number
+          .field-value TM439812
+
+        .summary-field
+          .field-label Invoice No.
+          .field-value TM202507098
+        
+        .summary-field
+          .field-label MAWB
+          .field-value 074-12345678
+
+        .summary-field
+          .field-label ORIGIN/DESTINATION
+          .field-value TPE → PVG
+        
+        .summary-field
+          .field-label PACKAGE COUNT
+          .field-value 1
+
+        .summary-field
+          .field-label WEIGHT
+          .field-value 25 KG
+
+        .summary-field
+          .field-label ETA
+          .field-value 06/10/2025 14:30(loval)
+    
+    .status-info
+      .summary-field
+        .field-label TRACKING NO.
+        .field-value EX39DAF9
+      .summary-field
+        .field-label Current Status
+        .field-value.status-value-wrapper
+          span.status-inline Out for Delivery
+          .status-icon-wrapper(data-tooltip="Dry ice refilled")
+            .status-icon
+              img(src="/Projects/TailorMed/track/images/icon-dryice.svg", alt="Truck", width="40", height="40")
+      
+      .summary-field
+        .field-label Last Update
+        .field-value 11-10-2025 14:30 (local)
+      
+  .results-note
+    | This information is NOT updated in real-time. For the most current status, please refresh this page or contact our customer service team.
+  
+  .results-mobile-cta
+    .btn-text View Full Timeline

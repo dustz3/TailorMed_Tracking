@@ -66,7 +66,7 @@
     border-radius 12px
     padding 24px 
     position relative
-    margin 0 auto 100px auto
+    margin 0 auto 50px auto
     
     // 視覺容器 - 包裝 timeline 和 nodes
     .timeline-visual-container
@@ -126,6 +126,9 @@
           height 16px
           transform translateY(-50%)
           z-index 1
+          
+          .timeline-event:nth-child(1)
+            left 57%
         
         // Import/Export 專用的分段式連接線 (7個節點，6段間距)
         .timeline-horizontal-line
@@ -155,6 +158,26 @@
           &::before
             // 在 ::before 的基礎上添加突出部分
             box-shadow 10px 0 0 accent-color
+    
+    // Import 進度到第5個節點的樣式 (Destination Customs Process)
+    &.timeline-progress-5
+      .timeline-visual-container
+        .timeline-horizontal-line
+          &::before
+            width 67%  // 延伸到第5個節點 (Destination Customs Process)
+          &::after
+            left 67%   // 從第5個節點開始
+            width 33%  // 剩餘的節點
+    
+    // Export 進度到第4個節點的樣式 (In Transit - Processing)
+    &.timeline-progress-6
+      .timeline-visual-container
+        .timeline-horizontal-line
+          &::before
+            width 50%  // 延伸到第4個節點 (In Transit)
+          &::after
+            left 50%   // 從第4個節點開始
+            width 50%  // 剩餘的節點
     
     // Order Completion Timeline (3 nodes) - 獨立樣式
     &.timeline-order_completion
@@ -422,7 +445,7 @@
         left 50%
         transform translateX(-50%)
         text-align center
-        width 110px
+        width 120px
         z-index 4
         
         .status-text
@@ -498,7 +521,7 @@
           &::after
             content ''
             position absolute
-            top 54%
+            top 50%
             left 51%
             transform translate(-50%, -50%)
             width 18px

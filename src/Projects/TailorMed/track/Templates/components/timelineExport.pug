@@ -1,15 +1,13 @@
-//- Import/Export Timeline Track Component
-//- 進出口時間軸軌道組件
+//- Export Timeline Track Component
+//- 出口時間軸軌道組件
 
 .timeline-track-panel
-  h2.panel-title Import/Export Timeline Track
+  h2.panel-title Export Timeline Track
   
-  .timeline-track-container.timeline-import_export
+  .timeline-track-container.timeline-import_export.timeline-progress-6
     .track-content
       p 
-        | IMPORT/EXPORT
-        br
-        | 7 Nodes with 2 Events
+        | 7 Nodes without Events
     .timeline-visual-container
       .timeline-horizontal-line
       .timeline-nodes
@@ -33,7 +31,7 @@
             .status-time 10:38
         .timeline-node.in-transit(data-step="4")
           .node-circle
-          .node-date Oct 11
+          .node-date Oct 12
           .node-status
             .status-text In Transit
             .status-time Processing...
@@ -55,8 +53,8 @@
           .node-status
             .status-text Shipment Delivered
             .status-time --:--
-      .timeline-events
-        .timeline-event(data-event="event-1")
-          .event-tag
-            .event-tag-text Dry ice refilled
+      //- .timeline-events
+        //- .timeline-event(data-event="event-1")
+        //-   .event-tag
+        //-     .event-tag-text Dry ice refilled
         //- .timeline-event(data-event="event-2")  // 隱藏第2個event

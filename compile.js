@@ -5,12 +5,18 @@ const stylus = require('stylus');
 
 const ROOT_DIR = __dirname;
 const STYLE_DIR = path.join(ROOT_DIR, 'src/Projects/TailorMed/track/Styles');
-const SCRIPT_DIR = path.join(ROOT_DIR, 'src/Projects/TailorMed/track/Javascript');
+const SCRIPT_DIR = path.join(
+  ROOT_DIR,
+  'src/Projects/TailorMed/track/Javascript'
+);
 const DATA_DIR = path.join(ROOT_DIR, 'src/Projects/TailorMed/track/data');
-const TEMPLATE_DIR = path.join(ROOT_DIR, 'src/Projects/TailorMed/track/Templates');
+const TEMPLATE_DIR = path.join(
+  ROOT_DIR,
+  'src/Projects/TailorMed/track/Templates'
+);
 const ASSETS_DIR = path.join(ROOT_DIR, 'src/Projects/TailorMed/track/Assets');
-// 編譯到專案根目錄的 dist
-const DIST_DIR = path.join(ROOT_DIR, 'dist');
+// 編譯到專案根目錄的 dist，保持 src 的資料夾結構
+const DIST_DIR = path.join(ROOT_DIR, 'dist/Projects/TailorMed/track');
 
 function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) {
@@ -62,7 +68,7 @@ try {
 
     const outputName = file.replace(/\.pug$/, '.html');
     fs.writeFileSync(path.join(DIST_DIR, outputName), html);
-    console.log(`  ✅ 已生成 dist/${outputName}`);
+    console.log(`  ✅ 已生成 dist/Projects/TailorMed/track/${outputName}`);
   });
 } catch (error) {
   console.error('❌ Pug 編譯失敗:', error.message);
@@ -98,7 +104,7 @@ try {
         const outputName = file.replace(/\.styl$/, '.css');
         fs.writeFileSync(path.join(cssDir, outputName), css);
         console.log(
-          `  ✅ 已生成 dist/css/${outputName}`
+          `  ✅ 已生成 dist/Projects/TailorMed/track/css/${outputName}`
         );
       });
   });
@@ -116,5 +122,5 @@ copyDir(ASSETS_DIR, path.join(DIST_DIR, 'images'));
 console.log('✅ 靜態資源已就緒');
 
 console.log(
-  '🎉 編譯完成！可以在 dist/index.html 預覽貨件追蹤 MVP'
+  '🎉 編譯完成！可以在 dist/Projects/TailorMed/track/index.html 預覽貨件追蹤 MVP'
 );

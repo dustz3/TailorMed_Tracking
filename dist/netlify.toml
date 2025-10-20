@@ -11,6 +11,11 @@
   status = 200
 
 [[redirects]]
+  from = "/"
+  to = "/Projects/TailorMed/track/index.html"
+  status = 200
+
+[[redirects]]
   from = "/design"
   to = "/Projects/TailorMed/track/design_ui.html"
   status = 200

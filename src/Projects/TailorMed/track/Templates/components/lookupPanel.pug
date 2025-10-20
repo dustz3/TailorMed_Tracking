@@ -1,0 +1,25 @@
+//- Tracking Lookup Panel Component
+//- 貨件查詢面板組件
+
+.tracking-lookup-panel
+  .summary-title Shipment Tracking Lookup
+  
+  .summary-search 
+    
+    .summary-form
+      .form-row
+        .input-group
+          .input-label Order Number
+          input(type="text", placeholder="e.g. TM111234", name="orderNo", required)
+        
+        .input-group
+          .input-label Tracking Number
+          input(type="text", placeholder="e.g. CXXXD3XX", name="trackingNo", required)
+        
+        .input-group
+          button.btn--primary(type="submit") Status Check
+      
+      .form-helper
+        | Need Help? Contact your TailorMed Logistic specialist at 
+        span.contact-phone +8862-2694-6168
+        |  for priority support.
