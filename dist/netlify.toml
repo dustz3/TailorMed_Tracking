@@ -1,5 +1,5 @@
 [build]
-  publish = "dist"
+  publish = "dist/Projects/TailorMed/track"
   command = ""
 
 [build.environment]
@@ -12,12 +12,12 @@
 
 [[redirects]]
   from = "/"
-  to = "/Projects/TailorMed/track/index.html"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
   from = "/design"
-  to = "/Projects/TailorMed/track/design_ui.html"
+  to = "/design_ui.html"
   status = 200
 
 [[redirects]]

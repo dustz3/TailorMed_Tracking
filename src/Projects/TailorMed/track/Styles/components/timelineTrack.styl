@@ -725,3 +725,47 @@
       position relative
       z-index 2
       margin-bottom 50px
+
+// Import Timeline - 進口時間軸
+.timeline-import
+  .track-content p
+    color #10b981 // 綠色
+    font-weight 600
+    
+  .timeline-horizontal-line
+    background linear-gradient(90deg, #10b981 0%, #34d399 50%, #6ee7b7 100%)
+    
+  .timeline-node .node-circle
+    border-color #10b981
+    
+    &.completed
+      background #10b981
+      
+    &.in-transit
+      background linear-gradient(45deg, #10b981, #34d399)
+      
+    &.pending
+      background #e5e7eb
+      border-color #9ca3af
+
+// Export Timeline - 出口時間軸  
+.timeline-export
+  .track-content p
+    color #3b82f6 // 藍色
+    font-weight 600
+    
+  .timeline-horizontal-line
+    background linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%)
+    
+  .timeline-node .node-circle
+    border-color #3b82f6
+    
+    &.completed
+      background #3b82f6
+      
+    &.in-transit
+      background linear-gradient(45deg, #3b82f6, #60a5fa)
+      
+    &.pending
+      background #e5e7eb
+      border-color #9ca3af

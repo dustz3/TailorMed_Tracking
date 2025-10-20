@@ -217,10 +217,7 @@ app.get('/', (req, res) => {
 
 // 設計頁面路由（內部測試用）
 app.get('/design', (req, res) => {
-  const designPath = path.join(
-    staticPath,
-    'Projects/TailorMed/track/design_ui.html'
-  );
+  const designPath = path.join(staticPath, 'Projects/TailorMed/track/design_ui.html');
   if (fs.existsSync(designPath)) {
     res.sendFile(designPath);
   } else {
