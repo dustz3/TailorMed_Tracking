@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: tailormed-tracking-api
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AIRTABLE_API_KEY
+        sync: false
+      - key: AIRTABLE_BASE_ID
+        sync: false
+      - key: AIRTABLE_SHIPMENTS_TABLE
+        value: Tracking
+
+
+
+
+
+

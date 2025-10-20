@@ -1,45 +1,40 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
+# 環境變數（包含敏感資訊）
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.env
 
-# Build outputs
-dist/
-build/
+# Node modules
+node_modules/
+package-lock.json
 
-# IDE
+# 日誌檔案
+*.log
+logs/
+
+# 暫存檔案
+*.tmp
+.cache/
+.DS_Store
+Thumbs.db
+
+# IDE 設定
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS
-.DS_Store
-Thumbs.db
+# Build 產出（如果有的話）
+build/
+# dist/ - 保留 dist 資料夾給 Netlify 部署使用
 
-# Logs
-logs
-*.log
+# 測試覆蓋率
+coverage/
+.nyc_output/
 
 # Runtime data
 pids
 *.pid
 *.seed
 *.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# nyc test coverage
-.nyc_output
 
 # Dependency directories
 jspm_packages/
@@ -56,11 +51,7 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-
 # parcel-bundler cache (https://parceljs.org/)
-.cache
 .parcel-cache
 
 # next.js build output

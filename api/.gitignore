@@ -1,0 +1,20 @@
+# 環境變數（包含敏感資訊）
+.env
+
+# Node modules（如果 api 有獨立的 node_modules）
+node_modules/
+
+# 日誌檔案
+*.log
+logs/
+
+# 暫存檔案
+*.tmp
+.cache/
+
+
+
+
+
+
+

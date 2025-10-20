@@ -1,0 +1,120 @@
+// Tracking Lookup Panel Component
+// 貨件查詢面板組件
+
+@import '../variables'
+
+.tracking-lookup-panel
+  display flex
+  width 100%
+  max-width 1200px
+  background white
+  border-radius 16px
+  box-shadow panel-shadow
+  padding 32px 40px
+  flex-direction column
+  gap 0
+  position relative
+  z-index 2
+
+  .summary-title
+    font-size 1.75rem
+    font-weight 600
+    color primary-color
+
+  .summary-search
+    display flex
+    flex-direction column
+    gap 16px
+    padding 20px 24px
+    background rgba(neutral-light, 0.15)
+    border 1px solid rgba(37, 99, 235, 0.12)
+    border-radius 12px
+
+    .search-hint
+      font-size 0.95rem
+      color primary-color
+
+    .summary-form
+      display flex
+      flex-direction column
+      gap 12px
+
+      .form-row
+        display grid
+        grid-template-columns repeat(3, minmax(0, 1fr))
+        gap 16px
+
+        @media (max-width: 992px)
+          grid-template-columns 1fr
+
+      .input-group
+        display flex
+        flex-direction column
+        gap 6px
+
+        .input-label
+          font-size 0.825rem
+          font-weight 600
+          color primary-color
+          text-transform uppercase
+          letter-spacing 0.08em
+
+        input
+          padding 12px 14px
+          border 1px solid rgba(15, 23, 42, 0.15)
+          border-radius 10px
+          font-size 1rem
+          transition all 0.2s ease
+
+          &::placeholder
+            color neutral-gray
+
+          &:focus
+            border-color accent-color
+            box-shadow 0 0 0 3px rgba(accent-color, 0.18)
+            outline none
+
+      .form-helper
+        font-size 0.85rem
+        color neutral-gray
+        margin-bottom 0
+
+        .contact-phone
+          color accent-color
+          font-weight 600
+
+      button.btn--primary
+        font-weight 700
+        letter-spacing 0.05em
+        text-transform uppercase
+        font-size 1.2rem
+
+// Mobile Specific Styles
+@media (max-width: 768px)
+  .tracking-lookup-panel
+    width 100%
+    padding 28px 24px
+
+    .summary-search
+      padding 0
+      background none
+      border none
+
+      .search-hint
+        display none
+
+      .summary-form
+        .form-row
+          grid-template-columns 1fr
+
+        .input-group
+          input
+            width 100%
+
+        button.btn--primary
+          width 100%
+          padding 14px 0
+
+        .form-helper
+          display none
+

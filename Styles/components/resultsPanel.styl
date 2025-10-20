@@ -1,0 +1,354 @@
+// Results Panel Component
+// 查詢結果面板組件
+
+@import '../variables'
+
+.results-panel
+  display flex
+  width 100%
+  max-width 1200px
+  background white
+  border-radius 16px
+  box-shadow panel-shadow
+  padding 28px 36px
+  flex-direction column
+  gap 20px
+  position relative
+  z-index 2
+
+  .results-title
+    font-size 1.75rem
+    font-weight 600
+    color primary-color
+
+  .results-description
+    font-size 0.95rem
+    color neutral-gray
+
+  .results-container
+    display flex
+    flex-direction row
+    gap 24px
+
+  .results-highlight
+    flex 6
+    padding 20px 24px
+    background rgba(neutral-light, 0.15)
+    border 1px solid rgba(37, 99, 235, 0.12)
+    border-radius 12px
+
+    .summary-grid
+      display grid
+      grid-template-columns repeat(2, 1fr)
+      gap 18px
+
+      .summary-field
+        display flex
+        flex-direction column
+        gap 6px
+
+        .field-label
+          font-size 0.75rem
+          font-weight 600
+          color neutral-gray
+          text-transform uppercase
+          letter-spacing 0.08em
+
+        .field-value
+          font-size 1.4rem
+          font-weight 600
+          color primary-color
+
+  .status-info
+    flex 4
+    background primary-color
+    border-radius 12px
+    padding 20px
+    display flex
+    flex-direction column
+    gap 16px
+    position relative
+    overflow hidden
+
+    &::after
+      content ''
+      position absolute
+      bottom: -20px;
+      right: -20px;
+      width: 50%;
+      height: 80%;
+      background-image url('../images/tailormed-mark.svg')
+      background-size contain
+      background-repeat no-repeat
+      background-position bottom right
+      opacity 0.15
+      pointer-events none
+
+    .summary-field
+      display flex
+      flex-direction column
+      gap 6px
+      position relative
+      z-index 1
+      align-items flex-start
+
+      .field-label
+        font-size 0.75rem
+        font-weight 600
+        color base-white
+        text-transform uppercase
+        letter-spacing 0.08em
+
+      .field-value
+        font-size 1.4rem
+        font-weight 600
+        color base-white
+
+      .status-value-wrapper
+        display flex
+        align-items center
+        gap 10px
+
+      .status-inline
+        color #fff
+        padding 5px 10px
+        background accent-color
+        border-radius 5px
+
+      .status-icon-wrapper
+        position relative
+        display inline-flex
+        cursor pointer
+
+        &::after
+          content attr(data-tooltip)
+          position absolute
+          bottom 110%
+          left 50%
+          transform translateX(-50%)
+          padding 8px 12px
+          background rgba(0, 0, 0, 0.9)
+          color base-white
+          font-size 0.85rem
+          font-weight 500
+          white-space nowrap
+          border-radius 6px
+          opacity 0
+          pointer-events none
+          transition opacity 0.3s ease
+          z-index 10
+
+        &::before
+          content ''
+          position absolute
+          bottom 100%
+          left 50%
+          transform translateX(-50%)
+          width 0
+          height 0
+          border-left 6px solid transparent
+          border-right 6px solid transparent
+          border-top 6px solid rgba(0, 0, 0, 0.9)
+          opacity 0
+          pointer-events none
+          transition opacity 0.3s ease
+
+        &:hover::after,
+        &:hover::before
+          opacity 1
+
+      .status-icon
+        width 40px
+        height 40px
+        display block
+
+      // Tracking No. (第一個欄位)
+      &:nth-child(1)
+        .field-value
+          font-size 2.4rem
+
+      // Last Update (第三個欄位)
+      &:nth-child(3)
+        .field-value
+          font-size 0.8rem
+          font-weight 400
+
+        .status-badge
+          display inline-flex
+          align-items center
+          justify-content center
+          padding 10px 16px
+          border-radius 999px
+          font-size 0.85rem
+          font-weight 700
+          text-transform uppercase
+          letter-spacing 0.08em
+          background rgba(37, 99, 235, 0.1)
+          color accent-color
+
+          &.status-in-transit
+            background rgba(37, 99, 235, 0.12)
+            color accent-color
+
+          &.status-customs
+            background rgba(245, 158, 11, 0.12)
+            color #f59e0b
+
+          &.status-departed
+            background rgba(187, 39, 73, 0.12)
+            color accent-color
+
+          &.status-delivered
+            background rgba(187, 39, 73, 0.18)
+            color #9a1f3a
+
+          &.status-exception
+            background rgba(225, 29, 72, 0.12)
+            color #e11d48
+
+  .results-note
+    font-size 0.9rem
+    color neutral-gray
+    padding 12px 16px
+    background rgba(248, 250, 252, 0.9)
+    border 1px dashed rgba(12, 48, 88, 0.15)
+    border-radius 12px
+    text-align center
+
+  .results-mobile-cta
+    display none
+    letter-spacing 0.05em
+    text-transform uppercase
+    font-size 1rem
+    padding 0 22px
+    height 55px
+    border none
+    border-radius 10px
+    background primary-color
+    color base-white
+    cursor pointer
+    font-weight 700
+    transition transform 0.2s ease
+
+    .btn-text
+      font-size inherit
+      line-height 1
+
+    &:hover
+      transform translateY(-3px)
+      background darken(primary-color, 10%)
+
+    &:active
+      transform translateY(0)
+
+  .results-summary,
+  .results-list,
+  .results-empty
+    display none
+
+// Mobile Specific Styles
+@media (max-width: 768px)
+  .results-panel
+    width 100%
+    padding 24px 22px
+    gap 16px
+
+    .results-title
+      font-size 1.2rem
+
+    .results-description
+      font-size 0.9rem
+
+    .results-container
+      flex-direction column
+      gap 0
+
+    .results-highlight
+      flex 1
+      padding 18px 18px
+      background none
+      border none
+
+      .summary-grid
+        grid-template-columns 1fr
+        gap 14px
+
+        .summary-field
+          .field-value
+            font-size 1.4rem
+
+    .status-info
+      flex 1
+      background primary-color
+      padding 20px
+      margin-top 24px
+      box-shadow panel-shadow
+      border-radius 12px
+
+      .summary-field
+        .field-label
+          color base-white
+
+        .field-value
+          color base-white
+
+        .status-inline
+          color base-white
+          background accent-color
+
+    .results-note
+      font-size 0.85rem
+      padding 12px 12px
+
+    .results-mobile-cta
+      display inline-flex
+      justify-content center
+      align-items center
+      font-size 1rem
+      width 100%
+      margin-top 12px
+
+// Laptop Specific Styles
+@media (max-width: 1024px)
+  .results-panel
+    padding 28px 28px
+    
+    .results-container
+      flex-direction column
+      gap 0
+      
+    .results-highlight
+      flex 1
+      
+      .summary-grid
+        grid-template-columns 1fr
+        
+    .status-info
+      flex 1
+      background primary-color
+      padding 20px
+      margin-top 24px
+      box-shadow panel-shadow
+      border-radius 12px
+      
+      .summary-field
+        .field-label
+          color base-white
+        
+        .field-value
+          color base-white
+        
+        .status-inline
+          color base-white
+          background accent-color
+
+// Mobile Extra Styles
+@media (max-width: 480px)
+  .results-panel
+    padding 24px 22px
+    gap 16px
+
+    .results-title
+      font-size 1.2rem
+
+

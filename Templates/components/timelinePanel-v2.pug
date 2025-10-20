@@ -1,0 +1,124 @@
+//- Shipment Timeline Component V2
+//- 可重用的貨件追蹤時間軸組件 V2
+
+.status-panel-v2
+  h2.status-title Shipment Status Timeline
+  
+  //- 第一列：上方卡片（奇數步驟：1,3,5,7,9）
+  .timeline-cards.top
+    .timeline-card.completed.top(data-step="1")
+      .card-number 1
+      .card-content
+        .card-title Order Created
+    .timeline-card.completed.top(data-step="3")
+      .card-number 3
+      .card-content
+        .card-title Origin Customs Process
+    .timeline-card.pending.top(data-step="5")
+      .card-number 5
+      .card-content
+        .card-title In Transit
+    .timeline-card.pending.top(data-step="7")
+      .card-number 7
+      .card-content
+        .card-title Import Released
+    .timeline-card.pending.top(data-step="9")
+      .card-number 9
+      .card-content
+        .card-title Shipment Delivered
+
+  //- 第二列：時間軸核心
+  .timeline-container
+    .timeline-track
+      .timeline-progress(style="width: 37.5%", data-target-width="37.5%")
+    .timeline-nodes
+      .timeline-node.completed(data-step="1")
+        .node-dot
+          .node-icon 1
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 01
+          .datetime-time 09:30
+      .timeline-node.completed(data-step="2")
+        .node-dot
+          .node-icon 2
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 01
+          .datetime-time 15:20
+      .timeline-node.completed(data-step="3")
+        .node-dot
+          .node-icon 3
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 02
+          .datetime-time 10:15
+      .timeline-node.pending(data-step="4")
+        .node-dot
+          .node-icon 4
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 02
+          .datetime-time --:--
+      .timeline-node.pending(data-step="5")
+        .node-dot
+          .node-icon 5
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 03
+          .datetime-time --:--
+      .timeline-node.pending(data-step="6")
+        .node-dot
+          .node-icon 6
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 04
+          .datetime-time --:--
+      .timeline-node.pending(data-step="7")
+        .node-dot
+          .node-icon 7
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 04
+          .datetime-time --:--
+      .timeline-node.pending(data-step="8")
+        .node-dot
+          .node-icon 8
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 04
+          .datetime-time --:--
+      .timeline-node.pending(data-step="9")
+        .node-dot
+          .node-icon 9
+        .node-datetime
+          .datetime-month OCT
+          .datetime-day 05
+          .datetime-time --:--
+    //- 乾冰 event 圖標已移除（Step7 到 Step8 時操作員未在資料庫打勾）
+
+  //- 第三列：下方卡片（偶數步驟：2,4,6,乾冰,8）
+  .timeline-cards.bottom
+    .timeline-card.completed.bottom(data-step="2")
+      .card-number 2
+      .card-content
+        .card-title Shipment Collected
+    .timeline-card.pending.bottom(data-step="4")
+      .card-number 4
+      .card-content
+        .card-title Export Released
+    .timeline-card.pending.bottom(data-step="6")
+      .card-number 6
+      .card-content
+        .card-title Destination Customs
+    .timeline-card.event.pending.bottom(data-step="dryice")
+      .card-icon-wrapper
+        img.card-icon-img.icon-default(src="images/icon-dryice.svg", alt="Dry Ice")
+        img.card-icon-img.icon-hover(src="images/icon-dryice_hover.svg", alt="Dry Ice")
+      .card-content
+        .card-title Dry Ice Refilled
+    .timeline-card.pending.bottom(data-step="8")
+      .card-number 8
+      .card-content
+        .card-title Out for Delivery
+

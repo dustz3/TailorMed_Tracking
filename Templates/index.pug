@@ -1,0 +1,153 @@
+doctype html
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title TailorMed｜貨件追蹤系統
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap", rel="stylesheet")
+    style.
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        background: linear-gradient(135deg, #143463 0%, #97d3df 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .site-header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand-logo {
+        height: 40px;
+        width: auto;
+      }
+      .nav-link {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+      .nav-link:hover {
+        background: #f0f0f0;
+        color: #667eea;
+      }
+      .main-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 4rem 2rem;
+      }
+      .construction-content {
+        max-width: 600px;
+      }
+      .construction-icon {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+      }
+      .construction-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .construction-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+      .construction-message {
+        font-size: 1rem;
+        opacity: 0.8;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .test-link {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-weight: 500;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      .test-link:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+      }
+      .site-footer {
+        background: #143463;
+        padding: 2rem 0;
+        text-align: center;
+        color: #ffffff;
+      }
+      .site-footer .container {
+        display: block;
+        text-align: center;
+      }
+      .site-footer__copy {
+        font-size: 0.9rem;
+        margin: 0;
+      }
+      @media (max-width: 768px) {
+        .construction-title {
+          font-size: 2rem;
+        }
+        .construction-subtitle {
+          font-size: 1rem;
+        }
+        .container {
+          padding: 0 1rem;
+        }
+      }
+  body
+    header.site-header
+      .container
+        .brand
+          img.brand-logo(src="./images/logo.png", alt="TailorMed")
+
+    main.main-content
+      .construction-content
+        .construction-icon 🚧
+        h1.construction-title Under Construction
+        p.construction-subtitle We're building something amazing for you!
+        .construction-message
+          p Our new shipment tracking system is currently under development. 
+          p We're working hard to bring you the best experience possible.
+          p Please check back soon!
+        a.test-link(href="https://tailormed-tracking-api.onrender.com/basic") Test Version (Internal Use)
+
+    footer.site-footer
+      .container
+        p.site-footer__copy © 2025 TailorMed. All Rights Reserved.

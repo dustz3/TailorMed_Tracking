@@ -1,0 +1,185 @@
+//- Timeline Track Component
+//- 時間軸軌道組件
+
+.timeline-track-panel
+  h2.panel-title Timeline Track
+  
+  .timeline-track-container.timeline-domestic
+    .track-content
+      p 
+        | DOMESTIC
+        br
+        | 4 Nodes
+    .timeline-visual-container
+      .timeline-horizontal-line
+      .timeline-nodes
+        .timeline-node.completed(data-step="1")
+          .node-circle
+          .node-date OCT 10
+          .node-status
+            .status-text Order Created
+            .status-time 10:16
+        .timeline-node.processing(data-step="2")
+          .node-circle
+          .node-date OCT 12
+          .node-status
+            .status-text Shipment Collected
+            .status-time Processing...
+        .timeline-node.pending(data-step="3")
+          .node-circle
+          .node-date TBD
+          .node-status
+            .status-text In Transit
+            .status-time --:--
+        .timeline-node.pending(data-step="4")
+          .node-circle
+          .node-date TBD
+          .node-status
+            .status-text Shipment Delivered
+            .status-time --:--
+      
+  .timeline-track-container.timeline-import_export
+    .track-content
+      p 
+        | IMPORT/EXPORT
+        br
+        | 7 Nodes with 2 Events
+    .timeline-visual-container
+      .timeline-horizontal-line
+      .timeline-nodes
+        .timeline-node.completed(data-step="1")
+          .node-circle
+          .node-date OCT 09
+          .node-status
+            .status-text Order Created
+            .status-time 03:45
+        .timeline-node.completed(data-step="2")
+          .node-circle
+          .node-date OCT 09
+          .node-status
+            .status-text Shipment Collected
+            .status-time 06:10
+        .timeline-node.completed(data-step="3")
+          .node-circle
+          .node-date OCT 10
+          .node-status
+            .status-text Export Released
+            .status-time 10:38
+        .timeline-node.in-transit(data-step="4")
+          .node-circle
+          .node-date OCT 11
+          .node-status
+            .status-text In Transit
+            .status-time Processing...
+        .timeline-node.pending(data-step="5")
+          .node-circle
+          .node-date TBD
+          .node-status
+            .status-text Import Released
+            .status-time --:--
+        .timeline-node.pending(data-step="6")
+          .node-circle
+          .node-date TBD
+          .node-status
+            .status-text Out for Delivery
+            .status-time --:--
+        .timeline-node.pending(data-step="7")
+          .node-circle
+          .node-date TBD
+          .node-status
+            .status-text Shipment Delivered
+            .status-time --:--
+      .timeline-events
+        .timeline-event(data-event="event-1")
+          .event-tag
+            .event-tag-text Dry ice refilled
+        //- .timeline-event(data-event="event-2")  // 隱藏第2個event
+      
+  .timeline-track-container.timeline-cross_trade_layered
+    .track-content
+      p
+        | CROSS TRADE
+        br
+        | Origin:4 Nodes / Transit:2 Nodes / Destination:4 Nodes 
+
+    // Origin 和 Destination 容器 (100% 寬度)
+    .timeline-main-layers
+      // Origin 階段 (綠色，4 節點)
+      .timeline-origin-wrapper
+        .timeline-layer.timeline-origin-layer.origin-stage
+          .timeline-visual-container
+            .timeline-horizontal-line
+            .timeline-nodes
+              .timeline-node.timeline-origin.completed(data-step="1")
+                .node-circle
+                .node-date OCT 08
+                .node-status
+                  .status-text Cargo Ready
+                  .status-time 15:32
+              .timeline-node.timeline-origin.completed(data-step="2")
+                .node-circle
+                .node-date OCT 09
+                .node-status
+                  .status-text Port In
+                  .status-time 08:22
+              .timeline-node.timeline-origin.completed(data-step="3")
+                .node-circle
+                .node-date OCT 09
+                .node-status
+                  .status-text On Board
+                  .status-time 11:30
+              .timeline-node.timeline-origin.completed(data-step="4")
+                .node-circle
+                .node-date OCT 09
+                .node-status
+                  .status-text Departure Confirmed
+                  .status-time 14:30
+          .track-content
+      
+      // Destination 階段 (藍色，4 節點)
+      .timeline-destination-wrapper
+        .timeline-layer.timeline-destination-layer.destination-stage
+          .timeline-visual-container
+            .timeline-horizontal-line
+            .timeline-nodes
+              .timeline-node.timeline-destination.completed(data-step="7")
+                .node-circle
+                .node-date OCT 11
+                .node-status
+                  .status-text Arrival Port
+                  .status-time 00:32
+              .timeline-node.timeline-destination.completed(data-step="8")
+                .node-circle
+                .node-date OCT 11
+                .node-status
+                  .status-text Customs Cleared
+                  .status-time 04:25
+              .timeline-node.timeline-destination.completed(data-step="9")
+                .node-circle
+                .node-date OCT 12
+                .node-status
+                  .status-text Delivery Out
+                  .status-time 07:50
+              .timeline-node.timeline-destination.completed(data-step="10")
+                .node-circle
+                .node-date OCT 13
+                .node-status
+                  .status-text POD
+                  .status-time 18:40
+          .track-content
+    
+    // Transit 階段 (橙色，2 節點) - 移到下方
+    .timeline-layer.timeline-transit-layer.transit-stage
+      .timeline-visual-container
+        .timeline-horizontal-line
+        .timeline-nodes
+          .timeline-node.timeline-transit.completed(data-step="5")
+            .node-circle
+            .node-status
+              .status-text In Transit Start
+              .status-time 15:30
+          .timeline-node.timeline-transit.completed(data-step="6")
+            .node-circle
+            .node-status
+              .status-text Arrival Notice Issued
+              .status-time 05:30

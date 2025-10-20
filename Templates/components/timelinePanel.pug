@@ -1,0 +1,94 @@
+//- Shipment Timeline Component
+//- 可重用的貨件追蹤時間軸組件
+
+.status-panel
+  h2.status-title Shipment Status Timeline
+  .timeline-container
+    .timeline-track
+      .timeline-progress(style="width: 87.5%", data-target-width="87.5%")
+    .timeline-nodes
+      .timeline-node.completed(data-step="1")
+        .node-dot
+        .node-icon 1
+      .timeline-node.completed(data-step="2")
+        .node-dot
+        .node-icon 2
+      .timeline-node.completed(data-step="3")
+        .node-dot
+        .node-icon 3
+      .timeline-node.completed(data-step="4")
+        .node-dot
+        .node-icon 4
+      .timeline-node.completed(data-step="5")
+        .node-dot
+        .node-icon 5
+      .timeline-node.completed(data-step="6")
+        .node-dot
+        .node-icon 6
+      .timeline-node.completed(data-step="7")
+        .node-dot
+        .node-icon 7
+      .timeline-node.active(data-step="8")
+        .node-dot
+        .node-pulse
+        .node-icon 8
+      .timeline-node.pending(data-step="9")
+        .node-dot
+        .node-icon 9
+    .timeline-event-icon
+      img(src="images/icon-dryice.svg", alt="Dry Ice Refilled")
+    .timeline-labels
+      .timeline-row
+        .timeline-card.completed
+          .card-number 1
+          .card-content
+            .card-title Order Created
+            .card-time 2025-10-01 09:30
+        .timeline-card.completed
+          .card-number 2
+          .card-content
+            .card-title Shipment Collected
+            .card-time 2025-10-01 15:20
+        .timeline-card.completed
+          .card-number 3
+          .card-content
+            .card-title Origin Customs Process
+            .card-time 2025-10-02 10:15
+        .timeline-card.completed
+          .card-number 4
+          .card-content
+            .card-title Export Released
+            .card-time 2025-10-02 16:45
+        .timeline-card.completed
+          .card-number 5
+          .card-content
+            .card-title In Transit
+            .card-time 2025-10-03 08:00
+      .timeline-row
+        .timeline-card.completed
+          .card-number 6
+          .card-content
+            .card-title Destination Customs
+            .card-time 2025-10-04 11:20
+        .timeline-card.completed
+          .card-number 7
+          .card-content
+            .card-title Import Released
+            .card-time 2025-10-04 17:30
+        .timeline-card.event
+          .card-icon-wrapper
+            img.card-icon-img.icon-default(src="images/icon-dryice.svg", alt="Dry Ice")
+            img.card-icon-img.icon-hover(src="images/icon-dryice_hover.svg", alt="Dry Ice")
+          .card-content
+            .card-title Dry Ice Refilled
+            .card-time 2025-10-04 19:45
+        .timeline-card.active
+          .card-number 8
+          .card-content
+            .card-title Out for Delivery
+            .card-time Processing...
+        .timeline-card.pending
+          .card-number 9
+          .card-content
+            .card-title Shipment Delivered
+            .card-time Pending

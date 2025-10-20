@@ -1,0 +1,25 @@
+# 注意：此配置適用於從 track 目錄直接部署
+# 如果從專案根目錄部署，請在 Netlify 設定中指定 Base directory
+
+[build]
+  # 建置命令
+  command = "npm install && npm run build"
+  
+  # 發布目錄 - 相對於建置目錄的路徑
+  publish = "dist"
+
+[[redirects]]
+  # 處理 SPA 路由（如果需要）
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  
+[[headers]]
+  # 為所有頁面添加安全標頭
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+

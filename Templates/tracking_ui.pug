@@ -1,0 +1,51 @@
+doctype html
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title TailorMed｜貨件追蹤系統 - Test Version
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="./css/main.css")
+    script(src="./js/config.js")
+    script(src="./js/app.js", defer)
+    script(src="./js/interaction.js", defer)
+  body
+    header.site-header
+      .container
+        .brand
+          img.brand-logo(src="./images/logo.png", alt="TailorMed")
+        nav.site-nav
+          a.nav-link(href="./index.html") Back to Home
+          a.nav-link(href="https://tailormed.com.tw", target="_blank", rel="noopener") Back to TailorMed
+
+    section.hero-banner
+      .hero-overlay
+      .container
+        .hero-content
+          .hero-text
+            h1.hero-title Track Your TailorMed Shipments Anytime
+            p.hero-subtitle.hero-subtitle--desktop Use your order number and job ID to review the most recent shipment status available from TailorMed.
+            p.hero-subtitle.hero-subtitle--mobile Use your order number and job ID to review the most recent shipment status available from TailorMed.
+
+    section.hero-summary
+      //- Timeline Track Component - 新的時間軸軌道組件
+      .timeline-container
+        include components/timelineTrack.pug
+        
+      //- 1. Shipment Tracking Lookup
+      //- include components/lookupPanel.pug
+
+      //- 2. Latest shipment updates
+      //- include components/resultsPanel.pug
+
+      //- 3. Shipment Status Timeline (Original)
+      //- include components/timelinePanel.pug
+
+      //- 4. Shipment Status Timeline v2 (New Design)
+      //- include components/timelinePanel-v2.pug
+
+    footer.site-footer
+      .container
+        p.site-footer__copy © 2025 TailorMed. All Rights Reserved.

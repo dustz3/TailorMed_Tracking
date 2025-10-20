@@ -1,0 +1,601 @@
+// Timeline Track Component
+// 時間軸軌道組件樣式
+
+@import '../variables'
+
+.timeline-track-panel
+  width 100%
+  max-width 1200px
+  background base-white
+  border-radius 16px
+  box-shadow panel-shadow
+  padding 40px 48px
+  margin 0 auto 32px
+  text-align center
+  position relative
+  z-index 10
+  
+  .panel-title
+    font-size 1.75rem
+    font-weight 600
+    color primary-color
+    margin 0 0 16px 0
+    
+  .panel-description
+    font-size 1rem
+    color neutral-gray
+    margin 0 0 32px 0
+    line-height 1.6
+    
+  .timeline-track-container
+    width 90%
+    min-height 200px 
+    border-radius 12px
+    padding 24px 
+    position relative
+    margin 0 auto 100px auto
+    
+    // 視覺容器 - 包裝 timeline 和 nodes
+    .timeline-visual-container
+      position relative
+      margin-top 20px
+    
+    // Domestic Timeline (4 nodes) - 獨立樣式
+    &.timeline-domestic
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 37.33%  // 1-2 節點之間 (37.33%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 38.33%  // 從第2個節點開始
+            height 100%
+            width 61.67%  // 2-3-4 節點之間 (61.67%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+          // 完成節點線段前的突出部分
+          &::before
+            // 在 ::before 的基礎上添加突出部分
+            box-shadow 10px 0 0 accent-color
+    
+    // Import/Export Timeline (7 nodes + 2 events) - 獨立樣式
+    &.timeline-import_export
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+        
+        .timeline-events
+          position absolute
+          top 50%
+          left -16px
+          right -16px
+          height 16px
+          transform translateY(-50%)
+          z-index 1
+        
+        // Import/Export 專用的分段式連接線 (7個節點，6段間距)
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 52%  // 1-4 節點之間 (前3段 + 2%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 52%  // 從第4個節點開始
+            height 100%
+            width 48%  // 4-7 節點之間 (後3段 - 2%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+          // 完成節點線段前的突出部分
+          &::before
+            // 在 ::before 的基礎上添加突出部分
+            box-shadow 10px 0 0 accent-color
+    
+    // Cross Trade Layered (3 layers with alignment)
+    &.timeline-cross_trade_layered
+      display flex
+      flex-direction column
+      gap 40px
+      
+      // Origin 和 Destination 主容器 (100% 寬度)
+      .timeline-main-layers
+        width 100%
+        display flex
+        gap 0
+      
+      .timeline-layer
+        position relative
+        min-height 40px
+        
+        .timeline-visual-container
+          position relative
+          margin-top 20px
+          
+          .timeline-horizontal-line
+            position absolute
+            top 50%
+            left 0
+            right 0
+            height 2px
+            background primary-color
+            transform translateY(-50%)
+            z-index 1
+            
+        // Transit 階段專用樣式 - 線段和節點只對應 Origin 寬度並置中
+        &.timeline-transit-layer
+          .timeline-visual-container
+            .timeline-horizontal-line
+              left 0
+              background primary-color
+              
+            .timeline-nodes
+              left 0
+              justify-content space-between  // 兩個節點平均分佈
+            
+          .timeline-nodes
+            position absolute
+            top 50%
+            height 32px
+            transform translateY(-50%)
+            display flex
+            align-items center
+            z-index 3
+          
+        .track-content
+          position absolute
+          top 100%
+          left 0
+          right 0
+          margin-top -76px
+          margin-bottom 0
+          text-align center
+          font-size 0.9rem
+          font-weight 500
+      
+      // Origin 包裝器 (50% 寬度)
+      .timeline-origin-wrapper
+        width 50%
+      
+      // Origin 層 (綠色，4 節點)
+      .timeline-origin-layer
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        .timeline-node.timeline-origin
+          background primary-color
+          border-color base-white
+          
+        .track-content
+          color primary-color
+      
+      // Origin 階段獨立控制 (80%)
+      .origin-stage
+        width 80%
+        
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+      
+      // Transit 層 (橙色，2 節點) - 對齊 Origin 的第4個和 Destination 的第1個
+      .timeline-transit-layer
+        .timeline-nodes
+          left calc(75% - 16px)  // 對齊 Origin 第4個節點
+          right calc(25% - 16px) // 對齊 Destination 第1個節點
+          justify-content space-between
+          
+        .timeline-node.timeline-transit
+          background primary-color
+          border-color base-white
+          
+        .track-content
+          color primary-color
+      
+      // Transit 階段獨立控制 (16.1%)
+      .transit-stage
+        width 16.1%
+        margin 0 auto
+        
+        .timeline-nodes
+          left 0
+          right 0
+          justify-content space-between
+      
+      // Destination 包裝器 (50% 寬度)
+      .timeline-destination-wrapper
+        width 50%
+      
+      // Destination 層 (藍色，4 節點)
+      .timeline-destination-layer
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        .timeline-node.timeline-destination
+          background primary-color
+          border-color base-white
+          
+        .track-content
+          color primary-color
+      
+      // Destination 階段獨立控制 (80%, 靠右)
+      .destination-stage
+        width 80%
+        margin-left auto  // 靠右對齊
+        
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+    
+    .timeline-horizontal-line
+      position absolute
+      top 50%
+      left 0
+      right 0
+      height 2px
+      background primary-color
+      transform translateY(-50%)
+      z-index 1
+      
+    .timeline-nodes
+      position absolute
+      top 50%
+      height 32px
+      transform translateY(-50%)
+      display flex
+      align-items center
+      z-index 3
+      
+      
+    .timeline-node
+      position relative
+      flex-shrink 0
+      display flex
+      flex-direction column
+      align-items center
+      justify-content center
+      gap 10px
+      
+      // Node Circle - 與 timeline-node 相同的樣式
+      .node-circle
+        width 32px
+        height 32px
+        background primary-color
+        border-radius 50%
+        border 2px solid base-white
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        z-index 6
+        
+        // 內層白色圓圈
+        &::before
+          content ''
+          position absolute
+          top 50%
+          left 50%
+          width 24px
+          height 24px
+          background base-white
+          border-radius 50%
+          transform translate(-50%, -50%)
+          z-index 1
+          
+        // 圖標層 (勾選符號)
+        &::after
+          content ''
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          width 10px
+          height 10px
+          background-image url('../images/icon-check.svg')
+          background-size contain
+          background-repeat no-repeat
+          background-position center
+          z-index 2
+        
+      // 節點日期樣式
+      .node-date
+        position absolute
+        top -45px
+        left 50%
+        transform translateX(-50%)
+        font-size 0.9rem
+        font-weight bold
+        white-space nowrap
+        z-index 4
+        
+      // 節點狀態樣式
+      .node-status
+        position absolute
+        top 25px
+        left 50%
+        transform translateX(-50%)
+        text-align center
+        width 80px
+        z-index 4
+        
+        .status-text
+          font-size 0.7rem
+          font-weight 600
+          color neutral-dark
+          line-height 1.2
+          margin-bottom 2px
+          word-wrap break-word
+          overflow-wrap break-word
+          hyphens auto
+          
+        .status-time
+          font-size 0.65rem
+          font-weight 500
+          color neutral-gray
+      
+      // Completed 狀態 (預設)
+      &.completed
+        // 完成節點的日期色彩
+        .node-date
+          color primary-color
+          
+        // 完成節點的圓圈樣式
+        .node-circle
+          background primary-color
+          
+          // 完成節點的勾選符號
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 10px
+            height 10px
+            background-image url('../images/icon-check.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // Completed hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 primary-color
+            &::before
+              background primary-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+        
+      // In Progress 狀態
+      &.in-progress
+        background primary-color
+        border 2px solid warning-color
+        box-shadow 0 0 8px rgba(255, 165, 0, 0.5)
+        
+      // Processing 狀態
+      &.processing
+        // 處理中節點的日期色彩
+        .node-date
+          color accent-color
+          
+        // 處理中節點的圓圈樣式
+        .node-circle
+          background accent-color
+          
+          // 處理中節點的卡車圖標
+          &::after
+            content ''
+            position absolute
+            top 54%
+            left 51%
+            transform translate(-50%, -50%)
+            width 18px
+            height 11px
+            background-image url('../images/icon-truck.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // Processing hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 accent-color
+            &::before
+              background accent-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+              
+      // IMPORT/EXPORT 專用的 In Transit 狀態 (第4個節點)
+      &.in-transit
+        // In Transit 節點的日期色彩
+        .node-date
+          color accent-color
+          
+        // In Transit 節點的圓圈樣式
+        .node-circle
+          background accent-color
+          
+          // In Transit 節點的專用圖標
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 16px
+            height 16px
+            background-image url('../images/icon-inTransit.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+            
+          // In Transit hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // 中間白色圓圈變為 accent-color
+            &::before
+              background accent-color
+              
+            // 圖標變為白色
+            &::after
+              filter brightness(0) invert(1)
+        
+      // Pending 狀態
+      &.pending
+        // 待處理節點的日期色彩和樣式
+        .node-date
+          color neutral-light
+          opacity 0.6
+          font-style italic
+          border 1px dashed neutral-light
+          padding 2px 6px
+          border-radius 4px
+          
+        // 待處理節點的狀態文字和時間色彩
+        .node-status
+          .status-text
+            color neutral-light
+          .status-time
+            color neutral-light
+            
+        // 待處理節點的圓圈樣式
+        .node-circle
+          background neutral-light
+          border 2px dashed neutral-light
+          
+          // 待處理節點沒有圖標，隱藏 ::after
+          &::after
+            display none
+        
+      &::before
+        content ''
+        position absolute
+        top 50%
+        left 50%
+        width 24px
+        height 24px
+        background base-white
+        border-radius 50%
+        transform translate(-50%, -50%)
+    
+    // Event 節點樣式 (比原節點小 50%，定位在節點之間)
+    .timeline-event
+      width 16px
+      height 16px
+      background secondary-color
+      border-radius 50%
+      border 1px solid base-white
+      position absolute
+      top 50%
+      transform translateY(-50%)
+      z-index 4
+      display flex
+      align-items center
+      justify-content center
+      
+      &::before
+        content ''
+        position absolute
+        top 50%
+        left 50%
+        width 6px
+        height 6px
+        background base-white
+        border-radius 50%
+        transform translate(-50%, -50%)
+      
+      // Event 1: 定位在第2和第3節點之間 (25%位置)
+      &:nth-child(1)
+        left 25%
+      
+      // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+      &:nth-child(2)
+        left 73.5%
+      
+      // Event Tag 樣式
+      .event-tag
+        position absolute
+        top 100%
+        left 50%
+        transform translateX(-50%)
+        margin-top 80px
+        z-index 5
+        
+        // 垂直連接線
+        &::before
+          content ''
+          position absolute
+          top -80px
+          left 50%
+          transform translateX(-50%)
+          width 2px
+          height 80px
+          background secondary-color
+          z-index 4
+        
+        .event-tag-text
+          background secondary-color
+          color #fff
+          padding 4px 8px
+          border-radius 4px
+          font-size 0.7rem
+          font-weight normal
+          white-space nowrap
+          text-align center
+          box-shadow 0 2px 4px rgba(0, 0, 0, 0.1)
+      
+    .track-content
+      color neutral-gray
+      font-style italic
+      position relative
+      z-index 2
+      margin-bottom 50px
