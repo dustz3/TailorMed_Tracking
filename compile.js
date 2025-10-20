@@ -121,6 +121,21 @@ copyDir(ASSETS_DIR, path.join(DIST_DIR, 'images'));
 
 console.log('✅ 靜態資源已就緒');
 
+// 4. 複製後端監控頁到前端發布目錄，提供 /admin 監控介面
+try {
+  const adminSrc = path.join(
+    ROOT_DIR,
+    'src/Projects/TailorMed/track/backend/admin.html'
+  );
+  const adminDest = path.join(DIST_DIR, 'admin.html');
+  if (fs.existsSync(adminSrc)) {
+    copyFile(adminSrc, adminDest);
+    console.log('  ✅ 已複製 admin.html 至前端發布目錄');
+  }
+} catch (error) {
+  console.warn('⚠️ 複製 admin 監控頁失敗:', error.message);
+}
+
 console.log(
   '🎉 編譯完成！可以在 dist/Projects/TailorMed/track/index.html 預覽貨件追蹤 MVP'
 );

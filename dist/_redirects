@@ -3,3 +3,4 @@
 /design /design_ui.html 200
 /basic https://tailormed-tracking-api.onrender.com/basic 200
 /standard https://tailormed-tracking-api.onrender.com/standard 200
+/admin /admin.html 200
