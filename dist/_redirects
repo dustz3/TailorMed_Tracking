@@ -1,0 +1,13 @@
+# Netlify 重定向規則
+# 將所有 API 請求重定向到 Render 後端
+/api/* https://tailormed-tracking-api.onrender.com/api/:splat 200
+
+# 設計頁面重定向
+/design /Projects/TailorMed/track/design_ui.html 200
+
+# 基本和標準頁面重定向到 Render
+/basic https://tailormed-tracking-api.onrender.com/basic 200
+/standard https://tailormed-tracking-api.onrender.com/standard 200
+
+# 根目錄重定向到主頁
+/ /index.html 200

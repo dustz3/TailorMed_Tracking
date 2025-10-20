@@ -106,6 +106,12 @@
         border-color: rgba(255, 255, 255, 0.5);
         transform: translateY(-2px);
       }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
       .site-footer {
         background: #143463;
         padding: 2rem 0;
@@ -148,7 +154,8 @@
           <p>Our new shipment tracking system is currently under development. </p>
           <p>We're working hard to bring you the best experience possible.</p>
           <p>Please check back soon!</p>
-        </div><a class="test-link" href="https://tailormed-tracking-api.onrender.com/basic">Test Version (Internal Use)</a>
+        </div>
+        <div class="button-group"><a class="test-link" href="/basic">Basic</a><a class="test-link" href="/standard">Standard</a></div>
       </div>
     </main>
     <footer class="site-footer">

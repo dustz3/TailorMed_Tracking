@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TailorMed｜貨件追蹤系統 - Test Version</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/config.js"></script>
+    <script src="./js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="brand"><img class="brand-logo" src="./images/logo.png" alt="TailorMed"></div>
+        <nav class="site-nav"><a class="nav-link" href="./index.html">Back to Home</a><a class="nav-link" href="https://tailormed.com.tw" target="_blank" rel="noopener">Back to TailorMed</a></nav>
+      </div>
+    </header>
+    <section class="hero-banner">
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">Track Your TailorMed Shipments Anytime</h1>
+            <p class="hero-subtitle hero-subtitle--desktop">Use your order number and job ID to review the most recent shipment status available from TailorMed.</p>
+            <p class="hero-subtitle hero-subtitle--mobile">Use your order number and job ID to review the most recent shipment status available from TailorMed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="hero-summary">
+      <div class="timeline-container">
+        <div class="timeline-track-panel">
+          <h2 class="panel-title">Timeline Track</h2>
+          <div class="timeline-track-container timeline-domestic">
+            <div class="track-content">
+              <p>
+                 DOMESTIC<br>4 Nodes</p>
+            </div>
+            <div class="timeline-visual-container">
+              <div class="timeline-horizontal-line"></div>
+              <div class="timeline-nodes">
+                <div class="timeline-node completed" data-step="1">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 10</div>
+                  <div class="node-status">
+                    <div class="status-text">Order Created</div>
+                    <div class="status-time">10:16</div>
+                  </div>
+                </div>
+                <div class="timeline-node processing" data-step="2">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 12</div>
+                  <div class="node-status">
+                    <div class="status-text">Shipment Collected</div>
+                    <div class="status-time">Processing...</div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="3">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-status">
+                    <div class="status-text">In Transit</div>
+                    <div class="status-time">--:--</div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="4">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-status">
+                    <div class="status-text">Shipment Delivered</div>
+                    <div class="status-time">--:--</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-track-container timeline-import_export">
+            <div class="track-content">
+              <p>
+                 IMPORT/EXPORT<br>7 Nodes with 2 Events</p>
+            </div>
+            <div class="timeline-visual-container">
+              <div class="timeline-horizontal-line"></div>
+              <div class="timeline-nodes">
+                <div class="timeline-node completed" data-step="1">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 09</div>
+                  <div class="node-status">
+                    <div class="status-text">Order Created</div>
+                    <div class="status-time">03:45</div>
+                  </div>
+                </div>
+                <div class="timeline-node completed" data-step="2">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 09</div>
+                  <div class="node-status">
+                    <div class="status-text">Shipment Collected</div>
+                    <div class="status-time">06:10</div>
+                  </div>
+                </div>
+                <div class="timeline-node completed" data-step="3">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 10</div>
+                  <div class="node-status">
+                    <div class="status-text">Origin Customs Process</div>
+                    <div class="status-time">10:38</div>
+                  </div>
+                </div>
+                <div class="timeline-node in-transit" data-step="4">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 11</div>
+                  <div class="node-status">
+                    <div class="status-text">In Transit</div>
+                    <div class="status-time">Processing...</div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="5">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-status">
+                    <div class="status-text">Destination Customs Process</div>
+                    <div class="status-time">--:--</div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="6">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-status">
+                    <div class="status-text">Out for Delivery</div>
+                    <div class="status-time">--:--</div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="7">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-status">
+                    <div class="status-text">Shipment Delivered</div>
+                    <div class="status-time">--:--</div>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-events">
+                <div class="timeline-event" data-event="event-1">
+                  <div class="event-tag">
+                    <div class="event-tag-text">Dry ice refilled</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-track-container timeline-cross_trade_layered">
+            <div class="track-content">
+              <p>CROSS TRADE<br>Origin:4 Nodes / Transit:2 Nodes / Destination:4 Nodes </p>
+            </div>
+            <!-- Origin 和 Destination 容器 (100% 寬度)-->
+            <div class="timeline-main-layers">
+              <!-- Origin 階段 (綠色，4 節點)-->
+              <div class="timeline-origin-wrapper">
+                <div class="timeline-layer timeline-origin-layer origin-stage">
+                  <div class="timeline-visual-container">
+                    <div class="timeline-horizontal-line"></div>
+                    <div class="timeline-nodes">
+                      <div class="timeline-node timeline-origin completed" data-step="1">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 08</div>
+                        <div class="node-status">
+                          <div class="status-text">Cargo Ready</div>
+                          <div class="status-time">15:32</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-origin completed" data-step="2">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 09</div>
+                        <div class="node-status">
+                          <div class="status-text">Port In</div>
+                          <div class="status-time">08:22</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-origin completed" data-step="3">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 09</div>
+                        <div class="node-status">
+                          <div class="status-text">On Board</div>
+                          <div class="status-time">11:30</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-origin completed" data-step="4">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 09</div>
+                        <div class="node-status">
+                          <div class="status-text">Departure Confirmed</div>
+                          <div class="status-time">14:30</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="track-content"></div>
+                </div>
+              </div>
+              <!-- Destination 階段 (藍色，4 節點)-->
+              <div class="timeline-destination-wrapper">
+                <div class="timeline-layer timeline-destination-layer destination-stage">
+                  <div class="timeline-visual-container">
+                    <div class="timeline-horizontal-line"></div>
+                    <div class="timeline-nodes">
+                      <div class="timeline-node timeline-destination completed" data-step="7">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 11</div>
+                        <div class="node-status">
+                          <div class="status-text">Arrival Port</div>
+                          <div class="status-time">00:32</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-destination completed" data-step="8">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 11</div>
+                        <div class="node-status">
+                          <div class="status-text">Customs Cleared</div>
+                          <div class="status-time">04:25</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-destination completed" data-step="9">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 12</div>
+                        <div class="node-status">
+                          <div class="status-text">Delivery Out</div>
+                          <div class="status-time">07:50</div>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-destination completed" data-step="10">
+                        <div class="node-circle"></div>
+                        <div class="node-date">Oct 13</div>
+                        <div class="node-status">
+                          <div class="status-text">POD</div>
+                          <div class="status-time">18:40</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="track-content"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Transit 階段 (橙色，2 節點) - 移到下方-->
+            <div class="timeline-layer timeline-transit-layer transit-stage">
+              <div class="timeline-visual-container">
+                <div class="timeline-horizontal-line"></div>
+                <div class="timeline-nodes">
+                  <div class="timeline-node timeline-transit completed" data-step="5">
+                    <div class="node-circle"></div>
+                    <div class="node-status">
+                      <div class="status-text">In Transit Start</div>
+                      <div class="status-time">15:30</div>
+                    </div>
+                  </div>
+                  <div class="timeline-node timeline-transit completed" data-step="6">
+                    <div class="node-circle"></div>
+                    <div class="node-status">
+                      <div class="status-text">Arrival Notice Issued</div>
+                      <div class="status-time">05:30</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Order Completion Timeline - 訂單完成時間軸-->
+          <div class="timeline-track-container timeline-order_completion">
+            <div class="track-content">
+              <p>
+                 ORDER COMPLETION<br>3 Nodes</p>
+            </div>
+            <div class="timeline-visual-container">
+              <div class="timeline-horizontal-line"></div>
+              <div class="timeline-nodes">
+                <div class="timeline-node completed" data-step="1">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 13</div>
+                  <div class="node-status">
+                    <div class="status-text">Final Inspection</div>
+                    <div class="status-time">09:15</div>
+                  </div>
+                </div>
+                <div class="timeline-node completed" data-step="2">
+                  <div class="node-circle"></div>
+                  <div class="node-date">Oct 13</div>
+                  <div class="node-status">
+                    <div class="status-text">Quality Approval</div>
+                    <div class="status-time">11:30</div>
+                  </div>
+                </div>
+                <div class="timeline-node completed" data-step="3">
+                  <div class="order-completion-container"></div>
+                  <div class="node-date">Oct 13</div>
+                  <div class="node-status">
+                    <div class="status-text">Order Completed</div>
+                    <div class="status-time">14:45</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="container">
+        <p class="site-footer__copy">© 2025 TailorMed. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -17,8 +17,8 @@ function trackUsage(action, data) {
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
           referrer: document.referrer,
-          url: window.location.href,
-        }),
+          url: window.location.href
+        })
       }).catch(() => {}); // 靜默處理錯誤，不影響主要功能
     }, 0);
   } catch (error) {
@@ -38,49 +38,47 @@ const statusPanel = document.querySelector('.status-panel');
 const STATUS_MESSAGES = {
   loading: '正在查詢貨件狀態，請稍候...',
   notFound: '查無此追蹤編號的記錄，請確認編號是否正確。',
-  error: '服務暫時無法使用，稍候再試或聯絡客服人員。',
+  error: '服務暫時無法使用，稍候再試或聯絡客服人員。'
 };
 
 // 查詢貨件資料
 async function fetchTrackingData(orderNo, trackingNo) {
   // 追蹤查詢嘗試
   trackUsage('query_attempt', { orderNo, trackingNo });
-
+  
   const startTime = Date.now();
-
+  
   try {
     const response = await fetch(
-      `${API_BASE_URL}/tracking?orderNo=${encodeURIComponent(
-        orderNo
-      )}&trackingNo=${encodeURIComponent(trackingNo)}`
+      `${API_BASE_URL}/tracking?orderNo=${encodeURIComponent(orderNo)}&trackingNo=${encodeURIComponent(trackingNo)}`
     );
 
     if (!response.ok) {
       if (response.status === 404) {
         // 追蹤查詢結果（未找到）
-        trackUsage('query_result', {
-          orderNo,
-          trackingNo,
-          success: false,
+        trackUsage('query_result', { 
+          orderNo, 
+          trackingNo, 
+          success: false, 
           reason: 'not_found',
-          responseTime: Date.now() - startTime,
+          responseTime: Date.now() - startTime
         });
         return null; // 找不到資料
       }
       if (response.status === 429) {
         // 追蹤查詢結果（限制）
-        trackUsage('query_result', {
-          orderNo,
-          trackingNo,
-          success: false,
+        trackUsage('query_result', { 
+          orderNo, 
+          trackingNo, 
+          success: false, 
           reason: 'rate_limit',
-          responseTime: Date.now() - startTime,
+          responseTime: Date.now() - startTime
         });
         // 查詢次數超過限制
         const errorData = await response.json();
-        return {
-          error: 'rate_limit',
-          message: errorData.message || '查詢次數已達上限，請稍後再試。',
+        return { 
+          error: 'rate_limit', 
+          message: errorData.message || '查詢次數已達上限，請稍後再試。'
         };
       }
       throw new Error('Network response was not ok');
@@ -88,28 +86,28 @@ async function fetchTrackingData(orderNo, trackingNo) {
 
     const data = await response.json();
     const result = data.success ? data.data : null;
-
+    
     // 追蹤查詢結果（成功）
-    trackUsage('query_result', {
-      orderNo,
-      trackingNo,
-      success: !!result,
+    trackUsage('query_result', { 
+      orderNo, 
+      trackingNo, 
+      success: !!result, 
       reason: result ? 'success' : 'no_data',
-      responseTime: Date.now() - startTime,
+      responseTime: Date.now() - startTime
     });
-
+    
     return result;
   } catch (error) {
     // 追蹤查詢結果（錯誤）
-    trackUsage('query_result', {
-      orderNo,
-      trackingNo,
-      success: false,
+    trackUsage('query_result', { 
+      orderNo, 
+      trackingNo, 
+      success: false, 
       reason: 'error',
       responseTime: Date.now() - startTime,
-      error: error.message,
+      error: error.message
     });
-
+    
     console.error('Fetch tracking data failed:', error);
     return 'error';
   }
@@ -123,11 +121,11 @@ function renderShipmentInfo(shipmentData) {
   const summaryFields = {
     'Order No.': shipmentData.orderNo || '—',
     'Invoice No.': shipmentData.invoiceNo || '—',
-    MAWB: shipmentData.mawb || '—',
+    'MAWB': shipmentData.mawb || '—',
     'Original/Destination': shipmentData.route || '—',
     'Package Count': shipmentData.packageCount || '—',
-    Weight: shipmentData.weight ? `${shipmentData.weight} KG` : '—',
-    ETA: shipmentData.eta || '—',
+    'Weight': shipmentData.weight ? `${shipmentData.weight} KG` : '—',
+    'ETA': shipmentData.eta || '—'
   };
 
   // 更新 summary grid
@@ -149,10 +147,8 @@ function renderShipmentInfo(shipmentData) {
   const statusInfo = document.querySelector('.status-info');
   if (statusInfo) {
     // 檢查是否有 Dry Ice Event
-    const hasDryIceEvent = shipmentData.timeline?.some(
-      (item) => item.isEvent && item.eventType === 'dryice'
-    );
-
+    const hasDryIceEvent = shipmentData.timeline?.some(item => item.isEvent && item.eventType === 'dryice');
+    
     statusInfo.innerHTML = `
       <div class="summary-field">
         <span class="field-label">Tracking No.</span>
@@ -161,18 +157,12 @@ function renderShipmentInfo(shipmentData) {
       <div class="summary-field status-field">
         <span class="field-label">Status</span>
         <div class="status-value-wrapper">
-          <span class="field-value status-inline status-in-transit">${
-            shipmentData.status || 'Processing'
-          }</span>
-          ${
-            hasDryIceEvent
-              ? `
+          <span class="field-value status-inline status-in-transit">${shipmentData.status || 'Processing'}</span>
+          ${hasDryIceEvent ? `
             <div class="status-icon-wrapper" data-tooltip="Dry Ice Refilled">
               <img class="status-icon" src="images/icon-dryice.svg" alt="Dry Ice Refilled">
             </div>
-          `
-              : ''
-          }
+          ` : ''}
         </div>
       </div>
       <div class="summary-field">
@@ -188,10 +178,8 @@ function renderTimeline(timeline) {
   if (!timeline || timeline.length === 0) return;
 
   // 計算進度百分比（排除 event 項目）
-  const steps = timeline.filter((item) => item.step !== null);
-  const completedSteps = steps.filter(
-    (item) => item.status === 'completed'
-  ).length;
+  const steps = timeline.filter(item => item.step !== null);
+  const completedSteps = steps.filter(item => item.status === 'completed').length;
   const progressPercentage = (completedSteps / (steps.length - 1)) * 100;
 
   // 更新進度條
@@ -204,7 +192,7 @@ function renderTimeline(timeline) {
   const timelineNodes = document.querySelector('.timeline-nodes');
   if (timelineNodes) {
     timelineNodes.innerHTML = '';
-
+    
     timeline.forEach((item) => {
       // 跳過 event 項目（它們會顯示在別處）
       if (item.step === null) return;
@@ -224,10 +212,10 @@ function renderTimeline(timeline) {
   const timelineCards = document.querySelector('.timeline-cards');
   if (timelineCards) {
     timelineCards.innerHTML = '';
-
+    
     timeline.forEach((item) => {
       const card = document.createElement('div');
-
+      
       if (item.isEvent) {
         // Dry Ice Event Card
         card.className = 'timeline-card event';
@@ -253,22 +241,19 @@ function renderTimeline(timeline) {
           </div>
         `;
       }
-
+      
       timelineCards.appendChild(card);
     });
   }
 
   // 如果有 Dry Ice Event，添加時間軸圖示
-  const dryIceEvent = timeline.find(
-    (item) => item.isEvent && item.eventType === 'dryice'
-  );
+  const dryIceEvent = timeline.find(item => item.isEvent && item.eventType === 'dryice');
   if (dryIceEvent) {
     const eventIcon = document.querySelector('.timeline-event-icon');
     if (!eventIcon && timelineNodes) {
       const icon = document.createElement('div');
       icon.className = 'timeline-event-icon';
-      icon.innerHTML =
-        '<img src="images/icon-dryice.svg" alt="Dry Ice Refilled">';
+      icon.innerHTML = '<img src="images/icon-dryice.svg" alt="Dry Ice Refilled">';
       timelineNodes.parentElement.appendChild(icon);
     }
   }
@@ -371,9 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
   trackUsage('page_load', {
     url: window.location.href,
     referrer: document.referrer,
-    userAgent: navigator.userAgent,
+    userAgent: navigator.userAgent
   });
-
+  
   // 綁定表單提交事件
   if (trackingForm) {
     trackingForm.addEventListener('submit', handleFormSubmit);
@@ -388,3 +373,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatchEvent(new Event('resize'));
   });
 });
+
