@@ -364,6 +364,55 @@ app.get('/api/monitoring/stats', (req, res) => {
       successfulQueries: successfulRequests.length,
       successRate: `${successRate}%`,
       averageResponseTime: `${Math.round(avgResponseTime)}ms`,
+      // 依 trackingNo 彙總查詢次數
+      queryCounts: (() => {
+        const map = {};
+        trackingRequests.forEach((r) => {
+          try {
+            const url = new URL(r.path, 'http://localhost');
+            const tracking = url.searchParams.get('trackingNo') || url.searchParams.get('tracking');
+            if (tracking) {
+              // 可能為逗號陣列或多值，用分隔處理
+              const list = tracking
+                .replace(/[\[\]\s]/g, '')
+                .split(',')
+                .filter(Boolean);
+              list.forEach((t) => {
+                map[t] = (map[t] || 0) + 1;
+              });
+            }
+          } catch (e) {
+            // 忽略解析錯誤
+          }
+        });
+        return map;
+      })(),
+      // 最常被查詢的 trackingNo
+      topQueried: (() => {
+        const entries = Object.entries(this && this.tracking && this.tracking.queryCounts || {});
+        // 上面 this 無法使用，改用重新計算
+        const map = {};
+        trackingRequests.forEach((r) => {
+          try {
+            const url = new URL(r.path, 'http://localhost');
+            const tracking = url.searchParams.get('trackingNo') || url.searchParams.get('tracking');
+            if (tracking) {
+              const list = tracking
+                .replace(/[\[\]\s]/g, '')
+                .split(',')
+                .filter(Boolean);
+              list.forEach((t) => {
+                map[t] = (map[t] || 0) + 1;
+              });
+            }
+          } catch {}
+        });
+        let top = null;
+        Object.entries(map).forEach(([k, v]) => {
+          if (!top || v > top.count) top = { trackingNo: k, count: v };
+        });
+        return top || { trackingNo: '-', count: 0 };
+      })(),
     },
     recentRequests: recentRequests.map((r) => ({
       time: r.timestamp,

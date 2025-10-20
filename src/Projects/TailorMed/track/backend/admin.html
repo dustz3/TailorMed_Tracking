@@ -256,6 +256,12 @@
                 <div class="metric-value" id="uptime">-</div>
                 <div class="metric-change">服務可用性</div>
             </div>
+            
+            <div class="metric-card">
+                <h3>最常被查的 Job No.</h3>
+                <div class="metric-value" id="topTrackingNo">-</div>
+                <div class="metric-change" id="topTrackingCount">查詢次數：0</div>
+            </div>
         </div>
         
         <div class="chart-container">
@@ -332,6 +338,15 @@
                     if (uptimeElement) {
                         uptimeElement.textContent = `${diffHours}h ${diffMinutes}m`;
                     }
+                }
+
+                // 最常被查詢的 trackingNo 顯示
+                const top = data.tracking?.topQueried;
+                if (top) {
+                    const topNoEl = document.getElementById('topTrackingNo');
+                    const topCountEl = document.getElementById('topTrackingCount');
+                    if (topNoEl) topNoEl.textContent = top.trackingNo || '-';
+                    if (topCountEl) topCountEl.textContent = `查詢次數：${top.count || 0}`;
                 }
                 
             } catch (error) {
