@@ -119,4 +119,34 @@ copyDir(ASSETS_DIR, path.join(DIST_DIR, 'images'));
 
 console.log('✅ 靜態資源已就緒');
 
+// 複製檔案到 dist 根目錄供 Netlify 使用
+console.log('📋 複製檔案到 dist 根目錄...');
+const rootFiles = [
+  'index.html',
+  'design_ui.html'
+];
+
+rootFiles.forEach(file => {
+  const srcPath = path.join(DIST_DIR, file);
+  const destPath = path.join(ROOT_DIR, 'dist', file);
+  if (fs.existsSync(srcPath)) {
+    fs.copyFileSync(srcPath, destPath);
+    console.log(`  ✅ 已複製 ${file} 到 dist 根目錄`);
+  }
+});
+
+// 複製 CSS 和 JS 到 dist 根目錄
+const rootDirs = ['css', 'js', 'images'];
+rootDirs.forEach(dir => {
+  const srcDir = path.join(DIST_DIR, dir);
+  const destDir = path.join(ROOT_DIR, 'dist', dir);
+  if (fs.existsSync(srcDir)) {
+    if (fs.existsSync(destDir)) {
+      fs.rmSync(destDir, { recursive: true });
+    }
+    fs.cpSync(srcDir, destDir, { recursive: true });
+    console.log(`  ✅ 已複製 ${dir} 到 dist 根目錄`);
+  }
+});
+
 console.log('🎉 編譯完成！可以在 dist/Projects/TailorMed/track/index.html 預覽貨件追蹤 MVP');
