@@ -217,7 +217,10 @@ app.get('/', (req, res) => {
 
 // 設計頁面路由（內部測試用）
 app.get('/design', (req, res) => {
-  const designPath = path.join(staticPath, 'Projects/TailorMed/track/design_ui.html');
+  const designPath = path.join(
+    staticPath,
+    'Projects/TailorMed/track/design_ui.html'
+  );
   if (fs.existsSync(designPath)) {
     res.sendFile(designPath);
   } else {
@@ -364,21 +367,22 @@ app.get('/api/monitoring/stats', (req, res) => {
       successfulQueries: successfulRequests.length,
       successRate: `${successRate}%`,
       averageResponseTime: `${Math.round(avgResponseTime)}ms`,
-      // 依 trackingNo 彙總查詢次數
+      // 依 orderNo 彙總查詢次數
       queryCounts: (() => {
         const map = {};
         trackingRequests.forEach((r) => {
           try {
             const url = new URL(r.path, 'http://localhost');
-            const tracking = url.searchParams.get('trackingNo') || url.searchParams.get('tracking');
-            if (tracking) {
+            const order =
+              url.searchParams.get('orderNo') || url.searchParams.get('order');
+            if (order) {
               // 可能為逗號陣列或多值，用分隔處理
-              const list = tracking
+              const list = order
                 .replace(/[\[\]\s]/g, '')
                 .split(',')
                 .filter(Boolean);
-              list.forEach((t) => {
-                map[t] = (map[t] || 0) + 1;
+              list.forEach((o) => {
+                map[o] = (map[o] || 0) + 1;
               });
             }
           } catch (e) {
@@ -387,31 +391,30 @@ app.get('/api/monitoring/stats', (req, res) => {
         });
         return map;
       })(),
-      // 最常被查詢的 trackingNo
+      // 最常被查詢的 orderNo
       topQueried: (() => {
-        const entries = Object.entries(this && this.tracking && this.tracking.queryCounts || {});
-        // 上面 this 無法使用，改用重新計算
         const map = {};
         trackingRequests.forEach((r) => {
           try {
             const url = new URL(r.path, 'http://localhost');
-            const tracking = url.searchParams.get('trackingNo') || url.searchParams.get('tracking');
-            if (tracking) {
-              const list = tracking
+            const order =
+              url.searchParams.get('orderNo') || url.searchParams.get('order');
+            if (order) {
+              const list = order
                 .replace(/[\[\]\s]/g, '')
                 .split(',')
                 .filter(Boolean);
-              list.forEach((t) => {
-                map[t] = (map[t] || 0) + 1;
+              list.forEach((o) => {
+                map[o] = (map[o] || 0) + 1;
               });
             }
           } catch {}
         });
         let top = null;
         Object.entries(map).forEach(([k, v]) => {
-          if (!top || v > top.count) top = { trackingNo: k, count: v };
+          if (!top || v > top.count) top = { orderNo: k, count: v };
         });
-        return top || { trackingNo: '-', count: 0 };
+        return top || { orderNo: '-', count: 0 };
       })(),
     },
     recentRequests: recentRequests.map((r) => ({

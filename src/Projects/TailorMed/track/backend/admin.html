@@ -258,9 +258,9 @@
             </div>
             
             <div class="metric-card">
-                <h3>最常被查的 Job No.</h3>
-                <div class="metric-value" id="topTrackingNo">-</div>
-                <div class="metric-change" id="topTrackingCount">查詢次數：0</div>
+                <h3>最常被查的 Order No.</h3>
+                <div class="metric-value" id="topOrderNo">-</div>
+                <div class="metric-change" id="topOrderCount">查詢次數：0</div>
             </div>
         </div>
         
@@ -343,9 +343,9 @@
                 // 最常被查詢的 trackingNo 顯示
                 const top = data.tracking?.topQueried;
                 if (top) {
-                    const topNoEl = document.getElementById('topTrackingNo');
-                    const topCountEl = document.getElementById('topTrackingCount');
-                    if (topNoEl) topNoEl.textContent = top.trackingNo || '-';
+                    const topNoEl = document.getElementById('topOrderNo');
+                    const topCountEl = document.getElementById('topOrderCount');
+                    if (topNoEl) topNoEl.textContent = top.orderNo || '-';
                     if (topCountEl) topCountEl.textContent = `查詢次數：${top.count || 0}`;
                 }
                 
