@@ -2946,6 +2946,46 @@
   z-index: 2;
   margin-bottom: 50px;
 }
+.timeline-import .track-content p {
+  color: #10b981;
+  font-weight: 600;
+}
+.timeline-import .timeline-horizontal-line {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+}
+.timeline-import .timeline-node .node-circle {
+  border-color: #10b981;
+}
+.timeline-import .timeline-node .node-circle.completed {
+  background: #10b981;
+}
+.timeline-import .timeline-node .node-circle.in-transit {
+  background: linear-gradient(45deg, #10b981, #34d399);
+}
+.timeline-import .timeline-node .node-circle.pending {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+.timeline-export .track-content p {
+  color: #3b82f6;
+  font-weight: 600;
+}
+.timeline-export .timeline-horizontal-line {
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+}
+.timeline-export .timeline-node .node-circle {
+  border-color: #3b82f6;
+}
+.timeline-export .timeline-node .node-circle.completed {
+  background: #3b82f6;
+}
+.timeline-export .timeline-node .node-circle.in-transit {
+  background: linear-gradient(45deg, #3b82f6, #60a5fa);
+}
+.timeline-export .timeline-node .node-circle.pending {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
 @-moz-keyframes gradientShine {
   0% {
     left: -100%;

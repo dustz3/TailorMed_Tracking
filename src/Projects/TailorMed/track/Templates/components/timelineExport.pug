@@ -1,0 +1,30 @@
+//- Timeline Export Component
+//- 時間軸 Export 組件
+
+.timeline-track-container.timeline-export
+  .track-content
+    p 
+      | EXPORT
+      br
+      | 3 Nodes
+  .timeline-visual-container
+    .timeline-horizontal-line
+    .timeline-nodes
+      .timeline-node.pending(data-step="1")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text Destination Customs Process
+          .status-time --:--
+      .timeline-node.pending(data-step="2")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text Out for Delivery
+          .status-time --:--
+      .timeline-node.pending(data-step="3")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text Shipment Delivered
+          .status-time --:--
