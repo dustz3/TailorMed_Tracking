@@ -1,20 +1,22 @@
 {
-  "name": "tailormed-tracking-frontend",
+  "name": "tailormed-tracking",
   "version": "1.0.0",
-  "description": "TailorMed 貨件追蹤前端",
+  "description": "TailorMed 貨件追蹤系統",
+  "main": "src/Projects/TailorMed/track/backend/server.js",
   "scripts": {
-    "build": "node compile.js"
+    "start": "cd src/Projects/TailorMed/track/backend && node server.js",
+    "build": "node compile.js",
+    "dev": "cd src/Projects/TailorMed/track/backend && USE_MOCK_DATA=true node server.js"
   },
+  "keywords": [
+    "tailormed",
+    "tracking",
+    "logistics"
+  ],
+  "author": "TailorMed",
+  "license": "ISC",
   "dependencies": {
     "pug": "^3.0.2",
     "stylus": "^0.59.0"
   }
 }
-
-
-
-
-
-
-
-
