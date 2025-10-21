@@ -3062,101 +3062,97 @@
   font-size: 1rem;
   margin: 0;
 }
-.status-legend-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-.status-legend-grid .status-item {
+.status-legend-horizontal {
   display: flex;
-  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #143463;
+  padding: 1rem 0;
+}
+.status-legend-horizontal .status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  min-width: 120px;
   transition: all 0.2s ease;
 }
-.status-legend-grid .status-item:hover {
-  background: #f0f2f5;
+.status-legend-horizontal .status-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.status-legend-grid .status-item .status-icon {
-  width: 24px;
-  height: 24px;
+.status-legend-horizontal .status-item .status-icon {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-bottom: 0.5rem;
   position: relative;
 }
-.status-legend-grid .status-item .status-icon::after {
+.status-legend-horizontal .status-item .status-icon::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #fff;
 }
-.status-legend-grid .status-item .status-icon.completed {
+.status-legend-horizontal .status-item .status-icon.completed {
   background: #28a745;
 }
-.status-legend-grid .status-item .status-icon.processing {
+.status-legend-horizontal .status-item .status-icon.processing {
   background: #ffc107;
   animation: pulse 2s infinite;
 }
-.status-legend-grid .status-item .status-icon.processing::after {
+.status-legend-horizontal .status-item .status-icon.processing::after {
   content: '⋯';
   width: auto;
   height: auto;
   background: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #fff;
 }
-.status-legend-grid .status-item .status-icon.in-transit {
+.status-legend-horizontal .status-item .status-icon.in-transit {
   background: #17a2b8;
 }
-.status-legend-grid .status-item .status-icon.in-transit::after {
+.status-legend-horizontal .status-item .status-icon.in-transit::after {
   content: '✈';
   width: auto;
   height: auto;
   background: none;
-  font-size: 10px;
+  font-size: 12px;
   color: #fff;
 }
-.status-legend-grid .status-item .status-icon.pending {
+.status-legend-horizontal .status-item .status-icon.pending {
   background: #6c757d;
 }
-.status-legend-grid .status-item .status-icon.active {
+.status-legend-horizontal .status-item .status-icon.active {
   background: #fd7e14;
   animation: pulse 2s infinite;
 }
-.status-legend-grid .status-item .status-icon.active::after {
+.status-legend-horizontal .status-item .status-icon.active::after {
   content: '⋯';
   width: auto;
   height: auto;
   background: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #fff;
 }
-.status-legend-grid .status-item .status-info {
-  flex: 1;
-}
-.status-legend-grid .status-item .status-info .status-name {
+.status-legend-horizontal .status-item .status-info .status-name {
   font-weight: 600;
   color: #143463;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   margin-bottom: 0.25rem;
 }
-.status-legend-grid .status-item .status-info .status-desc {
+.status-legend-horizontal .status-item .status-info .status-desc {
   color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 0.8rem;
   margin: 0;
 }
 @media (max-width: 768px) {
@@ -3167,27 +3163,36 @@
   .status-legend-panel .panel-title h3 {
     font-size: 1.5rem;
   }
-  .status-legend-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .status-legend-horizontal {
+    flex-direction: column;
+    gap: 1.5rem;
   }
-  .status-legend-grid .status-item {
+  .status-legend-horizontal .status-item {
+    flex-direction: row;
+    text-align: left;
+    min-width: auto;
+    width: 100%;
     padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #143463;
   }
-  .status-legend-grid .status-item .status-icon {
-    width: 20px;
-    height: 20px;
+  .status-legend-horizontal .status-item .status-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 0;
+    margin-right: 0.8rem;
   }
-  .status-legend-grid .status-item .status-icon::after {
-    width: 6px;
-    height: 6px;
+  .status-legend-horizontal .status-item .status-icon::after {
+    width: 8px;
+    height: 8px;
   }
-  .status-legend-grid .status-item .status-icon.processing::after,
-  .status-legend-grid .status-item .status-icon.active::after {
+  .status-legend-horizontal .status-item .status-icon.processing::after,
+  .status-legend-horizontal .status-item .status-icon.active::after {
+    font-size: 12px;
+  }
+  .status-legend-horizontal .status-item .status-icon.in-transit::after {
     font-size: 10px;
-  }
-  .status-legend-grid .status-item .status-icon.in-transit::after {
-    font-size: 8px;
   }
 }
 @-moz-keyframes pulse {
