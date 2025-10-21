@@ -3336,16 +3336,33 @@ p {
 .system-description .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
-.system-description .description-content .description-title {
+.system-description .container padding 0 20px .description-content .description-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.system-description .container padding 0 20px .description-content .description-title {
   font-size: 0.8rem;
   font-weight: 600;
   color: #333;
   text-align: left;
-  margin: 0 0 16px 0;
+  margin: 0;
 }
-.system-description .description-content .description-text {
+.system-description .container padding 0 20px .description-content .urgent-call-icon {
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.system-description .container padding 0 20px .description-content .urgent-call-icon img {
+  display: block;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.system-description .container padding 0 20px .description-content .urgent-call-icon img:hover {
+  opacity: 1;
+}
+.system-description .container .description-text {
   font-size: 0.8rem;
   color: #666;
   line-height: 1.6;
@@ -3353,22 +3370,22 @@ p {
   margin: 0 0 16px 0;
   max-width: 100%;
 }
-.system-description .description-content .description-text strong {
+.system-description .container .description-text strong {
   color: #bb2749;
   font-weight: 600;
 }
-.system-description .description-content .description-list {
+.system-description .container .description-list {
   font-size: 0.8rem;
   color: #666;
   line-height: 1.6;
   margin: 16px 0 24px 20px;
   padding: 0;
 }
-.system-description .description-content .description-list li {
+.system-description .container .description-list li {
   margin-bottom: 8px;
   list-style-type: disc;
 }
-.system-description .description-content .description-list li:last-child {
+.system-description .container .description-list li:last-child {
   margin-bottom: 0;
 }
 @media (max-width: 768px) {

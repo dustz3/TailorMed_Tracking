@@ -55,11 +55,14 @@ html(lang="zh-TW")
       //- 原始完整 Timeline (可選)
       //- include components/timelineTrack.pug
 
-    //- 系統說明文字
-    section.system-description
-      .container
-        .description-content
-          h3.description-title TailorMed™ Shipment Tracking Notice｜Cold Chain Dedicated Service
+        //- 系統說明文字
+        section.system-description
+          .container
+            .description-content
+              .description-header
+                h3.description-title TailorMed™ Shipment Tracking Notice｜Cold Chain Dedicated Service
+                .urgent-call-icon
+                  img(src="./images/urgentCall.png", alt="Urgent Call", width="40", height="40")
           
               p.description-text
                 | This tracking platform is exclusively provided by TailorMed for authorized clients to access real-time shipment information. Data is updated daily and accessible across multiple devices and platforms—no software installation required. Clients can securely monitor cold chain shipments anytime, anywhere.

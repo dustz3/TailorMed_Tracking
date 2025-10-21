@@ -359,13 +359,31 @@ respond(mobile)
     margin 0 auto
     padding 0 20px
     
-  .description-content
-    .description-title
-      font-size 0.8rem
-      font-weight 600
-      color #333
-      text-align left
-      margin 0 0 16px 0
+        .description-content
+          .description-header
+            display flex
+            justify-content space-between
+            align-items center
+            margin-bottom 16px
+            
+          .description-title
+            font-size 0.8rem
+            font-weight 600
+            color #333
+            text-align left
+            margin 0
+            
+          .urgent-call-icon
+            flex-shrink 0
+            margin-left 16px
+            
+            img
+              display block
+              opacity 0.8
+              transition opacity 0.3s ease
+              
+              &:hover
+                opacity 1
       
     .description-text
       font-size 0.8rem
