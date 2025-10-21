@@ -41,6 +41,58 @@
     &:hover
       transform translateY(-2px)
     
+    // 已完成範例使用 timeline 樣式
+    &.completed-example
+      min-width 200px
+      padding 0
+      
+      .timeline-node
+        position relative
+        display flex
+        flex-direction column
+        align-items center
+        text-align center
+        padding 0
+        background none
+        border none
+        box-shadow none
+        
+        .node-circle
+          width 24px
+          height 24px
+          border-radius 50%
+          background #28a745
+          margin-bottom 8px
+          position relative
+          
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 8px
+            height 8px
+            border-radius 50%
+            background white
+            
+        .node-date
+          font-size 0.8rem
+          color #666
+          margin-bottom 4px
+          font-weight 500
+          
+        .node-status
+          .status-text
+            font-size 0.9rem
+            font-weight 600
+            color #143463
+            margin-bottom 2px
+            
+          .status-time
+            font-size 0.8rem
+            color #666
+    
     .status-icon
       width 32px
       height 32px

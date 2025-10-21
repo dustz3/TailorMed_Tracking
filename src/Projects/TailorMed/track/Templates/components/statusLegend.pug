@@ -5,11 +5,13 @@
     p 了解每個時間軸節點狀態的含義
   
   .status-legend-horizontal
-    .status-item
-      .status-icon.completed
-      .status-info
-        .status-name 已完成
-        .status-desc Completed
+    .status-item.completed-example
+      .timeline-node.completed(data-step="1")
+        .node-circle
+        .node-date Oct 09
+        .node-status
+          .status-text Order Created
+          .status-time 03:45
     
     .status-item
       .status-icon.processing
