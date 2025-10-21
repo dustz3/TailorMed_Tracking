@@ -3146,6 +3146,7 @@
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover {
   transform: translate(-50%, -50%) scale(1.1);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(20,52,99,0.3);
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover::before {
   background: #143463;
