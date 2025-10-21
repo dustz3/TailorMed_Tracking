@@ -3379,18 +3379,6 @@ p {
 .system-description .container padding 0 20px .description-content .description-layout .urgent-call-section img:hover {
   opacity: 1;
 }
-.system-description .container .description-text {
-  font-size: 0.8rem;
-  color: #666;
-  line-height: 1.6;
-  text-align: left;
-  margin: 0 0 16px 0;
-  max-width: 100%;
-}
-.system-description .container .description-text strong {
-  color: #bb2749;
-  font-weight: 600;
-}
 .system-description .container .description-list {
   font-size: 0.8rem;
   color: #666;
