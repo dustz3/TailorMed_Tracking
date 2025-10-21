@@ -3097,6 +3097,12 @@
   border: none;
   box-shadow: none;
 }
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle {
   width: 24px;
   height: 24px;
@@ -3104,23 +3110,15 @@
   background: #28a745;
   margin-bottom: 8px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-}
-.status-legend-horizontal .status-item.completed-example .timeline-node .node-date {
-  font-size: 0.8rem;
-  color: #666;
-  margin-bottom: 4px;
-  font-weight: 500;
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
   font-size: 0.9rem;

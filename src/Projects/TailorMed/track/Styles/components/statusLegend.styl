@@ -57,6 +57,12 @@
         border none
         box-shadow none
         
+        .node-date
+          font-size 0.8rem
+          color #666
+          margin-bottom 8px
+          font-weight 500
+          
         .node-circle
           width 24px
           height 24px
@@ -64,23 +70,15 @@
           background #28a745
           margin-bottom 8px
           position relative
+          display flex
+          align-items center
+          justify-content center
           
           &::after
-            content ''
-            position absolute
-            top 50%
-            left 50%
-            transform translate(-50%, -50%)
-            width 8px
-            height 8px
-            border-radius 50%
-            background white
-            
-        .node-date
-          font-size 0.8rem
-          color #666
-          margin-bottom 4px
-          font-weight 500
+            content '✓'
+            color white
+            font-size 12px
+            font-weight bold
           
         .node-status
           .status-text
