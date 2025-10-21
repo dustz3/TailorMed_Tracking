@@ -3178,7 +3178,7 @@
   font-weight: bold;
   white-space: nowrap;
   z-index: 4;
-  color: #ffc107;
+  color: #ffc107 !important;
 }
 .status-legend-horizontal .status-item.processing-example .timeline-node .node-circle {
   width: 40px;
@@ -3242,7 +3242,7 @@
 .status-legend-horizontal .status-item.processing-example .timeline-node .node-status .status-text {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #222;
+  color: #222 !important;
   line-height: 1.2;
   margin-bottom: 2px;
   word-wrap: break-word;
