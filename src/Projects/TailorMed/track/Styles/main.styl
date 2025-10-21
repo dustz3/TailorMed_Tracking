@@ -388,19 +388,22 @@ respond(mobile)
         .urgent-call-section
           flex 0 0 10%
           display flex
+          flex-direction column
           justify-content center
-          align-items flex-start
+          align-items center
           padding-top 8px
           
           img
             display block
             max-width 100%
             height auto
-            opacity 0.8
-            transition opacity 0.3s ease
+            margin-bottom 8px
             
-            &:hover
-              opacity 1
+          .phone-number
+            font-size 0.7rem
+            color accent-color
+            font-weight 600
+            text-align center
         
     .description-list
       font-size 0.8rem

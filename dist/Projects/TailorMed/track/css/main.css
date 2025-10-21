@@ -3366,19 +3366,22 @@ p {
 .system-description .container .description-content .description-layout .urgent-call-section {
   flex: 0 0 10%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 8px;
 }
 .system-description .container .description-content .description-layout .urgent-call-section img {
   display: block;
   max-width: 100%;
   height: auto;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  margin-bottom: 8px;
 }
-.system-description .container .description-content .description-layout .urgent-call-section img:hover {
-  opacity: 1;
+.system-description .container .description-content .description-layout .urgent-call-section .phone-number {
+  font-size: 0.7rem;
+  color: #bb2749;
+  font-weight: 600;
+  text-align: center;
 }
 .system-description .container .description-list {
   font-size: 0.8rem;
