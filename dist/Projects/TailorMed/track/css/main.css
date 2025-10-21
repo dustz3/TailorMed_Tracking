@@ -3109,6 +3109,7 @@
   height: 40px;
   background: #143463;
   border-radius: 50%;
+  border: 2px solid #fff;
   position: absolute;
   top: 0;
   left: 50%;
