@@ -3126,6 +3126,15 @@
   font-size: 16px;
   font-weight: bold;
 }
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-status {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 120px;
+  z-index: 4;
+}
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
   font-size: 0.9rem;
   font-weight: 600;
