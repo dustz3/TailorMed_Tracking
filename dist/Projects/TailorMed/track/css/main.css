@@ -2526,6 +2526,8 @@
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(1) .node-circle::after,
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(2) .node-circle::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  width: 20px;
+  height: 20px;
 }
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(1) .node-circle:hover,
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(2) .node-circle:hover {
