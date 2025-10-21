@@ -3104,12 +3104,17 @@
   font-weight: 500;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle {
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
+  background: #143463;
   border-radius: 50%;
-  background: #28a745;
-  margin-bottom: 8px;
-  position: relative;
+  border: 2px solid #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3117,7 +3122,7 @@
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle::after {
   content: '✓';
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
