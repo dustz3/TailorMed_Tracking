@@ -69,22 +69,26 @@
           height 40px
           background #143463
           border-radius 50%
-          border 2px solid #fff
           position absolute
           top 0
           left 50%
           transform translate(-50%, -50%)
           z-index 6
           transition all 0.3s ease
-          display flex
-          align-items center
-          justify-content center
           
           &::after
-            content '✓'
-            color white
-            font-size 16px
-            font-weight bold
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 10px
+            height 10px
+            background-image url('../images/icon-check.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
           
         .node-status
           position absolute
