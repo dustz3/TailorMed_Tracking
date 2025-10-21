@@ -102,6 +102,19 @@
             background-position center
             z-index 2
           
+          // Completed hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            
+            // ::before 從白色變為 primary-color
+            &::before
+              background #143463
+              
+            // 圖標從 primary-color 變為白色
+            &::after
+              filter brightness(0) invert(1)
+          
         .node-status
           position absolute
           top 25px

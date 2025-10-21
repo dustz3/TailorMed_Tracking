@@ -3142,6 +3142,16 @@
   background-position: center;
   z-index: 2;
 }
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  transition: all 0.3s ease;
+}
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover::before {
+  background: #143463;
+}
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover::after {
+  filter: brightness(0) invert(1);
+}
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status {
   position: absolute;
   top: 25px;
