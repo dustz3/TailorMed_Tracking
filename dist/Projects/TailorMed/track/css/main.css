@@ -3154,7 +3154,83 @@
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover::after {
   filter: brightness(0) invert(1);
 }
-.status-legend-horizontal .status-item.completed-example .timeline-node .node-status {
+.status-legend-horizontal .status-item.processing-example {
+  min-width: 200px;
+  padding: 0;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-date {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 4;
+  color: #ffc107;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle {
+  width: 40px;
+  height: 40px;
+  background: #ffc107;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 11px;
+  background-image: url("../images/icon-truck.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255,193,7,0.3);
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle:hover::before {
+  background: #ffc107;
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-circle:hover::after {
+  filter: brightness(0) invert(1);
+}
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-status {
   position: absolute;
   top: 25px;
   left: 50%;
@@ -3163,7 +3239,7 @@
   width: 120px;
   z-index: 4;
 }
-.status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-status .status-text {
   font-size: 0.9rem;
   font-weight: 600;
   color: #222;
@@ -3173,7 +3249,7 @@
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-time {
+.status-legend-horizontal .status-item.processing-example .timeline-node .node-status .status-time {
   font-size: 0.8rem;
   color: #666;
 }

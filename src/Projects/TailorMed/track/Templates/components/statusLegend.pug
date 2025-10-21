@@ -10,14 +10,16 @@
         .node-date Oct 09
         .node-circle
         .node-status
-          .status-text Order Created
-          .status-time 03:45
+          .status-text Completed
+          .status-time 12:34
     
-    .status-item
-      .status-icon.processing
-      .status-info
-        .status-name 處理中
-        .status-desc Processing
+    .status-item.processing-example
+      .timeline-node.processing(data-step="2")
+        .node-date Oct 10
+        .node-circle
+        .node-status
+          .status-text Processing
+          .status-time Processing...
     
     .status-item
       .status-icon.in-transit

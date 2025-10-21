@@ -116,6 +116,86 @@
             // 圖標從 primary-color 變為白色
             &::after
               filter brightness(0) invert(1)
+    
+    // 處理中範例使用 timeline 樣式
+    &.processing-example
+      min-width 200px
+      padding 0
+      
+      .timeline-node
+        position relative
+        display flex
+        flex-direction column
+        align-items center
+        text-align center
+        padding 0
+        background none
+        border none
+        box-shadow none
+        
+        .node-date
+          position absolute
+          top -50px
+          left 50%
+          transform translateX(-50%)
+          font-size 1.1rem
+          font-weight bold
+          white-space nowrap
+          z-index 4
+          color #ffc107
+          
+        .node-circle
+          width 40px
+          height 40px
+          background #ffc107
+          border-radius 50%
+          border 2px solid #fff
+          position absolute
+          top 0
+          left 50%
+          transform translate(-50%, -50%)
+          z-index 6
+          transition all 0.3s ease
+          
+          &::before
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            width 24px
+            height 24px
+            background #fff
+            border-radius 50%
+            transform translate(-50%, -50%)
+            z-index 1
+          
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 51%
+            transform translate(-50%, -50%)
+            width 18px
+            height 11px
+            background-image url('../images/icon-truck.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+          
+          // Processing hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1.10)
+            transition all 0.3s ease
+            box-shadow 0 4px 12px rgba(255,193,7,0.3)
+            
+            // ::before 從白色變為 accent-color
+            &::before
+              background #ffc107
+              
+            // 圖標從 accent-color 變為白色
+            &::after
+              filter brightness(0) invert(1)
           
         .node-status
           position absolute
