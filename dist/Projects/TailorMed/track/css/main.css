@@ -3077,10 +3077,6 @@
   text-align: center;
   padding: 1rem 0.5rem;
   min-width: 120px;
-  transition: all 0.2s ease;
-}
-.status-legend-horizontal .status-item:hover {
-  transform: translateY(-2px);
 }
 .status-legend-horizontal .status-item.completed-example {
   min-width: 200px;
