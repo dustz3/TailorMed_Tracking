@@ -2521,6 +2521,10 @@
 }
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(1) .node-circle::before,
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(2) .node-circle::before {
+  background: #143463;
+}
+.timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(1) .node-circle::after,
+.timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(2) .node-circle::after {
   background: #fff;
 }
 .timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-visual-container .timeline-node:nth-child(1) .node-circle:hover,
