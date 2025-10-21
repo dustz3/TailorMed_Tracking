@@ -211,10 +211,15 @@
             border 1px solid primary-color
             z-index 2
             
-        // 取消前兩個節點的 hover 效果
+        // 取消前兩個節點的 hover 效果並調整樣式
         .timeline-node:nth-child(1),
         .timeline-node:nth-child(2)
           .node-circle
+            background primary-color
+            
+            &::before
+              background white
+              
             &:hover
               transform translate(-50%, -50%) scale(1)
               box-shadow none
