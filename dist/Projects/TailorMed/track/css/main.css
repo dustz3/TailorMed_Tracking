@@ -3336,47 +3336,48 @@ p {
 .system-description .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 }
-.system-description .container padding 0 20px .description-content .description-title {
+.system-description .container .description-content .description-title {
   font-size: 0.8rem;
   font-weight: 600;
   color: #333;
   text-align: left;
   margin: 0 0 16px 0;
 }
-.system-description .container padding 0 20px .description-content .description-layout {
+.system-description .container .description-content .description-layout {
   display: flex;
   align-items: flex-start;
   gap: 20px;
 }
-.system-description .container padding 0 20px .description-content .description-layout .description-text-section {
+.system-description .container .description-content .description-layout .description-text-section {
   flex: 0 0 90%;
 }
-.system-description .container padding 0 20px .description-content .description-layout .description-text-section .description-text {
+.system-description .container .description-content .description-layout .description-text-section .description-text {
   font-size: 0.8rem;
   color: #666;
   line-height: 1.6;
   text-align: left;
   margin: 0 0 16px 0;
 }
-.system-description .container padding 0 20px .description-content .description-layout .description-text-section .description-text:last-child {
+.system-description .container .description-content .description-layout .description-text-section .description-text:last-child {
   margin-bottom: 0;
 }
-.system-description .container padding 0 20px .description-content .description-layout .urgent-call-section {
+.system-description .container .description-content .description-layout .urgent-call-section {
   flex: 0 0 10%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding-top: 8px;
 }
-.system-description .container padding 0 20px .description-content .description-layout .urgent-call-section img {
+.system-description .container .description-content .description-layout .urgent-call-section img {
   display: block;
   max-width: 100%;
   height: auto;
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
-.system-description .container padding 0 20px .description-content .description-layout .urgent-call-section img:hover {
+.system-description .container .description-content .description-layout .urgent-call-section img:hover {
   opacity: 1;
 }
 .system-description .container .description-list {
