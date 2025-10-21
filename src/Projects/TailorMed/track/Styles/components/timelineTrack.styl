@@ -210,6 +210,15 @@
             background primary-color
             border 1px solid primary-color
             z-index 2
+            
+        // 取消前兩個節點的 hover 效果
+        .timeline-node:nth-child(1),
+        .timeline-node:nth-child(2)
+          .node-circle
+            &:hover
+              transform translate(-50%, -50%) scale(1)
+              box-shadow none
+              cursor default
     
     // Cross Trade Layered (3 layers with alignment)
     &.timeline-cross_trade_layered
