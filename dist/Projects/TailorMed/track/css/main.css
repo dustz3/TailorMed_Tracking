@@ -3369,12 +3369,12 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 0;
 }
 .system-description .container .description-content .description-layout .urgent-call-section img {
   display: block;
-  max-width: 100%;
-  height: auto;
+  width: 100px;
+  height: 100px;
   margin-bottom: 8px;
 }
 .system-description .container .description-content .description-layout .urgent-call-section .phone-number {
