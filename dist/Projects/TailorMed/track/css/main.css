@@ -3341,21 +3341,48 @@ p {
   margin: 0 auto;
   padding: 0 20px;
 }
-.system-description .description-text {
+.system-description .description-content .description-text {
   font-size: 0.8rem;
   color: #666;
   line-height: 1.6;
   text-align: left;
-  margin: 0;
+  margin: 0 0 16px 0;
   max-width: 100%;
+}
+.system-description .description-content .description-text strong {
+  color: #333;
+  font-weight: 600;
+}
+.system-description .description-content .description-list {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 16px 0 24px 20px;
+  padding: 0;
+}
+.system-description .description-content .description-list li {
+  margin-bottom: 8px;
+  list-style-type: disc;
+}
+.system-description .description-content .description-list li:last-child {
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
   .system-description {
     padding: 30px 0;
     margin-top: 40px;
   }
-  .system-description .description-text {
+  .system-description .description-content .description-text {
     font-size: 0.75rem;
     line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .system-description .description-content .description-list {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin: 12px 0 20px 16px;
+  }
+  .system-description .description-content .description-list li {
+    margin-bottom: 6px;
   }
 }
