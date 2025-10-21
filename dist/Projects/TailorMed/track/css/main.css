@@ -3341,6 +3341,15 @@ p {
   margin: 0 auto;
   padding: 0 20px;
 }
+.system-description .description-content .description-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #143463;
+  text-align: center;
+  margin: 0 0 24px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e9ecef;
+}
 .system-description .description-content .description-text {
   font-size: 0.8rem;
   color: #666;
@@ -3371,6 +3380,11 @@ p {
   .system-description {
     padding: 30px 0;
     margin-top: 40px;
+  }
+  .system-description .description-content .description-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
   }
   .system-description .description-content .description-text {
     font-size: 0.75rem;
