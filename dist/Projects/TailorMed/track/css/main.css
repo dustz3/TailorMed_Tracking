@@ -3098,10 +3098,15 @@
   box-shadow: none;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-date {
-  font-size: 0.8rem;
-  color: #666;
-  margin-bottom: 8px;
-  font-weight: 500;
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 4;
+  color: #143463;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle {
   width: 40px;
