@@ -3133,8 +3133,12 @@
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #143463;
+  color: #222;
+  line-height: 1.2;
   margin-bottom: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-time {
   font-size: 0.8rem;
