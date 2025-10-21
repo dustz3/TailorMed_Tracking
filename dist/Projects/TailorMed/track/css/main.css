@@ -3398,21 +3398,21 @@ p {
     padding: 30px 0;
     margin-top: 40px;
   }
-  .system-description .description-content .description-title {
+  .system-description .container .description-content .description-title {
     font-size: 0.75rem;
     margin-bottom: 12px;
   }
-  .system-description .description-content .description-text {
+  .system-description .container .description-content .description-text {
     font-size: 0.75rem;
     line-height: 1.5;
     margin-bottom: 12px;
   }
-  .system-description .description-content .description-list {
+  .system-description .container .description-list {
     font-size: 0.75rem;
     line-height: 1.5;
     margin: 12px 0 20px 16px;
   }
-  .system-description .description-content .description-list li {
+  .system-description .container .description-list li {
     margin-bottom: 6px;
   }
 }
