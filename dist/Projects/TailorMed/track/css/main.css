@@ -3284,7 +3284,6 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  margin-bottom: 80px;
 }
 @media (max-width: 768px) {
   .hero-banner {
