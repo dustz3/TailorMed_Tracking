@@ -116,6 +116,29 @@
             // 圖標從 primary-color 變為白色
             &::after
               filter brightness(0) invert(1)
+          
+        .node-status
+          position absolute
+          top 50px
+          left 50%
+          transform translateX(-50%)
+          text-align center
+          width 120px
+          z-index 4
+          
+          .status-text
+            font-size 0.9rem
+            font-weight 600
+            color #222
+            line-height 1.2
+            margin-bottom 2px
+            word-wrap break-word
+            overflow-wrap break-word
+            hyphens auto
+            
+          .status-time
+            font-size 0.8rem
+            color #666
     
     // 處理中範例使用 timeline 樣式
     &.processing-example
@@ -199,7 +222,7 @@
           
         .node-status
           position absolute
-          top 25px
+          top 50px
           left 50%
           transform translateX(-50%)
           text-align center

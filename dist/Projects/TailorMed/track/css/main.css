@@ -3154,6 +3154,29 @@
 .status-legend-horizontal .status-item.completed-example .timeline-node .node-circle:hover::after {
   filter: brightness(0) invert(1);
 }
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-status {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 120px;
+  z-index: 4;
+}
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.status-legend-horizontal .status-item.completed-example .timeline-node .node-status .status-time {
+  font-size: 0.8rem;
+  color: #666;
+}
 .status-legend-horizontal .status-item.processing-example {
   min-width: 200px;
   padding: 0;
@@ -3232,7 +3255,7 @@
 }
 .status-legend-horizontal .status-item.processing-example .timeline-node .node-status {
   position: absolute;
-  top: 25px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
