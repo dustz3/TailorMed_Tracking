@@ -3351,7 +3351,7 @@ p {
   gap: 20px;
 }
 .system-description .container .description-content .description-layout .description-text-section {
-  flex: 0 0 90%;
+  flex: 0 0 85%;
 }
 .system-description .container .description-content .description-layout .description-text-section .description-text {
   font-size: 0.8rem;
