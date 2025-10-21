@@ -3337,29 +3337,37 @@ p {
   max-width: 1200px;
   margin: 0 auto;
 }
-.system-description .container padding 0 20px .description-content .description-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
 .system-description .container padding 0 20px .description-content .description-title {
   font-size: 0.8rem;
   font-weight: 600;
   color: #333;
   text-align: left;
+  margin: 0 0 16px 0;
+}
+.system-description .container padding 0 20px .description-content .description-text-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.system-description .container padding 0 20px .description-content .description-text-wrapper .description-text {
+  flex: 1;
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.6;
+  text-align: left;
   margin: 0;
 }
-.system-description .container padding 0 20px .description-content .urgent-call-icon {
+.system-description .container padding 0 20px .description-content .description-text-wrapper .urgent-call-icon {
   flex-shrink: 0;
-  margin-left: 16px;
+  margin-top: 4px;
 }
-.system-description .container padding 0 20px .description-content .urgent-call-icon img {
+.system-description .container padding 0 20px .description-content .description-text-wrapper .urgent-call-icon img {
   display: block;
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
-.system-description .container padding 0 20px .description-content .urgent-call-icon img:hover {
+.system-description .container padding 0 20px .description-content .description-text-wrapper .urgent-call-icon img:hover {
   opacity: 1;
 }
 .system-description .container .description-text {
