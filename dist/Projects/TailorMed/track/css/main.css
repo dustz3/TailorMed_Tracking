@@ -3331,94 +3331,31 @@ p {
     gap: 24px;
   }
 }
-.system-features {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 80px 0;
+.system-description {
+  background: #f8f9fa;
+  padding: 40px 0;
   margin-top: 60px;
 }
-.system-features .container {
+.system-description .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
-.system-features .features-content {
-  text-align: center;
-}
-.system-features .features-intro {
-  margin-bottom: 60px;
-}
-.system-features .features-intro .features-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #143463;
-  margin-bottom: 16px;
-}
-.system-features .features-intro .features-subtitle {
-  font-size: 1.2rem;
+.system-description .description-text {
+  font-size: 0.8rem;
   color: #666;
-  max-width: 600px;
-  margin: 0 auto;
   line-height: 1.6;
-}
-.system-features .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  margin-top: 40px;
-}
-.system-features .feature-item {
-  background: #fff;
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
   text-align: left;
-}
-.system-features .feature-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-}
-.system-features .feature-item .feature-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  display: block;
-}
-.system-features .feature-item .feature-content .feature-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #143463;
-  margin-bottom: 16px;
-}
-.system-features .feature-item .feature-content .feature-desc {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.7;
   margin: 0;
+  max-width: 100%;
 }
 @media (max-width: 768px) {
-  .system-features {
-    padding: 60px 0;
+  .system-description {
+    padding: 30px 0;
     margin-top: 40px;
   }
-  .system-features .features-intro {
-    margin-bottom: 40px;
-  }
-  .system-features .features-intro .features-title {
-    font-size: 2rem;
-  }
-  .system-features .features-intro .features-subtitle {
-    font-size: 1.1rem;
-  }
-  .system-features .features-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .system-features .feature-item {
-    padding: 30px 20px;
-    text-align: center;
-  }
-  .system-features .feature-item .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
+  .system-description .description-text {
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
 }
