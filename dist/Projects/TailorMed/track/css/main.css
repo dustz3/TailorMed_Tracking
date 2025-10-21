@@ -3348,7 +3348,7 @@ p {
 .system-description .container .description-content .description-layout {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 30px;
 }
 .system-description .container .description-content .description-layout .description-text-section {
   flex: 0 0 85%;
