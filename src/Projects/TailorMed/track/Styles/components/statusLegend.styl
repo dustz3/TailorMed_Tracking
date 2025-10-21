@@ -1,0 +1,160 @@
+// 節點狀態說明面板樣式
+.status-legend-panel
+  background white
+  border-radius 12px
+  padding 2rem
+  margin 2rem 0
+  box-shadow 0 2px 10px rgba(0, 0, 0, 0.1)
+  
+  .panel-title
+    text-align center
+    margin-bottom 2rem
+    
+    h3
+      color #143463
+      font-size 1.8rem
+      font-weight 600
+      margin-bottom 0.5rem
+      
+    p
+      color #666
+      font-size 1rem
+      margin 0
+
+.status-legend-grid
+  display grid
+  grid-template-columns repeat(auto-fit, minmax(300px, 1fr))
+  gap 1.5rem
+  
+  .status-item
+    display flex
+    align-items flex-start
+    gap 1rem
+    padding 1rem
+    background #f8f9fa
+    border-radius 8px
+    border-left 4px solid #143463
+    transition all 0.2s ease
+    
+    &:hover
+      background #f0f2f5
+      transform translateY(-2px)
+      box-shadow 0 4px 12px rgba(0, 0, 0, 0.1)
+    
+    .status-icon
+      width 24px
+      height 24px
+      border-radius 50%
+      flex-shrink 0
+      margin-top 2px
+      position relative
+      
+      &::after
+        content ''
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        width 8px
+        height 8px
+        border-radius 50%
+        background white
+        
+      &.completed
+        background #28a745
+        
+      &.processing
+        background #ffc107
+        animation pulse 2s infinite
+        
+        &::after
+          content '⋯'
+          width auto
+          height auto
+          background none
+          font-size 12px
+          font-weight bold
+          color white
+          
+      &.in-transit
+        background #17a2b8
+        
+        &::after
+          content '✈'
+          width auto
+          height auto
+          background none
+          font-size 10px
+          color white
+          
+      &.pending
+        background #6c757d
+        
+      &.active
+        background #fd7e14
+        animation pulse 2s infinite
+        
+        &::after
+          content '⋯'
+          width auto
+          height auto
+          background none
+          font-size 12px
+          font-weight bold
+          color white
+    
+    .status-info
+      flex 1
+      
+      .status-name
+        font-weight 600
+        color #143463
+        font-size 1.1rem
+        margin-bottom 0.25rem
+        
+      .status-desc
+        color #666
+        font-size 0.9rem
+        line-height 1.4
+        margin 0
+
+// 動畫效果
+@keyframes pulse
+  0%
+    opacity 1
+  50%
+    opacity 0.7
+  100%
+    opacity 1
+
+// 響應式設計
+@media (max-width: 768px)
+  .status-legend-panel
+    padding 1.5rem
+    margin 1.5rem 0
+    
+    .panel-title
+      h3
+        font-size 1.5rem
+        
+  .status-legend-grid
+    grid-template-columns 1fr
+    gap 1rem
+    
+    .status-item
+      padding 0.8rem
+      
+      .status-icon
+        width 20px
+        height 20px
+        
+        &::after
+          width 6px
+          height 6px
+          
+        &.processing::after,
+        &.active::after
+          font-size 10px
+          
+        &.in-transit::after
+          font-size 8px
