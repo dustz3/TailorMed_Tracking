@@ -1,0 +1,41 @@
+// Timeline Statistics Panel
+// 時間軸統計面板
+
+section.timeline-stats-panel
+  .container
+    .stats-content
+      h2.stats-title Timeline Statistics
+      p.stats-description Track your shipment progress with detailed statistics and insights.
+      
+      .stats-grid
+        .stat-card
+          .stat-icon
+            img(src="./images/icon-delivered.svg", alt="Delivered")
+          .stat-content
+            .stat-number 98.5%
+            .stat-label Delivery Success Rate
+            .stat-description On-time delivery performance
+            
+        .stat-card
+          .stat-icon
+            img(src="./images/icon-time.svg", alt="Time")
+          .stat-content
+            .stat-number 2.3
+            .stat-label Average Days
+            .stat-description From pickup to delivery
+            
+        .stat-card
+          .stat-icon
+            img(src="./images/icon-temperature.svg", alt="Temperature")
+          .stat-content
+            .stat-number 99.8%
+            .stat-label Temperature Control
+            .stat-description Cold chain compliance
+            
+        .stat-card
+          .stat-icon
+            img(src="./images/icon-security.svg", alt="Security")
+          .stat-content
+            .stat-number 100%
+            .stat-label Security Score
+            .stat-description Zero incidents recorded

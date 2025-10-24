@@ -14,6 +14,15 @@ class TimelineManager {
       processing: 'processing',
       pending: 'pending',
     };
+
+    // Mobile 檢測
+    this.isMobile = window.innerWidth <= 768;
+
+    // 監聽視窗大小變化
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 768;
+      this.updateMobileStyles();
+    });
   }
 
   // 根據資料動態渲染 timeline
@@ -24,6 +33,12 @@ class TimelineManager {
       return;
     }
 
+    // 檢查是否已有靜態 Timeline，如果有則不覆蓋
+    if (container.querySelector('.timeline-track-panel')) {
+      console.log('Static timeline detected, skipping dynamic rendering');
+      return;
+    }
+
     // 清空容器
     container.innerHTML = '';
 
@@ -31,6 +46,26 @@ class TimelineManager {
     timelineData.forEach((timeline, index) => {
       const timelineElement = this.createTimelineElement(timeline, index);
       container.appendChild(timelineElement);
+    });
+
+    // 應用 Mobile 樣式
+    this.updateMobileStyles();
+  }
+
+  // 更新 Mobile 樣式
+  updateMobileStyles() {
+    const timelineContainers = document.querySelectorAll(
+      '.timeline-track-container'
+    );
+
+    timelineContainers.forEach((container) => {
+      if (this.isMobile) {
+        // 添加 Mobile class
+        container.classList.add('mobile-layout');
+      } else {
+        // 移除 Mobile class
+        container.classList.remove('mobile-layout');
+      }
     });
   }
 
@@ -185,13 +220,15 @@ class TimelineManager {
         </div>
       `;
     } else {
-      // 一般節點
+      // 一般節點 - 支援 Mobile 垂直佈局
       nodeContent = `
         <div class="node-circle"></div>
         <div class="node-date">${date}</div>
-        <div class="node-status">
-          <div class="status-text">${statusText}</div>
-          <div class="status-time">${statusTime}</div>
+        <div class="node-content">
+          <div class="node-status">
+            <div class="status-text">${statusText}</div>
+            <div class="status-time">${statusTime}</div>
+          </div>
         </div>
       `;
     }

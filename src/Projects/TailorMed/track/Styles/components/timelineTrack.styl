@@ -1583,3 +1583,160 @@
   animation orderCompletionShine 2s infinite
   pointer-events none
   z-index 1
+
+// Mobile 垂直佈局 - 使用 class 控制
+.results-panel
+  .timeline-track-container.mobile-layout
+    width 100%
+    padding 20px
+    margin 20px auto 0px auto
+    
+    .timeline-visual-container
+      margin-top 0px
+      display flex
+      flex-direction row
+      align-items flex-start
+      padding 0px
+        
+      // 垂直連接線
+      .timeline-horizontal-line
+        position absolute
+        top 5%
+        left 25px
+        width 4px
+        height 80%
+        background neutral-light
+        border-radius 10px
+        z-index 1
+        transform none
+        
+        // 移除水平佈局的偽元素
+        &::before,
+        &::after
+          display none
+        
+      // 節點容器 - 垂直佈局
+      .timeline-nodes
+        position relative
+        display flex
+        flex-direction column
+        align-items flex-start
+        z-index 2
+        padding 0 0 0 50px
+        width 100%
+        left auto
+        right auto
+        top auto
+        transform none
+        height auto
+        justify-content flex-start
+        gap 40px
+          
+        .timeline-node
+          position relative
+          display flex
+          flex-direction row
+          align-items center
+          text-align left
+          width 100%
+          flex-shrink 0
+          gap 15px
+            
+            // 節點圓圈 - 在左側
+            .node-circle
+              position relative
+              width 50px
+              height 50px
+              border-radius 50%
+              background base-white
+              border 3px solid neutral-light
+              z-index 3
+              transition all 0.3s ease
+              flex-shrink 0
+              
+              // 覆蓋 processing 狀態的 absolute 定位
+              &.processing
+                position relative
+                top auto
+                left auto
+                transform none
+              
+              // 節點狀態樣式
+              &.completed
+                background primary-color
+                border-color primary-color
+
+              &.processing
+                background accent-color
+                border-color accent-color
+
+              &.pending
+                background base-white
+                border-color neutral-light
+
+              &.in-transit
+                background accent-color
+                border-color accent-color
+                &::after
+                  content ''
+                  position absolute
+                  top 50%
+                  left 50%
+                  transform translate(-50%, -50%)
+                  width 16px
+                  height 16px
+                  background-image url('../images/icon-truck.svg')
+                  background-size contain
+                  background-repeat no-repeat
+                  background-position center
+                  z-index 2
+            
+            // 節點日期 - 在圓圈右側
+            .node-date
+              font-size 0.8rem
+              font-weight 600
+              color neutral-gray
+              position relative
+              white-space nowrap
+              text-align left
+              min-width 60px
+              flex-shrink 0
+            
+            // 節點內容容器 - 在右側
+            .node-content
+              display flex
+              flex-direction column
+              align-items flex-start
+              flex 1
+              position relative
+              top 0
+              left 0
+              transform none
+              
+              // 節點狀態
+              .node-status
+                position relative
+                top 0
+                left 0
+                transform none
+                text-align left
+                width auto
+                
+                .status-text
+                  position relative
+                  top 0
+                  left 0
+                  transform none
+                  font-size 0.9rem
+                  font-weight 600
+                  color primary-color
+                  margin-bottom 2px
+                  line-height 1.2
+                  word-wrap break-word
+                  overflow-wrap break-word
+                  hyphens auto
+                  
+                .status-time
+                  font-size 0.75rem
+                  color neutral-gray
+                  font-weight 500

@@ -8,11 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/main.css">
-    <script src="./js/config.js"></script>
-    <script src="./data/sample-timeline-data.js" defer></script>
-    <script src="./js/timeline-manager.js" defer></script>
-    <script src="./js/timeline-control.js" defer></script>
-    <script src="./js/app.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -34,104 +29,59 @@
       </div>
     </section>
     <section class="hero-summary">
-      <div class="tracking-lookup-panel">
-        <div class="summary-title">Shipment Tracking Lookup</div>
-        <div class="summary-search"> 
-          <div class="summary-form">
-            <div class="form-row">
-              <div class="input-group">
-                <div class="input-label">Order No.</div>
-                <input type="text" placeholder="e.g. TM111234" name="orderNo" required>
-              </div>
-              <div class="input-group">
-                <div class="input-label">Tracking No.</div>
-                <input type="text" placeholder="e.g. CXXXD3XX" name="trackingNo" required>
-              </div>
-              <div class="input-group">
-                <button class="btn--primary" type="submit">Status Check</button>
-              </div>
-            </div>
-            <div class="form-helper">Need Help? Contact your TailorMed logistic specialist at <span class="contact-phone">+8862-2694-6168</span> for priority support.</div>
-          </div>
-        </div>
-      </div>
       <div class="results-panel">
         <div class="results-title">Latest shipment updates</div>
         <div class="results-description">Review the most recent update TailorMed has received for this shipment</div>
-        <div class="results-container">
-          <div class="results-highlight">
-            <div class="summary-grid">
-              <div class="summary-field">
-                <div class="field-label">Order No.</div>
-                <div class="field-value">TM439812</div>
-              </div>
-              <div class="summary-field">
-                <div class="field-label">ORIGIN/DESTINATION</div>
-                <div class="field-value">PVG → TPE</div>
-              </div>
-              <div class="summary-field">
-                <div class="field-label">PACKAGE COUNT</div>
-                <div class="field-value">1</div>
-              </div>
-              <div class="summary-field">
-                <div class="field-label">WEIGHT</div>
-                <div class="field-value">25 KG</div>
-              </div>
-              <div class="summary-field">
-                <div class="field-label">ETA</div>
-                <div class="field-value">06/10/2025</div>
-              </div>
-            </div>
-          </div>
-          <div class="status-info">
-            <div class="summary-field">
-              <div class="field-label">TRACKING NO.</div>
-              <div class="field-value">EX39DAF9</div>
-            </div>
-            <div class="summary-field">
-              <div class="field-label">Current Status</div>
-              <div class="field-value status-value-wrapper"><span class="status-inline">Out for Delivery</span>
-                <div class="status-icon-wrapper" data-tooltip="Dry ice refilled">
-                  <div class="status-icon"><img src="./images/icon-dryice.svg" alt="Dry Ice" width="40" height="40"></div>
+        <div class="timeline-track-panel">
+          <h2 class="panel-title">Domestic </h2>
+          <div class="timeline-track-container timeline-domestic">
+            <div class="timeline-visual-container">
+              <div class="timeline-horizontal-line"></div>
+              <div class="timeline-nodes">
+                <div class="timeline-node completed" data-step="1">
+                  <div class="node-circle"></div>
+                  <div class="node-date"><span class="month">Oct</span><span class="day">10</span></div>
+                  <div class="node-content">
+                    <div class="node-status">
+                      <div class="status-text">Order Created</div>
+                      <div class="status-time">10:16</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-node processing" data-step="2">
+                  <div class="node-circle"></div>
+                  <div class="node-date"><span class="month">Oct</span><span class="day">12</span></div>
+                  <div class="node-content">
+                    <div class="node-status">
+                      <div class="status-text">Shipment Collected</div>
+                      <div class="status-time">Processing...</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="3">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-content">
+                    <div class="node-status">
+                      <div class="status-text">In Transit</div>
+                      <div class="status-time">--:--</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-node pending" data-step="4">
+                  <div class="node-circle"></div>
+                  <div class="node-date">TBD</div>
+                  <div class="node-content">
+                    <div class="node-status">
+                      <div class="status-text">Shipment Delivered</div>
+                      <div class="status-time">--:--</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="summary-field">
-              <div class="field-label">Last Update</div>
-              <div class="field-value">11/10/2025 14:30 (local)</div>
-            </div>
           </div>
         </div>
-        <div class="timeline-control-panel">
-          <div class="control-sections">
-            <div class="control-section">
-              <div class="section-title">Domestic</div>
-              <div class="control-buttons">
-                <button class="control-btn" data-status="domestic-step1">第一步</button>
-                <button class="control-btn" data-status="domestic-step2">第二步</button>
-                <button class="control-btn" data-status="domestic-step3">第三步</button>
-                <button class="control-btn" data-status="domestic-step4">第四步</button>
-                <button class="control-btn" data-status="completed">完成</button>
-              </div>
-            </div>
-            <div class="control-section">
-              <div class="section-title">Import / Export</div>
-              <div class="control-buttons">
-                <button class="control-btn" data-status="import-export-step1">第一步</button>
-                <button class="control-btn" data-status="import-export-step2">第二步</button>
-                <button class="control-btn" data-status="import-export-step3">第三步</button>
-                <button class="control-btn" data-status="import-export-step4">第四步</button>
-                <button class="control-btn" data-status="import-export-step5">第五步</button>
-                <button class="control-btn" data-status="import-export-step6">第六步</button>
-                <button class="control-btn" data-status="import-export-step7">第七步</button>
-                <button class="control-btn" data-status="import-export-completed">完成</button>
-                <button class="event-control-btn" data-event="dry-ice">乾冰1</button>
-                <button class="event-control-btn" data-event="special-handling">乾冰2</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="timeline-container"></div>
         <div class="results-note">This information is NOT updated in real-time. For the most current status, please refresh this page or contact our customer service team.</div>
       </div>
       <section class="system-description">

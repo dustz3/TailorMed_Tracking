@@ -527,3 +527,116 @@
                 animation-delay 1.5s !important
                 z-index 2 !important
 
+// Desktop 日期間距
+.timeline-track-container.timeline-domestic
+  .timeline-visual-container
+    .timeline-nodes
+      .timeline-node
+        .node-date
+          .month
+            margin-right 4px
+
+// Mobile 直式佈局
+@media (max-width: 768px)
+  .results-panel .timeline-track-container
+    margin 0 !important
+    width 100%
+    min-height 0
+    
+  .timeline-track-container.timeline-domestic
+    margin 0
+    padding 0 20px
+    
+    .timeline-visual-container
+      // 垂直連接線
+      .timeline-horizontal-line
+        position absolute
+        top 5%
+        left 25px
+        width 4px
+        height 80%
+        background neutral-light
+        border-radius 10px
+        z-index 1
+        transform none
+        
+        // 移除水平佈局的偽元素
+        &::before,
+        &::after
+          display none
+      
+      .timeline-nodes
+        display flex
+        flex-direction column
+        gap 40px
+        position relative
+        left -4%
+        right auto
+        top auto
+        transform none
+        height auto
+        justify-content flex-start
+        align-items flex-start
+        padding 0
+        
+        .timeline-node
+          display flex
+          flex-direction row
+          align-items center
+          width 100%
+          position relative
+          
+          // 重置所有絕對定位
+          .node-date
+            position relative
+            top auto
+            left auto
+            transform none
+            order 1
+            flex-shrink 0
+            text-align center
+            line-height 1.2
+            white-space normal
+            word-break break-word
+            width 40px
+            display flex
+            flex-direction column
+            align-items center
+            gap 2px
+            
+            .month
+              font-size 0.6rem
+              font-weight bold
+              color primary-color
+              line-height 1
+              
+            .day
+              font-size 1.4rem
+              font-weight bold
+              color primary-color
+              line-height 1
+            
+          .node-circle
+            position relative
+            top auto
+            left auto
+            transform none
+            order 2
+            flex-shrink 0
+            
+          .node-content
+            position relative
+            top auto
+            left auto
+            transform none
+            order 3
+            flex 1
+            
+            .node-status
+              position relative
+              top auto
+              left auto
+              transform none
+              text-align left
+              width auto
+

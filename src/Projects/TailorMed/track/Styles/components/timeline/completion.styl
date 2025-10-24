@@ -4,6 +4,10 @@
 .results-panel
   .timeline-track-container
     margin 120px auto 40px !important
+    
+    // Mobile 時移除 margin
+    @media (max-width: 768px)
+      margin 0 !important
     // Order Completion Timeline 樣式
     &.timeline-order_completion
       .timeline-visual-container

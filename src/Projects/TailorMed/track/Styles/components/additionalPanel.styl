@@ -1,0 +1,123 @@
+// Additional Panel Component
+// 額外資訊面板組件樣式
+
+@import '../variables'
+
+.additional-panel
+  background linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)
+  padding 60px 0
+  margin-top 40px
+  
+  .container
+    max-width 1200px
+    margin 0 auto
+    padding 0 20px
+    
+  .additional-content
+    text-align center
+    margin-bottom 50px
+    
+    .additional-title
+      font-size 2.5rem
+      font-weight 700
+      color primary-color
+      margin-bottom 20px
+      
+    .additional-description
+      font-size 1.1rem
+      color neutral-gray
+      max-width 600px
+      margin 0 auto
+      line-height 1.6
+      
+  .additional-grid
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(280px, 1fr))
+    gap 30px
+    margin-top 40px
+    
+  .additional-card
+    background base-white
+    border-radius 16px
+    padding 30px
+    box-shadow 0 4px 20px rgba(0, 0, 0, 0.08)
+    transition all 0.3s ease
+    border 1px solid rgba(0, 0, 0, 0.05)
+    
+    &:hover
+      transform translateY(-5px)
+      box-shadow 0 8px 30px rgba(0, 0, 0, 0.12)
+      
+    .card-icon
+      width 60px
+      height 60px
+      margin 0 auto 20px auto
+      background linear-gradient(135deg, primary-color, accent-color)
+      border-radius 50%
+      display flex
+      align-items center
+      justify-content center
+      
+      img
+        width 30px
+        height 30px
+        filter brightness(0) invert(1)
+        
+    .card-content
+      text-align center
+      
+      .card-title
+        font-size 1.3rem
+        font-weight 600
+        color primary-color
+        margin-bottom 12px
+        
+      .card-description
+        font-size 0.95rem
+        color neutral-gray
+        line-height 1.5
+        margin 0
+
+// Mobile 響應式設計
+@media (max-width: 768px)
+  .additional-panel
+    padding 40px 0
+    margin-top 30px
+    
+    .container
+      padding 0 15px
+      
+    .additional-content
+      margin-bottom 30px
+      
+      .additional-title
+        font-size 2rem
+        
+      .additional-description
+        font-size 1rem
+        
+    .additional-grid
+      grid-template-columns 1fr
+      gap 20px
+      margin-top 30px
+      
+    .additional-card
+      padding 25px
+      
+      .card-icon
+        width 50px
+        height 50px
+        margin-bottom 15px
+        
+        img
+          width 25px
+          height 25px
+          
+      .card-content
+        .card-title
+          font-size 1.2rem
+          margin-bottom 10px
+          
+        .card-description
+          font-size 0.9rem
+

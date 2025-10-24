@@ -10,25 +10,33 @@
       .timeline-nodes
         .timeline-node.completed(data-step="1")
           .node-circle
-          .node-date Oct 10
-          .node-status
-            .status-text Order Created
-            .status-time 10:16
+          .node-date
+            span.month Oct
+            span.day 10
+          .node-content
+            .node-status
+              .status-text Order Created
+              .status-time 10:16
         .timeline-node.processing(data-step="2")
           .node-circle
-          .node-date Oct 12
-          .node-status
-            .status-text Shipment Collected
-            .status-time Processing...
+          .node-date
+            span.month Oct
+            span.day 12
+          .node-content
+            .node-status
+              .status-text Shipment Collected
+              .status-time Processing...
         .timeline-node.pending(data-step="3")
           .node-circle
           .node-date TBD
-          .node-status
-            .status-text In Transit
-            .status-time --:--
+          .node-content
+            .node-status
+              .status-text In Transit
+              .status-time --:--
         .timeline-node.pending(data-step="4")
           .node-circle
           .node-date TBD
-          .node-status
-            .status-text Shipment Delivered
-            .status-time --:--
+          .node-content
+            .node-status
+              .status-text Shipment Delivered
+              .status-time --:--
