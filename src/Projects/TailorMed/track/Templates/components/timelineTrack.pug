@@ -5,11 +5,6 @@
   h2.panel-title Timeline Track
   
   .timeline-track-container.timeline-domestic
-    .track-content
-      p 
-        | DOMESTIC
-        br
-        | 4 Nodes
     .timeline-visual-container
       .timeline-horizontal-line
       .timeline-nodes
@@ -45,11 +40,6 @@
   include timelineExport.pug
       
   .timeline-track-container.timeline-cross_trade_layered
-    .track-content
-      p
-        | CROSS TRADE
-        br
-        | Origin:4 Nodes / Transit:2 Nodes / Destination:4 Nodes 
 
     // Origin 和 Destination 容器 (100% 寬度)
     .timeline-main-layers
@@ -83,7 +73,6 @@
                 .node-status
                   .status-text Departure Confirmed
                   .status-time 14:30
-          .track-content
       
       // Destination 階段 (藍色，4 節點)
       .timeline-destination-wrapper
@@ -115,7 +104,6 @@
                 .node-status
                   .status-text POD
                   .status-time 18:40
-          .track-content
     
     // Transit 階段 (橙色，2 節點) - 移到下方
     .timeline-layer.timeline-transit-layer.transit-stage
@@ -135,11 +123,6 @@
 
   // Order Completion Timeline - 訂單完成時間軸
   .timeline-track-container.timeline-order_completion
-    .track-content
-      p 
-        | ORDER COMPLETION
-        br
-        | 3 Nodes
     .timeline-visual-container
       .timeline-horizontal-line
       .timeline-nodes

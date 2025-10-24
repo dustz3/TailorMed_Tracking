@@ -1,0 +1,122 @@
+// 動態 Timeline 樣式
+// 用於 JavaScript 動態渲染的 timeline 組件
+
+.results-panel
+  .timeline-track-container
+    // 動態 Timeline Events 樣式
+    .timeline-events
+      position absolute
+      top 22%
+      left -16px
+      right -16px
+      height 16px
+      transform translateY(-50%)
+      z-index 1
+      
+      .timeline-event
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        width 16px
+        height 16px
+        background secondary-color
+        border-radius 50%
+        border 1px solid base-white
+        z-index 3
+        
+        // Event 1: 定位在第4和第5節點之間 (57.5%位置)
+        &:nth-child(1)
+          left 57.5%
+          
+        // Event 2: 定位在第5和第6節點之間 (74%位置)
+        &:nth-child(2)
+          left 74%
+        
+        // Event Tag 樣式
+        .event-tag
+          position absolute
+          top 100%
+          left 50%
+          transform translateX(-50%)
+          margin-top 80px
+          z-index 5
+          
+          // 垂直連接線
+          &::before
+            content ''
+            position absolute
+            top -80px
+            left 50%
+            transform translateX(-50%)
+            width 2px
+            height 80px
+            background secondary-color
+            z-index 4
+            
+          .event-tag-text
+            background secondary-color
+            color #fff
+            padding 4px 8px
+            border-radius 4px
+            font-size 0.7rem
+            font-weight normal
+            white-space nowrap
+            text-align center
+            box-shadow 0 2px 4px rgba(0, 0, 0, 0.1)
+
+    // Import/Export Timeline 專用樣式 (6個節點)
+    &.timeline-import_export
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57%位置)
+          &:nth-child(1)
+            left 57%
+            
+          // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+          &:nth-child(2)
+            left 73.5%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57% !important
+          
+        .event-dry-ice-refilled
+          left 73.5% !important
+
+    // Order Completion Timeline 專用樣式 (7個節點)
+    &.timeline-order_completion
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57.14%位置)
+          &:nth-child(1)
+            left 57.14%
+            
+          // Event 2: 定位在第5和第6節點之間 (71.43%位置)
+          &:nth-child(2)
+            left 71.43%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57.14% !important
+          
+        .event-dry-ice-refilled
+          left 71.43% !important
+
+    // Domestic Timeline 專用樣式 (4個節點)
+    &.timeline-domestic
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第2和第3節點之間 (50%位置)
+          &:nth-child(1)
+            left 50%
+            
+          // Event 2: 定位在第3和第4節點之間 (75%位置)
+          &:nth-child(2)
+            left 75%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 50% !important
+          
+        .event-dry-ice-refilled
+          left 75% !important

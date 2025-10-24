@@ -1,0 +1,29 @@
+//- Timeline 控制面板組件
+//- 用於動態切換不同的 timeline 狀態
+
+.timeline-control-panel
+  .control-sections
+    //- Domestic 區域
+    .control-section
+      .section-title Domestic
+      .control-buttons
+        button.control-btn(data-status="domestic-step1") 第一步
+        button.control-btn(data-status="domestic-step2") 第二步
+        button.control-btn(data-status="domestic-step3") 第三步
+        button.control-btn(data-status="domestic-step4") 第四步
+        button.control-btn(data-status="completed") 完成
+    
+    //- Import/Export 區域
+    .control-section
+      .section-title Import / Export
+      .control-buttons
+        button.control-btn(data-status="import-export-step1") 第一步
+        button.control-btn(data-status="import-export-step2") 第二步
+        button.control-btn(data-status="import-export-step3") 第三步
+        button.control-btn(data-status="import-export-step4") 第四步
+        button.control-btn(data-status="import-export-step5") 第五步
+        button.control-btn(data-status="import-export-step6") 第六步
+        button.control-btn(data-status="import-export-step7") 第七步
+        button.control-btn(data-status="import-export-completed") 完成
+        button.event-control-btn(data-event="dry-ice") 乾冰1
+        button.event-control-btn(data-event="special-handling") 乾冰2

@@ -1,0 +1,1003 @@
+// Import/Export Timeline 專用樣式
+// 7個節點 + 2個事件的國際運輸時間軸
+
+// Gradient Shine 動畫效果 - 用於 Processing 狀態
+@keyframes gradientShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// Completion Shine 動畫效果 - 用於完成狀態
+@keyframes completionShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// TailorMed Glow 動畫效果 - 用於完成狀態的 mark
+@keyframes tailormedGlow
+  0%
+    filter brightness(0) invert(0)
+  25%
+    filter brightness(0) invert(0)
+  50%
+    filter brightness(0) invert(1)
+  75%
+    filter brightness(0) invert(1)
+  100%
+    filter brightness(0) invert(0)
+
+// 飛機飄動動畫效果 - 用於 In Transit 狀態
+@keyframes planeFloat
+  0%
+    transform translate(-50%, -50%) translateY(-0.5px)
+  25%
+    transform translate(-50%, -50%) translateY(-3px)
+  50%
+    transform translate(-50%, -50%) translateY(-0.5px)
+  75%
+    transform translate(-50%, -50%) translateY(1.5px)
+  100%
+    transform translate(-50%, -50%) translateY(-0.5px)
+
+.results-panel
+  .timeline-track-container
+    .timeline-events
+      top 22%
+    // Import/Export Timeline 樣式
+    &.timeline-import_export
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+               // Import/Export 專用的分段式連接線 (7個節點，6段間距)
+               .timeline-horizontal-line
+                 &::before
+                   content ''
+                   position absolute
+                   top 0
+                   left 0
+                   height 100%
+                   width 89%  // 調整為 89%
+                   background linear-gradient(to right, primary-color, accent-color)
+                   border-radius 25px
+                   z-index 3
+                   
+                 &::after
+                   content ''
+                   position absolute
+                   top -1px
+                   left 88%  // 從 88% 開始
+                   height 100%
+                   width 12%  // 剩餘的節點 (12%)
+                   background #dfeaf3
+                   border 1px solid #dfeaf3
+                   z-index 2
+            
+        // Import/Export 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 前5個節點的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第6個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(6)
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第7個節點 (Pending 狀態) 的狀態文字顏色
+          &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step1 Timeline 樣式 - 第一步 Processing
+    &.timeline-import_export-step1
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57%位置)
+          &:nth-child(1)
+            left 57%
+            
+          // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+          &:nth-child(2)
+            left 73.5%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57% !important
+          
+        .event-dry-ice-refilled
+          left 73.5% !important
+          
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step1 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 2.5%  // 第一步 Processing 節點後 (2.5%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 2%  // 從第一步後開始
+            height 100%
+            width 100%  // 剩餘的節點 (100%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step1 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(1)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第2-7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step2 Timeline 樣式 - 第二步 Processing
+    &.timeline-import_export-step2
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57%位置)
+          &:nth-child(1)
+            left 57%
+            
+          // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+          &:nth-child(2)
+            left 73.5%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57% !important
+          
+        .event-dry-ice-refilled
+          left 73.5% !important
+          
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step2 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 20%  // 第二步 Processing 節點後 (20%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 19%  // 從第二步後開始
+            height 100%
+            width 81%  // 剩餘的節點 (81%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step2 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第2個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(2)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第3-7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step3 Timeline 樣式 - 第三步 Processing
+    &.timeline-import_export-step3
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57%位置)
+          &:nth-child(1)
+            left 57%
+            
+          // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+          &:nth-child(2)
+            left 73.5%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57% !important
+          
+        .event-dry-ice-refilled
+          left 73.5% !important
+          
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step3 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 37%  // 第三步 Processing 節點後 (37%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 36%  // 從第三步後開始
+            height 100%
+            width 64%  // 剩餘的節點 (64%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step3 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-2個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第3個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(3)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第4-7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step4 Timeline 樣式 - 第四步 Processing
+    &.timeline-import_export-step4
+      .timeline-events
+        .timeline-event
+          // Event 1: 定位在第4和第5節點之間 (57%位置)
+          &:nth-child(1)
+            left 57%
+            
+          // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+          &:nth-child(2)
+            left 73.5%
+            
+        // 專用 class 控制位置
+        .event-dry-ice-terminal
+          left 57% !important
+          
+        .event-dry-ice-refilled
+          left 73.5% !important
+          
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step4 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 54%  // 第四步 Processing 節點後 (54%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 47%  // 從第四步後開始
+            height 100%
+            width 53%  // 剩餘的節點 (53%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step4 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-3個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第4個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(4)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                width 16px !important
+                height 16px !important
+                background-image url('../images/icon-inTransit.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+                animation planeFloat 3s ease-in-out infinite !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第5-7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(5), &:nth-child(6), &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step5 Timeline 樣式 - 第五步 Processing
+    &.timeline-import_export-step5
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step5 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 71%  // 第五步 Processing 節點後 (71%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 70%  // 從第五步後開始
+            height 100%
+            width 30%  // 剩餘的節點 (30%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step5 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-4個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第5個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(5)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第6-7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(6), &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step6 Timeline 樣式 - 第六步 Processing
+    &.timeline-import_export-step6
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step6 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 89%  // 第六步 Processing 節點後 (89%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 85.71%  // 從第六步後開始
+            height 100%
+            width 14.29%  // 剩餘的節點 (1/7 = 14.29%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step6 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-5個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第6個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(6)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第7個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(7)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Import/Export Step7 Timeline 樣式 - 第七步 Processing (完成)
+    &.timeline-import_export-step7
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Step7 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 100%  // 第七步 Processing 節點後 (7/7 = 100% 完成)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 0%  // 沒有剩餘的節點 (0%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Step7 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-6個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+            .node-status
+              .status-text
+                color primary-color !important
+                // 確保沒有動畫效果
+                position static !important
+                overflow visible !important
+                &::before
+                  display none !important
+          // 第7個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(7)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                position relative !important
+                color accent-color !important
+                overflow hidden !important
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content '' !important
+                  position absolute !important
+                  top 0 !important
+                  left -100%
+                  width 100% !important
+                  height 100% !important
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent) !important
+                  animation gradientShine 2s infinite !important
+                  pointer-events none !important
+                  z-index 1 !important
+                  border-radius 2px !important
+                  display block !important
+
+    // 強制覆蓋 Step7 的第七個節點樣式
+    &.timeline-import_export-step7
+      .timeline-visual-container
+        .timeline-node:nth-child(7)
+          .node-status
+            .status-text
+              position relative !important
+              color accent-color !important
+              overflow hidden !important
+              &::before
+                content '' !important
+                position absolute !important
+                top 0 !important
+                left -100%
+                width 100% !important
+                height 100% !important
+                background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent) !important
+                animation gradientShine 2s infinite !important
+                pointer-events none !important
+                z-index 1 !important
+                border-radius 2px !important
+                display block !important
+
+    // Import/Export Completed Timeline 樣式 - 完成狀態（使用 Completion 樣式）
+    &.timeline-import_export-completed
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Import/Export Completed 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 100%  // 100% 完成
+            background primary-color  // 使用 primary-color 而不是漸層
+            border-radius 25px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 0%  // 沒有剩餘的節點 (0%)
+            background #dfeaf3
+            border 1px solid #dfeaf3
+            z-index 2
+            
+        // Import/Export Completed 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 前6個節點使用 node-circle-completion 樣式
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+            .node-circle-completion
+              width 40px !important
+              height 40px !important
+              background primary-color !important
+              border-radius 50% !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              display block !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 14px !important
+                height 14px !important
+                background-image url('../images/icon-check.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(0) invert(1) !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                color primary-color !important
+          // 最後一個節點使用 order-completion-container 樣式
+          &:nth-child(7)
+            .order-completion-container
+              width 55px !important
+              height 45px !important
+              background primary-color !important
+              border-radius 5px !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              overflow hidden !important
+              display flex !important
+              align-items center !important
+              justify-content center !important
+              &::before
+                content '' !important
+                position absolute !important
+                top 0 !important
+                left -100%
+                width 100% !important
+                height 100% !important
+                background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent) !important
+                transform skewX(20deg) !important
+                animation orderCompletionShine 2s infinite ease-out !important
+                pointer-events none !important
+                z-index 1 !important
+                border-radius 2px !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 36px !important
+                height 24px !important
+                background-image url('../images/tailormed-mark.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(1) !important
+                animation tailormedGlow 2s infinite ease-out !important
+                animation-delay 1.5s !important
+                z-index 2 !important
+            .node-status
+              .status-text
+                color primary-color !important
+                position static !important
+                overflow visible !important
+                &::before
+                  display none !important
+          // 確保第六個節點沒有動畫
+          &:nth-child(6)
+            .node-status
+              .status-text
+                color primary-color !important
+                position static !important
+                overflow visible !important
+                &::before
+                  display none !important

@@ -1,0 +1,34 @@
+//- Domestic Timeline 組件 - 第一步 Processing，後面三步 Pending
+//- 4個節點的國內運輸時間軸
+
+.timeline-track-container.timeline-domestic.timeline-domestic-step1
+  .timeline-visual-container
+    .timeline-horizontal-line
+    .timeline-nodes
+      .timeline-node.processing(data-step="1")
+        .node-circle
+        .node-date Oct 10
+        .node-status
+          .status-text Order Created
+          .status-time Processing...
+      
+      .timeline-node.pending(data-step="2")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text Shipment Collected
+          .status-time --:--
+      
+      .timeline-node.pending(data-step="3")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text In Transit
+          .status-time --:--
+      
+      .timeline-node.pending(data-step="4")
+        .node-circle
+        .node-date TBD
+        .node-status
+          .status-text Shipment Delivered
+          .status-time --:--

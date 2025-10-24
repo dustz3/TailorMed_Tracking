@@ -156,6 +156,14 @@ export class TimelineRendererV3 {
     nodes.forEach((node, index) => {
       const label = labels[index];
 
+      // 跳過 Order Completion Panel 的節點
+      const isOrderCompletion = this.container.closest(
+        '.timeline-order_completion'
+      );
+      if (isOrderCompletion) {
+        return; // 不為 Order Completion Panel 添加 hover 效果
+      }
+
       node.addEventListener('mouseenter', () => {
         node.style.transform = 'translate(-50%, -50%) scale(1.1)';
         if (label) {

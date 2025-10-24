@@ -14,14 +14,6 @@
           .field-value TM439812
 
         .summary-field
-          .field-label Invoice No.
-          .field-value TM202507098
-        
-        .summary-field
-          .field-label MAWB
-          .field-value 074-12345678
-
-        .summary-field
           .field-label ORIGIN/DESTINATION
           .field-value PVG → TPE
         
@@ -35,7 +27,7 @@
 
         .summary-field
           .field-label ETA
-          .field-value 06/10/2025 14:30(local)
+          .field-value 06/10/2025
     
     .status-info
       .summary-field
@@ -52,9 +44,15 @@
       .summary-field
         .field-label Last Update
         .field-value 11/10/2025 14:30 (local)
-      
+
+  //- Timeline 控制面板
+  include timelineControlPanel.pug
+  
+  //- 動態 Timeline 容器
+  #timeline-container
+    //- Timeline 將由 JavaScript 動態渲染
+  
+
   .results-note
     | This information is NOT updated in real-time. For the most current status, please refresh this page or contact our customer service team.
   
-  .results-mobile-cta
-    .btn-text View Full Timeline

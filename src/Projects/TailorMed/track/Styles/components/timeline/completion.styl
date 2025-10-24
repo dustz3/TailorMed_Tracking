@@ -1,0 +1,155 @@
+// Order Completion Timeline 專用樣式
+// 7個節點 + 2個事件的訂單完成時間軸
+
+.results-panel
+  .timeline-track-container
+    margin 120px auto 40px !important
+    // Order Completion Timeline 樣式
+    &.timeline-order_completion
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Order Completion 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 72%  // 1-6 節點之間 (72%)
+            background transparent
+            border none
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 72%  // 從第6個節點開始
+            height 100%
+            width 28%  // 6-7 節點之間 (28%)
+            background transparent
+            border none
+            z-index 2
+            
+        // Order Completion 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 前6個節點使用 node-circle-completion 樣式
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+            .node-circle-completion
+              width 40px !important
+              height 40px !important
+              background primary-color !important
+              border-radius 50% !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              display block !important
+              
+              // 勾選符號
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 14px !important
+                height 14px !important
+                background-image url('../images/icon-check.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(0) invert(1) !important
+                z-index 2 !important
+          
+          // 最後一個節點使用 order-completion-container 樣式
+          &:nth-child(7)
+            .order-completion-container
+              width 55px !important
+              height 45px !important
+              background primary-color !important
+              border-radius 5px !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              overflow hidden !important
+              display flex !important
+              align-items center !important
+              justify-content center !important
+              
+              // Gradient shine 效果 - 比照 Processing 狀態
+              &::before
+                content '' !important
+                position absolute !important
+                top 0 !important
+                left -100%
+                width 100% !important
+                height 100% !important
+                background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent) !important
+                transform skewX(20deg) !important
+                animation orderCompletionShine 2s infinite ease-out !important
+                pointer-events none !important
+                z-index 1 !important
+                border-radius 2px !important
+              
+              // TailorMed 標誌
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 36px !important
+                height 24px !important
+                background-image url('../images/tailormed-mark.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(1) !important
+                animation tailormedGlow 2s infinite ease-out !important
+                animation-delay 1.5s !important
+                z-index 2 !important
+
+// Order Completion Container 專用的動畫效果
+@keyframes orderCompletionShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// TailorMed 標誌變色動畫
+@keyframes tailormedGlow
+  0%
+    filter brightness(0) invert(0)
+  25%
+    filter brightness(0) invert(0)
+  50%
+    filter brightness(0) invert(1)
+  75%
+    filter brightness(0) invert(1)
+  100%
+    filter brightness(0) invert(0)

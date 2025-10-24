@@ -1,0 +1,501 @@
+// Domestic Timeline 專用樣式
+// 4個節點的國內運輸時間軸
+
+// Gradient Shine 動畫效果 - 用於 Processing 狀態
+@keyframes gradientShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// Completion Container 專用的動畫效果
+@keyframes completionShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// Order Completion Container 專用的動畫效果
+@keyframes orderCompletionShine
+  0%
+    left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
+
+// TailorMed 標誌變色動畫
+@keyframes tailormedGlow
+  0%
+    filter brightness(0) invert(0)
+  25%
+    filter brightness(0) invert(0)
+  50%
+    filter brightness(0) invert(1)
+  75%
+    filter brightness(0) invert(1)
+  100%
+    filter brightness(0) invert(0)
+
+.results-panel
+  .timeline-track-container
+    // Domestic Timeline 通用樣式（僅用於基本設定）
+    &.timeline-domestic
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+
+    // Domestic Step1 Timeline 樣式 - 第一步 Processing，後面三步 Pending
+    &.timeline-domestic-step1
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic Step1 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 3%  // 第一步 Processing 節點後 (3%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 2%  // 從 2% 位置開始
+            height 100%
+            width 98%  // 剩餘的節點 (98%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+        // Domestic Step1 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(1)
+            // 桃紅色日期
+            .node-date
+              color accent-color !important
+            
+            // 桃紅圓型節點
+            .node-circle
+              background accent-color !important
+              border 2px solid base-white
+              transition all 0.3s ease
+              
+              // hover 會放大節點
+              &:hover
+                transform translate(-50%, -50%) scale(1.1) !important
+                box-shadow 0 4px 12px rgba(accent-color, 0.3) !important
+                cursor pointer !important
+            
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第2-4個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(2), &:nth-child(3), &:nth-child(4)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Domestic Step2 Timeline 樣式 - 第二步 Processing，第三-四步 Pending
+    &.timeline-domestic-step2
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic Step2 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 37%  // 第二步 Processing 節點後 (37%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 100%  // 剩餘的節點 (100%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+        // Domestic Step2 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第2個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(2)
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第3-4個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(3), &:nth-child(4)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Domestic Step3 Timeline 樣式 - 第三步 Processing，第四步 Pending
+    &.timeline-domestic-step3
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic Step3 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 72%  // 第三步 Processing 節點後 (72%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 100%  // 剩餘的節點 (100%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+        // Domestic Step3 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-2個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第3個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(3)
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+          // 第4個節點 (Pending 狀態) 的狀態文字顏色 - 確保沒有動畫
+          &:nth-child(4)
+            .node-status
+              .status-text
+                color neutral-light !important
+                // 確保 pending 狀態沒有動畫效果
+                position static !important
+                overflow visible !important
+                
+                &::before
+                  display none !important
+
+    // Domestic Step4 Timeline 樣式 - 第四步 Processing，全部完成
+    &.timeline-domestic-step4
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic Step4 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 100%  // 第四步 Processing 節點後 (100% 完成)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 0%  // 沒有剩餘的節點 (0%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+        // Domestic Step4 專用的節點樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 第1-3個節點 (Completed 狀態) 的狀態文字顏色
+          &:nth-child(1), &:nth-child(2), &:nth-child(3)
+            .node-status
+              .status-text
+                color primary-color !important
+          // 第4個節點 (Processing 狀態) 的 Gradient shine 效果
+          &:nth-child(4)
+            .node-status
+              .status-text
+                position relative
+                color accent-color !important
+                overflow hidden
+                
+                // 添加 Gradient shine 動畫
+                &::before
+                  content ''
+                  position absolute
+                  top 0
+                  left -100%
+                  width 100%
+                  height 100%
+                  background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)
+                  animation gradientShine 2s infinite
+                  pointer-events none
+                  z-index 1
+                  border-radius 2px
+
+    // Domestic Completed Timeline 樣式 - 使用 Completion 樣式
+    &.timeline-domestic-completed
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic Completed 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 100%  // 全部完成 (100%)
+            background primary-color  // 改為純 primary-color
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 0  // 從開始位置開始
+            height 100%
+            width 0%  // 沒有剩餘的節點 (0%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+        // Domestic Completed 專用的節點樣式 - 使用 Completion 樣式
+        .timeline-node
+          // 節點日期位置調整
+          .node-date
+            top -60px !important
+          // 節點狀態位置調整
+          .node-status
+            top 30px !important
+          // 前3個節點使用 node-circle-completion 樣式
+          &:nth-child(1), &:nth-child(2), &:nth-child(3)
+            .node-circle-completion
+              width 40px !important
+              height 40px !important
+              background primary-color !important
+              border-radius 50% !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              display block !important
+              
+              // 勾選符號
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 14px !important
+                height 14px !important
+                background-image url('../images/icon-check.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(0) invert(1) !important
+                z-index 2 !important
+          
+          // 最後一個節點使用 order-completion-container 樣式（完整複製自 completion.styl）
+          &:nth-child(4)
+            .order-completion-container
+              width 55px !important
+              height 45px !important
+              background primary-color !important
+              border-radius 5px !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              overflow hidden !important
+              display flex !important
+              align-items center !important
+              justify-content center !important
+              
+              // Gradient shine 效果 - 比照 Processing 狀態
+              &::before
+                content '' !important
+                position absolute !important
+                top 0 !important
+                left -100%
+                width 100% !important
+                height 100% !important
+                background linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent) !important
+                transform skewX(20deg) !important
+                animation orderCompletionShine 2s infinite ease-out !important
+                pointer-events none !important
+                z-index 1 !important
+                border-radius 2px !important
+              
+              // TailorMed 標誌
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 36px !important
+                height 24px !important
+                background-image url('../images/tailormed-mark.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(1) !important
+                animation tailormedGlow 2s infinite ease-out !important
+                animation-delay 1.5s !important
+                z-index 2 !important
+

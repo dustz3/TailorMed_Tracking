@@ -1,0 +1,11 @@
+//- 乾冰事件元件
+//- 使用方式：include dryIceEvent.pug
+//- 可傳入參數：text, position, isVisible
+
+mixin dryIceEvent(text="Dry ice refilled", position="50%", isVisible=true)
+  .timeline-event(
+    data-event="dry-ice"
+    style=`left: ${position}; display: ${isVisible ? 'block' : 'none'};`
+  )
+    .event-tag
+      .event-tag-text= text

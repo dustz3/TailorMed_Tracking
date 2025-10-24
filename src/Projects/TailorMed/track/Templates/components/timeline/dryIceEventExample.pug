@@ -1,0 +1,15 @@
+//- 乾冰事件元件使用範例
+//- 展示如何在不同位置使用乾冰事件元件
+
+.timeline-container
+  //- 範例 1: 基本使用（預設位置 50%）
+  +dryIceEvent("Dry ice refilled")
+  
+  //- 範例 2: 自訂位置和文字
+  +dryIceEvent("Dry ice refilled (Terminal)", "57%", true)
+  
+  //- 範例 3: 隱藏的事件
+  +dryIceEvent("Out for Delivery", "73%", false)
+  
+  //- 範例 4: 自訂文字
+  +dryIceEvent("Custom event text", "25%", true)

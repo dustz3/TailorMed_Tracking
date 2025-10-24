@@ -3,12 +3,526 @@
 
 @import '../variables'
 
+// Results Panel 內的 Timeline 樣式
+.results-panel
+  .timeline-track-container
+    width 90%
+    min-height 200px
+    border-radius 12px
+    padding 24px
+    position relative
+    margin 50px auto 0px auto
+    
+    // 視覺容器 - 包裝 timeline 和 nodes
+    .timeline-visual-container
+      position relative
+      margin-top 20px
+      
+      .timeline-nodes
+        position absolute
+        top 50%
+        height 32px
+        transform translateY(-50%)
+        display flex
+        align-items center
+        z-index 3
+        left -16px
+        right -16px
+        justify-content space-between
+      
+      .timeline-events
+        position absolute
+        top 50%
+        left -16px
+        right -16px
+        height 16px
+        transform translateY(-50%)
+        z-index 1
+        
+        .timeline-event:nth-child(1)
+          left 57.5%
+          
+        .timeline-event:nth-child(2)
+          left 74%
+      
+      .timeline-horizontal-line
+        position absolute
+        top 50%
+        left 0
+        right 0
+        height 5px
+        background primary-color
+        transform translateY(-50%)
+        z-index 1
+      
+      // Import/Export 專用的分段式連接線 (7個節點，6段間距)
+      .timeline-horizontal-line
+        &::before
+          content ''
+          position absolute
+          top 0
+          left 0
+          height 100%
+          width 72%  // 延伸到第6個節點
+          background linear-gradient(to right, primary-color, accent-color)
+          border-radius 10px
+          z-index 3
+          
+        &::after
+          content ''
+          position absolute
+          top -1px
+          left 72%  // 從第6個節點開始
+          height 100%
+          width 28%  // 剩餘的節點
+          background #dfeaf3
+          border 1px solid #dfeaf3
+          z-index 2
+          
+        // 完成節點線段前的突出部分
+        &::before
+          // 在 ::before 的基礎上添加突出部分
+          
+      // Import/Export/Cross Trade Panel 的 node-circle hover 樣式（與 Domestic 一致）
+      .timeline-nodes .timeline-node .node-circle:hover
+        transform translate(-50%, -50%) scale(1.1) !important
+        box-shadow 0 4px 12px rgba(20,52,99,0.3) !important
+        cursor pointer !important
+      
+      // 節點樣式
+      .timeline-node
+        position relative
+        flex-shrink 0
+        display flex
+        flex-direction column
+        align-items center
+        justify-content center
+        gap 10px
+        
+        // Node Circle - 與 timeline-node 相同的樣式
+        .node-circle
+          width 40px
+          height 40px
+          background primary-color
+          border-radius 50%
+          border 2px solid base-white
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          z-index 6
+          transition all 0.3s ease
+          
+          // 內層白色圓圈
+          &::before
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            width 24px
+            height 24px
+            background base-white
+            border-radius 50%
+            transform translate(-50%, -50%)
+            z-index 1
+            
+          // 圖標層 (勾選符號)
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 10px
+            height 10px
+            background-image url('../images/icon-check.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
+        
+        // 節點日期樣式
+        .node-date
+          position absolute
+          top -50px
+          left 50%
+          transform translateX(-50%)
+          font-size 1.1rem
+          font-weight bold
+          white-space nowrap
+          z-index 4
+          
+        // 節點狀態樣式
+        .node-status
+          position absolute
+          top 25px
+          left 50%
+          transform translateX(-50%)
+          text-align center
+          width 120px
+          z-index 4
+          
+          .status-text
+            font-size 0.9rem
+            font-weight 600
+            color neutral-dark
+            line-height 1.2
+            margin-bottom 2px
+            word-wrap break-word
+            overflow-wrap break-word
+            hyphens auto
+            
+          .status-time
+            font-size 0.85rem
+            font-weight 500
+            color neutral-gray
+        
+        // Completed 狀態 (預設)
+        &.completed
+          // 完成節點的日期色彩
+          .node-date
+            color primary-color
+            
+          // 完成節點的圓圈樣式
+          .node-circle
+            background primary-color
+            
+            // 完成節點的勾選符號
+            &::after
+              content ''
+              position absolute
+              top 50%
+              left 50%
+              transform translate(-50%, -50%)
+              width 10px
+              height 10px
+              background-image url('../images/icon-check.svg')
+              background-size contain
+              background-repeat no-repeat
+              background-position center
+              z-index 2
+              
+            // Completed hover 效果 - 只有 circle 放大
+            &:hover
+              transform translate(-50%, -50%) scale(1.10)
+              transition all 0.3s ease
+              
+              // ::before 從白色變為 primary-color
+              &::before
+                background primary-color
+                
+              // 圖標從 primary-color 變為白色
+              &::after
+                filter brightness(0) invert(1)
+        
+        // Processing 狀態
+        &.processing
+          // 處理中節點的日期色彩
+          .node-date
+            color accent-color
+            
+          // 處理中節點的圓圈樣式
+          .node-circle
+            background accent-color
+            
+            // 處理中節點的卡車圖標
+            &::after
+              content ''
+              position absolute
+              top 50%
+              left 51%
+              transform translate(-50%, -50%)
+              width 18px
+              height 11px
+              background-image url('../images/icon-truck.svg')
+              background-size contain
+              background-repeat no-repeat
+              background-position center
+              z-index 2
+              
+            // Processing hover 效果 - 只有 circle 放大
+            &:hover
+              transform translate(-50%, -50%) scale(1.10)
+              transition all 0.3s ease
+              
+              // 中間白色圓圈變為 accent-color
+              &::before
+                background accent-color
+                
+              // 圖標變為白色
+              &::after
+                filter brightness(0) invert(1)
+              
+        // Pending 狀態
+        &.pending
+          // 待處理節點的日期色彩和樣式
+          .node-date
+            color neutral-light
+            opacity 0.6
+            font-style italic
+            border none
+            padding 2px 6px
+            border-radius 4px
+            
+          // 待處理節點的狀態文字和時間色彩
+          .node-status
+            .status-text
+              color neutral-light
+            .status-time
+              color neutral-light
+              
+          // 待處理節點的圓圈樣式
+          .node-circle
+            background neutral-light
+            border 2px dashed neutral-light
+            
+            // 待處理節點沒有圖標，隱藏 ::after
+            &::after
+              display none
+              
+            // 取消 pending 狀態的 hover 效果
+            &:hover
+              transform translate(-50%, -50%) scale(1) !important
+              box-shadow none !important
+              cursor default !important
+      
+      // Event 節點樣式 (比原節點小 50%，定位在節點之間)
+      .timeline-event
+        width 16px
+        height 16px
+        background secondary-color
+        border-radius 50%
+        border 1px solid base-white
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        z-index 4
+        display flex
+        align-items center
+        justify-content center
+        
+        &::before
+          content ''
+          position absolute
+          top 50%
+          left 50%
+          width 6px
+          height 6px
+          background base-white
+          border-radius 50%
+          transform translate(-50%, -50%)
+        
+        // Event 1: 定位在第2和第3節點之間 (25%位置)
+        &:nth-child(1)
+          left 57.5%
+        
+        // Event 2: 定位在第5和第6節點之間 (73.5%位置)
+        &:nth-child(2)
+          left 74%
+        
+        // Event Tag 樣式
+        .event-tag
+          position absolute
+          top 100%
+          left 50%
+          transform translateX(-50%)
+          margin-top 80px
+          z-index 5
+          
+          // 垂直連接線
+          &::before
+            content ''
+            position absolute
+            top -80px
+            left 50%
+            transform translateX(-50%)
+            width 2px
+            height 80px
+            background secondary-color
+            z-index 4
+          
+          .event-tag-text
+            background secondary-color
+            color #fff
+            padding 4px 8px
+            border-radius 4px
+            font-size 0.7rem
+            font-weight normal
+            white-space nowrap
+            text-align center
+            box-shadow 0 2px 4px rgba(0, 0, 0, 0.1)
+  
+    // Domestic Timeline 樣式
+    &.timeline-domestic
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Domestic 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 37.33%  // 1-2 節點之間 (37.33%)
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 38.33%  // 從第2個節點開始
+            height 100%
+            width 61.67%  // 2-3-4 節點之間 (61.67%)
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+          // 完成節點線段前的突出部分
+          &::before
+            // 在 ::before 的基礎上添加突出部分
+            box-shadow 10px 0 0 accent-color
+    
+    // Order Completion Timeline 樣式
+    &.timeline-order_completion
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Order Completion 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 72%  // 1-6 節點之間 (72%)
+            background transparent
+            border none
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 72%  // 從第6個節點開始
+            height 100%
+            width 28%  // 6-7 節點之間 (28%)
+            background transparent
+            border none
+            z-index 2
+                
+        // Order Completion 專用的節點樣式
+        .timeline-node
+          // 前6個節點使用 node-circle-completion 樣式
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+            .node-circle-completion
+              width 40px !important
+              height 40px !important
+              background primary-color !important
+              border-radius 50% !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              display block !important
+              
+              // 勾選符號
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 14px !important
+                height 14px !important
+                background-image url('../images/icon-check.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                filter brightness(0) invert(1) !important
+                z-index 2 !important
+          
+          // 最後一個節點使用 order-completion-container 樣式
+          &:nth-child(7)
+            .order-completion-container
+              width 60px !important
+              height 32px !important
+              background primary-color !important
+              border-radius 8px !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              overflow hidden !important
+              display flex !important
+              align-items center !important
+              justify-content center !important
+              
+              // Gradient shine 效果
+              &::before
+                content '' !important
+                position absolute !important
+                top 0 !important
+                left -100% !important
+                width 100% !important
+                height 100% !important
+                background linear-gradient(315deg, transparent 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.2) 30%, transparent 40%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.4) 90%, rgba(255,255,255,0.2) 95%, transparent 100%) !important
+                transform skew(20deg) !important
+                animation orderCompletionShine 2s infinite !important
+                pointer-events none !important
+                z-index 1 !important
+              
+              // TM 標誌
+              &::after
+                content 'TM' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                color base-white !important
+                font-size 12px !important
+                font-weight bold !important
+                z-index 2 !important
+
 // Gradient Shine 動畫效果 - 用於 Processing 狀態
 @keyframes gradientShine
   0%
     left -100%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
   100%
     left 100%
+    opacity 0
+
+// Order Completion Container 專用的動畫效果
+@keyframes orderCompletionShine
+  0%
+    left -50%
+    opacity 0
+  50%
+    opacity 1
+  100%
+    left 100%
+    opacity 0
 
 // 通用的 Processing 狀態樣式
 .timeline-node.processing,
@@ -62,11 +576,11 @@
     
   .timeline-track-container
     width 90%
-    min-height 200px 
+    min-height 200px
     border-radius 12px
-    padding 24px 
+    padding 24px
     position relative
-    margin 0 auto 50px auto
+    margin 50px auto 0px auto
     
     // 視覺容器 - 包裝 timeline 和 nodes
     .timeline-visual-container
@@ -128,7 +642,10 @@
           z-index 1
           
           .timeline-event:nth-child(1)
-            left 57%
+            left 57.5%
+            
+          .timeline-event:nth-child(2)
+            left 74%
         
         // Import/Export 專用的分段式連接線 (7個節點，6段間距)
         .timeline-horizontal-line
@@ -169,6 +686,137 @@
             left 67%   // 從第5個節點開始
             width 33%  // 剩餘的節點
     
+    // Order Completion Timeline 樣式
+    &.timeline-order_completion
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+          
+        // Order Completion 專用的分段式連接線
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 72%  // 1-6 節點之間 (72%)
+            background transparent
+            border none
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 72%  // 從第6個節點開始
+            height 100%
+            width 28%  // 6-7 節點之間 (28%)
+            background transparent
+            border none
+            z-index 2
+        
+        // Order Completion 專用的節點樣式
+        .timeline-node
+          // 前6個節點使用標準 completed 樣式
+          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+            .node-circle-completion
+              width 40px !important
+              height 40px !important
+              background primary-color !important
+              border-radius 50% !important
+              border 2px solid base-white !important
+              position absolute !important
+              top 50% !important
+              left 50% !important
+              transform translate(-50%, -50%) !important
+              z-index 6 !important
+              transition all 0.3s ease !important
+              display block !important
+              
+              // 內層白色圓圈
+              &::before
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                width 24px !important
+                height 24px !important
+                background base-white !important
+                border-radius 50% !important
+                transform translate(-50%, -50%) !important
+                z-index 1 !important
+                
+              // 勾選符號
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 50% !important
+                transform translate(-50%, -50%) !important
+                width 10px !important
+                height 10px !important
+                background-image url('../images/icon-check.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
+        
+          // 最後一個節點使用 order-completion-container 樣式
+          &:nth-child(7)
+            .order-completion-container
+              width 60px
+              height 32px
+              background primary-color
+              border-radius 8px
+              border 2px solid base-white
+              position absolute
+              top 50%
+              left 50%
+              transform translate(-50%, -50%)
+              z-index 6
+              transition all 0.3s ease
+              overflow hidden
+              display flex
+              align-items center
+              justify-content center
+              
+              // Gradient shine 效果
+              &::before
+                content ''
+                position absolute
+                top 0
+                left -100%
+                width 100%
+                height 100%
+                background linear-gradient(315deg, transparent 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.2) 30%, transparent 40%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.4) 90%, rgba(255,255,255,0.2) 95%, transparent 100%)
+                transform skew(20deg)
+                animation orderCompletionShine 2s infinite
+                pointer-events none
+                z-index 1
+              
+              // TM 標誌
+              &::after
+                content 'TM'
+                position absolute
+                top 50%
+                left 50%
+                transform translate(-50%, -50%)
+                color base-white
+                font-size 12px
+                font-weight bold
+                z-index 2
+      
+        // Order Completion 專用的 Event 樣式
+        .timeline-events
+          .timeline-event:nth-child(1)
+            left 57.5% // 第一個事件位置
+          
+          .timeline-event:nth-child(2)
+            left 74% // 第二個事件位置
+    
     // Export 進度到第4個節點的樣式 (In Transit - Processing)
     &.timeline-progress-6
       .timeline-visual-container
@@ -179,7 +827,7 @@
             left 50%   // 從第4個節點開始
             width 50%  // 剩餘的節點
     
-    // Order Completion Timeline (3 nodes) - 獨立樣式
+    // Order Completion Timeline - 獨立樣式
     &.timeline-order_completion
       .timeline-visual-container
         .timeline-nodes
@@ -187,7 +835,22 @@
           right -16px
           justify-content space-between
           
-        // Order Completion 專用的分段式連接線 (3個節點，2段間距)
+        .timeline-events
+          position absolute
+          top 50%
+          left -16px
+          right -16px
+          height 16px
+          transform translateY(-50%)
+          z-index 1
+          
+          .timeline-event:nth-child(1)
+            left 57.5%
+            
+          .timeline-event:nth-child(2)
+            left 74%
+          
+        // Order Completion 專用的分段式連接線 (7個節點，6段間距)
         .timeline-horizontal-line
           &::before
             content ''
@@ -195,8 +858,8 @@
             top 0
             left 0
             height 100%
-            width 100%  // 全部完成，100% 寬度
-            background primary-color
+            width 72%  // 延伸到第6個節點
+            background transparent
             border-radius 10px
             z-index 3
             
@@ -204,31 +867,148 @@
             content ''
             position absolute
             top -1px
-            left 0
+            left 72%  // 從第6個節點開始
             height 100%
-            width 100%
-            background primary-color
-            border 1px solid primary-color
+            width 28%  // 剩餘的節點
+            background transparent
+            border none
             z-index 2
             
-        // 取消前兩個節點的 hover 效果並調整樣式
-        .timeline-node:nth-child(1),
-        .timeline-node:nth-child(2)
-          .node-circle
-            background primary-color
+      // 前六個節點使用新的 node-circle-completion 樣式
+      .timeline-node:nth-child(1),
+      .timeline-node:nth-child(2),
+      .timeline-node:nth-child(3),
+      .timeline-node:nth-child(4),
+      .timeline-node:nth-child(5),
+      .timeline-node:nth-child(6)
+        position relative
+        
+        .node-circle-completion
+          width 40px !important
+          height 40px !important
+          border 2px solid #fff !important
+          border-radius 50% !important
+          background primary-color !important
+          position absolute !important
+          top 50% !important
+          left 50% !important
+          transform translate(-50%, -50%) !important
+          z-index 6 !important
+          display block !important
+          
+          &::after
+            content '' !important
+            position absolute !important
+            top 53% !important
+            left 50% !important
+            transform translate(-50%, -50%) !important
+            width 15px !important
+            height 15px !important
+            background-image url('../images/icon-check.svg') !important
+            background-size contain !important
+            background-repeat no-repeat !important
+            background-position center !important
+            filter brightness(0) invert(1) !important
+            z-index 2 !important
+          
+        // 移除節點的 hover 效果
+        &:hover
+          transform translate(-50%, -50%) scale(1)
+          box-shadow none
+          cursor default
             
-            &::before
-              background primary-color
+      // 最後一個節點使用 order-completion-container 樣式
+      .timeline-node:nth-child(7)
+        .order-completion-container
+          width 55px
+          height 40px
+          background primary-color
+          border-radius 5px
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          z-index 6
+          overflow hidden
+          
+          // 添加 mark 圖標
+          &::after
+            content ''
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
+            width 36px
+            height 24px
+            background-image url('../images/tailormed-mark.svg')
+            background-size contain
+            background-repeat no-repeat
+            background-position center
+            z-index 2
               
-            &::after
-              background-image url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E")
-              width 20px
-              height 20px
-              
-            &:hover
-              transform translate(-50%, -50%) scale(1)
-              box-shadow none
-              cursor default
+          // 移除 hover 效果
+          &:hover
+            transform translate(-50%, -50%) scale(1)
+            box-shadow none
+            cursor default
+
+    // Import/Export/Cross Trade Timeline (7 nodes + 2 events) - 獨立樣式
+    &.timeline-import_export
+      .timeline-visual-container
+        .timeline-nodes
+          left -16px
+          right -16px
+          justify-content space-between
+        
+        .timeline-events
+          position absolute
+          top 50%
+          left -16px
+          right -16px
+          height 16px
+          transform translateY(-50%)
+          z-index 1
+          
+          .timeline-event:nth-child(1)
+            left 57.5%
+            
+          .timeline-event:nth-child(2)
+            left 74%
+        
+        // Import/Export 專用的分段式連接線 (7個節點，6段間距)
+        .timeline-horizontal-line
+          &::before
+            content ''
+            position absolute
+            top 0
+            left 0
+            height 100%
+            width 72%  // 延伸到第6個節點
+            background linear-gradient(to right, primary-color, accent-color)
+            border-radius 10px
+            z-index 3
+            
+          &::after
+            content ''
+            position absolute
+            top -1px
+            left 72%  // 從第6個節點開始
+            height 100%
+            width 28%  // 剩餘的節點
+            background neutral-light
+            border 1px solid neutral-light
+            z-index 2
+            
+          // 完成節點線段前的突出部分
+          &::before
+            // 在 ::before 的基礎上添加突出部分
+            box-shadow 10px 0 0 accent-color
+            
+      // Import/Export/Cross Trade Panel 的 node-circle hover 樣式（與 Domestic 一致）
+      .timeline-visual-container .timeline-nodes .timeline-node .node-circle:hover
+        transform translate(-50%, -50%) scale(1.1) !important
+        box-shadow 0 4px 12px rgba(20,52,99,0.3) !important
+        cursor pointer !important
     
     // Cross Trade Layered (3 layers with alignment)
     &.timeline-cross_trade_layered
@@ -609,7 +1389,7 @@
           color neutral-light
           opacity 0.6
           font-style italic
-          border 1px dashed neutral-light
+          border none
           padding 2px 6px
           border-radius 4px
           
@@ -646,6 +1426,7 @@
         left 50%
         transform translate(-50%, -50%)
         z-index 6
+        overflow hidden
         
         // 添加 mark 圖標
         &::after
@@ -788,3 +1569,17 @@
     &.pending
       background #e5e7eb
       border-color #9ca3af
+
+// 為 Order Completion Panel 的最後一個節點添加 gradient shine 效果（專用動畫）
+.timeline-track-panel .timeline-track-container.timeline-order_completion .timeline-node:nth-child(7) .order-completion-container::before
+  content ''
+  position absolute
+  top 0
+  left -100%
+  width 100%
+  height 100%
+  background linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.2) 30%, transparent 40%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.4) 90%, rgba(255,255,255,0.2) 95%, transparent 100%)
+  transform skew(20deg)
+  animation orderCompletionShine 2s infinite
+  pointer-events none
+  z-index 1

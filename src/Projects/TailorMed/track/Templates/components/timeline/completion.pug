@@ -1,0 +1,66 @@
+//- Order Completion Timeline 組件
+//- 7個節點 + 2個事件的訂單完成時間軸
+
+.timeline-track-container.timeline-order_completion
+  .timeline-visual-container
+    .timeline-horizontal-line
+    .timeline-nodes
+      .timeline-node.completed(data-step="1")
+        .node-circle-completion
+        .node-date Oct 10
+        .node-status
+          .status-text Order Created
+          .status-time 10:30
+      
+      .timeline-node.completed(data-step="2")
+        .node-circle-completion
+        .node-date Oct 11
+        .node-status
+          .status-text Shipment Collected
+          .status-time 15:20
+      
+      .timeline-node.completed(data-step="3")
+        .node-circle-completion
+        .node-date Oct 12
+        .node-status
+          .status-text Origin Customs Process
+          .status-time 09:15
+      
+      .timeline-node.completed(data-step="4")
+        .node-circle-completion
+        .node-date Oct 13
+        .node-status
+          .status-text In Transit
+          .status-time 14:30
+      
+      .timeline-node.completed(data-step="5")
+        .node-circle-completion
+        .node-date Oct 14
+        .node-status
+          .status-text Destination Customs Process
+          .status-time 11:45
+      
+      .timeline-node.completed(data-step="6")
+        .node-circle-completion
+        .node-date Oct 15
+        .node-status
+          .status-text Out for Delivery
+          .status-time 16:00
+      
+      .timeline-node.completed(data-step="7")
+        .order-completion-container
+        .node-date Oct 16
+        .node-status
+          .status-text Shipment Delivered
+          .status-time 18:00
+    
+    .timeline-events
+      .timeline-event(data-event="dry-ice")
+        .event-tag
+          .event-tag-text Dry ice refilled
+            br
+            | (Terminal)
+      
+      .timeline-event(data-event="special-handling")
+        .event-tag
+          .event-tag-text Dry ice refilled
