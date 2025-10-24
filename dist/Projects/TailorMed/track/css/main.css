@@ -2947,6 +2947,23 @@
 .results-panel .timeline-track-container.timeline-domestic-step3 .timeline-visual-container .timeline-node:nth-child(2) .node-status .status-text {
   color: #143463 !important;
 }
+.results-panel .timeline-track-container.timeline-domestic-step3 .timeline-visual-container .timeline-node:nth-child(3) .node-circle {
+  background: #bb2749 !important;
+}
+.results-panel .timeline-track-container.timeline-domestic-step3 .timeline-visual-container .timeline-node:nth-child(3) .node-circle::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 51% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 18px !important;
+  height: 11px !important;
+  background-image: url("../images/icon-truck.svg") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  z-index: 2 !important;
+}
 .results-panel .timeline-track-container.timeline-domestic-step3 .timeline-visual-container .timeline-node:nth-child(3) .node-status .status-text {
   position: relative;
   color: #bb2749 !important;
@@ -3401,6 +3418,74 @@
   }
   100% {
     filter: brightness(0) invert(0);
+  }
+}
+@-moz-keyframes planeFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-3px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(1.5px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+}
+@-webkit-keyframes planeFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-3px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(1.5px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+}
+@-o-keyframes planeFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-3px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(1.5px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+}
+@keyframes planeFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-3px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(1.5px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-0.5px);
   }
 }
 .results-panel .timeline-track-container .timeline-events {

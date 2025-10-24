@@ -366,7 +366,7 @@ const sampleTimelineData = [
       {
         status: 'pending',
         date: 'TBD',
-        statusText: 'In Transit',
+        statusText: 'Origin Customs Process',
         statusTime: '--:--',
       },
       {
@@ -396,7 +396,7 @@ const sampleTimelineData = [
       {
         status: 'pending',
         date: 'TBD',
-        statusText: 'In Transit',
+        statusText: 'Origin Customs Process',
         statusTime: '--:--',
       },
       {
@@ -426,7 +426,7 @@ const sampleTimelineData = [
       {
         status: 'completed',
         date: 'Oct 12',
-        statusText: 'In Transit',
+        statusText: 'Origin Customs Process',
         statusTime: '08:45',
       },
       {
@@ -480,7 +480,7 @@ const sampleTimelineData = [
       {
         status: 'completed',
         date: 'Oct 12',
-        statusText: 'In Transit',
+        statusText: 'Origin Customs Process',
         statusTime: '08:45',
       },
       {

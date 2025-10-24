@@ -23,7 +23,7 @@ const SAMPLE_TIMELINE_DATA = {
       {
         status: 'pending',
         date: 'TBD',
-        statusText: 'Origin Customs Process',
+        statusText: 'In Transit',
         statusTime: '--:--',
       },
       {
@@ -56,7 +56,7 @@ const SAMPLE_TIMELINE_DATA = {
       {
         status: 'pending',
         date: 'TBD',
-        statusText: 'Origin Customs Process',
+        statusText: 'In Transit',
         statusTime: '--:--',
       },
       {
@@ -89,7 +89,7 @@ const SAMPLE_TIMELINE_DATA = {
       {
         status: 'processing',
         date: 'Oct 12',
-        statusText: 'Origin Customs Process',
+        statusText: 'In Transit',
         statusTime: 'Processing...',
       },
       {
@@ -122,7 +122,7 @@ const SAMPLE_TIMELINE_DATA = {
       {
         status: 'completed',
         date: 'Oct 12',
-        statusText: 'Origin Customs Process',
+        statusText: 'In Transit',
         statusTime: '08:45',
       },
       {
@@ -157,7 +157,7 @@ const SAMPLE_TIMELINE_DATA = {
       {
         status: 'completed',
         date: 'Oct 12',
-        statusText: 'Origin Customs Process',
+        statusText: 'In Transit',
         statusTime: '08:45',
         useCompletionStyle: true, // 第三個節點使用 Completion 樣式
       },

@@ -53,6 +53,19 @@
   100%
     filter brightness(0) invert(0)
 
+// 飛機飄動動畫效果 - 用於 In Transit 狀態
+@keyframes planeFloat
+  0%
+    transform translate(-50%, -50%) translateY(-0.5px)
+  25%
+    transform translate(-50%, -50%) translateY(-3px)
+  50%
+    transform translate(-50%, -50%) translateY(-0.5px)
+  75%
+    transform translate(-50%, -50%) translateY(1.5px)
+  100%
+    transform translate(-50%, -50%) translateY(-0.5px)
+
 .results-panel
   .timeline-track-container
     // Domestic Timeline 通用樣式（僅用於基本設定）
@@ -277,6 +290,21 @@
                 color primary-color !important
           // 第3個節點 (Processing 狀態) 的 Gradient shine 效果
           &:nth-child(3)
+            .node-circle
+              background accent-color !important
+              &::after
+                content '' !important
+                position absolute !important
+                top 50% !important
+                left 51% !important
+                transform translate(-50%, -50%) !important
+                width 18px !important
+                height 11px !important
+                background-image url('../images/icon-truck.svg') !important
+                background-size contain !important
+                background-repeat no-repeat !important
+                background-position center !important
+                z-index 2 !important
             .node-status
               .status-text
                 position relative
