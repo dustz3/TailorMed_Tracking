@@ -1,0 +1,719 @@
+// TailorMed 專案主要樣式
+
+// 導入變數
+@import 'variables.styl'
+
+// 重置樣式
+*
+  margin 0
+  padding 0
+  box-sizing border-box
+
+// 基礎樣式
+html
+  font-size font-size-base
+  line-height 1.6
+
+body
+  font-family font-family-primary
+  color text-color
+  background-color background-color
+  line-height 1.6
+
+// 容器
+.container
+  max-width container-max-width
+  margin 0 auto
+  padding 0 container-padding
+
+// Header
+.site-header
+  background-color background-color
+  height 78px
+  border-bottom 1px solid #e9ecef
+  display flex
+  align-items center
+
+  .container
+    width 100%
+
+.header-content
+  display flex
+  align-items center
+  justify-content space-between
+  height 78px
+
+.brand
+  display flex
+  align-items center
+
+.logo-placeholder
+  display flex
+  align-items center
+  justify-content center
+  height 40px
+  min-width 120px
+  background-color rgba(20, 52, 99, 0.05)
+  border 1px dashed rgba(20, 52, 99, 0.3)
+  border-radius 4px
+  color primary-color
+  font-size font-size-small
+  font-weight 500
+  letter-spacing 1px
+
+.site-nav
+  display flex
+  gap 8px
+  align-items center
+  flex 1
+  justify-content center
+
+.nav-link
+  color primary-color
+  text-decoration none
+  padding spacing-xs spacing-sm
+  font-weight 500
+  font-size 0.9rem
+  transition all 0.3s ease
+  white-space nowrap
+
+  &:hover
+    color darken(primary-color, 10%)
+
+.header-actions
+  display flex
+  align-items center
+
+.btn-track
+  height 40px
+  padding 0 spacing-md
+  background-color primary-color
+  color background-color
+  text-decoration none
+  border-radius border-radius-button
+  font-weight 500
+  transition all 0.3s ease
+  white-space nowrap
+  display inline-flex
+  align-items center
+  justify-content center
+  box-sizing border-box
+  line-height 1
+
+  &:hover
+    background-color darken(primary-color, 10%)
+
+// Main Content
+.main-content
+  padding 0
+
+// Section Base Styles
+.section
+  padding spacing-xl 0
+  background-color background-color
+
+.section-header
+  text-align center
+  margin-bottom spacing-xl
+
+.section-title
+  font-size 2rem
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-sm
+
+.section-subtitle
+  font-size font-size-large
+  font-weight 300
+  color text-color
+  margin-bottom 0
+
+// Hero Section
+.hero-section
+  text-align center
+  padding spacing-xl 0
+  background-color background-color
+
+.hero-title
+  font-size 2.5rem
+  font-weight 700
+  margin-bottom spacing-md
+  color primary-color
+
+.hero-subtitle
+  font-size font-size-large
+  font-weight 300
+  margin-bottom spacing-lg
+  color text-color
+
+.hero-actions
+  display flex
+  gap spacing-sm
+  justify-content center
+
+// Solutions Section
+.solutions-grid
+  display grid
+  grid-template-columns repeat(auto-fit, minmax(280px, 1fr))
+  gap spacing-lg
+
+.solution-card
+  background-color background-color
+  border 1px solid #e9ecef
+  border-radius 12px
+  padding spacing-lg
+  text-align center
+  transition all 0.3s ease
+
+  &:hover
+    transform translateY(-5px)
+    box-shadow 0 10px 30px rgba(0, 0, 0, 0.1)
+
+.solution-icon-placeholder
+  width 60px
+  height 60px
+  margin 0 auto spacing-md
+  background-color rgba(20, 52, 99, 0.05)
+  border 1px dashed rgba(20, 52, 99, 0.3)
+  border-radius 8px
+  display flex
+  align-items center
+  justify-content center
+  color primary-color
+  font-size font-size-small
+  font-weight 500
+
+.solution-title
+  font-size font-size-large
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-sm
+
+.solution-description
+  font-size font-size-base
+  font-weight 300
+  color text-color
+  line-height 1.6
+  margin-bottom spacing-md
+
+.solution-link
+  color primary-color
+  text-decoration none
+  font-weight 500
+  font-size font-size-small
+  transition all 0.3s ease
+
+  &:hover
+    text-decoration underline
+
+// Expertise Section
+.expertise-section
+  background-color #f8f9fa
+
+.expertise-content
+  display grid
+  grid-template-columns 2fr 1fr
+  gap spacing-xl
+  align-items start
+
+.expertise-features
+  display grid
+  grid-template-columns repeat(2, 1fr)
+  gap spacing-md
+  margin-top spacing-lg
+
+.expertise-feature
+  display flex
+  gap spacing-sm
+  align-items start
+
+.feature-icon-placeholder
+  width 32px
+  height 32px
+  min-width 32px
+  background-color primary-color
+  color #fff
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  font-weight 700
+  font-size 18px
+
+.feature-title
+  font-size font-size-base
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-xs
+
+.feature-description
+  font-size font-size-small
+  font-weight 300
+  color text-color
+  line-height 1.5
+
+.expertise-stats
+  display grid
+  grid-template-columns repeat(2, 1fr)
+  gap spacing-lg
+
+.stat-item
+  text-align center
+  padding spacing-md
+  background-color background-color
+  border-radius 8px
+
+.stat-number
+  font-size 2.5rem
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-xs
+
+.stat-label
+  font-size font-size-small
+  font-weight 300
+  color text-color
+
+// Insight Section
+.insight-grid
+  display grid
+  grid-template-columns repeat(auto-fit, minmax(300px, 1fr))
+  gap spacing-lg
+
+.insight-card
+  background-color background-color
+  border 1px solid #e9ecef
+  border-radius 12px
+  overflow hidden
+  transition all 0.3s ease
+
+  &:hover
+    transform translateY(-5px)
+    box-shadow 0 10px 30px rgba(0, 0, 0, 0.1)
+
+.insight-image-placeholder
+  width 100%
+  height 200px
+  background-color rgba(20, 52, 99, 0.05)
+  border-bottom 1px solid #e9ecef
+  display flex
+  align-items center
+  justify-content center
+  color primary-color
+  font-size font-size-small
+  font-weight 500
+  border 1px dashed rgba(20, 52, 99, 0.3)
+
+.insight-content
+  padding spacing-lg
+
+.insight-date
+  font-size font-size-small
+  font-weight 300
+  color rgba(51, 51, 51, 0.6)
+  margin-bottom spacing-xs
+
+.insight-title
+  font-size font-size-large
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-sm
+  line-height 1.4
+
+.insight-excerpt
+  font-size font-size-base
+  font-weight 300
+  color text-color
+  line-height 1.6
+  margin-bottom spacing-md
+
+.insight-link
+  color primary-color
+  text-decoration none
+  font-weight 500
+  font-size font-size-small
+  transition all 0.3s ease
+
+  &:hover
+    text-decoration underline
+
+// About Section
+.about-content
+  display grid
+  grid-template-columns 1fr 1fr
+  gap spacing-xl
+  align-items center
+
+.about-description
+  font-size font-size-base
+  font-weight 300
+  color text-color
+  line-height 1.8
+  margin-bottom spacing-md
+
+.about-image-placeholder
+  width 100%
+  height 300px
+  background-color rgba(20, 52, 99, 0.05)
+  border 1px dashed rgba(20, 52, 99, 0.3)
+  border-radius 12px
+  display flex
+  align-items center
+  justify-content center
+  color primary-color
+  font-size font-size-base
+  font-weight 500
+
+// Support Section
+.support-section
+  background-color #f8f9fa
+
+.support-grid
+  display grid
+  grid-template-columns repeat(auto-fit, minmax(250px, 1fr))
+  gap spacing-lg
+
+.support-card
+  background-color background-color
+  border 1px solid #e9ecef
+  border-radius 12px
+  padding spacing-lg
+  text-align center
+  transition all 0.3s ease
+
+  &:hover
+    transform translateY(-5px)
+    box-shadow 0 10px 30px rgba(0, 0, 0, 0.1)
+
+.support-icon-placeholder
+  width 60px
+  height 60px
+  margin 0 auto spacing-md
+  background-color rgba(20, 52, 99, 0.05)
+  border 1px dashed rgba(20, 52, 99, 0.3)
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  color primary-color
+  font-size font-size-small
+  font-weight 500
+
+.support-title
+  font-size font-size-large
+  font-weight 700
+  color primary-color
+  margin-bottom spacing-sm
+
+.support-description
+  font-size font-size-base
+  font-weight 300
+  color text-color
+  margin-bottom spacing-md
+  line-height 1.6
+
+// Contact CTA Section
+.contact-cta-section
+  background-color primary-color
+  color #fff
+  padding spacing-xl 0
+
+.cta-content
+  text-align center
+
+.cta-title
+  font-size 2rem
+  font-weight 700
+  color #fff
+  margin-bottom spacing-sm
+
+.cta-subtitle
+  font-size font-size-large
+  font-weight 300
+  color rgba(255, 255, 255, 0.9)
+  margin-bottom spacing-xl
+
+.cta-form-placeholder
+  max-width 600px
+  margin 0 auto spacing-lg
+  display flex
+  flex-direction column
+  gap spacing-sm
+
+.form-field-placeholder
+  width 100%
+  height 50px
+  background-color rgba(255, 255, 255, 0.1)
+  border 1px dashed rgba(255, 255, 255, 0.3)
+  border-radius 8px
+  display flex
+  align-items center
+  padding 0 spacing-md
+  color rgba(255, 255, 255, 0.8)
+  font-size font-size-base
+  font-weight 300
+
+.cta-contact-info
+  display flex
+  justify-content center
+  gap spacing-xl
+  margin-top spacing-lg
+
+.contact-info-item
+  text-align center
+
+.info-label
+  font-size font-size-small
+  font-weight 500
+  color rgba(255, 255, 255, 0.8)
+  margin-bottom spacing-xs
+
+.info-value
+  font-size font-size-base
+  font-weight 300
+  color #fff
+
+// 按鈕
+.btn
+  display inline-flex
+  align-items center
+  justify-content center
+  height 40px
+  padding 0 spacing-lg
+  border-radius border-radius-button
+  text-decoration none
+  font-weight 500
+  font-size font-size-base
+  transition all 0.3s ease
+  border none
+  cursor pointer
+  box-sizing border-box
+  line-height 1
+
+.btn-primary
+  background-color primary-color
+  color #fff
+  border 2px solid primary-color
+  box-sizing border-box
+
+  &:hover
+    background-color darken(primary-color, 10%)
+    border-color darken(primary-color, 10%)
+
+.btn-secondary
+  background-color transparent
+  color primary-color
+  border 2px solid primary-color
+  box-sizing border-box
+
+  &:hover
+    background-color primary-color
+    color background-color
+    border-color primary-color
+
+// Footer
+.site-footer
+  background-color primary-color
+  color #fff
+  padding spacing-xl 0 spacing-lg
+  margin-top spacing-xl
+  border-top 1px solid rgba(255, 255, 255, 0.1)
+
+.footer-content
+  display grid
+  grid-template-columns 2fr repeat(4, 1fr)
+  gap spacing-lg
+  margin-bottom spacing-xl
+
+.footer-brand
+  display flex
+  flex-direction column
+  align-items flex-start
+
+  .logo-placeholder
+    margin-bottom spacing-sm
+    background-color rgba(255, 255, 255, 0.1)
+    border-color rgba(255, 255, 255, 0.3)
+    color rgba(255, 255, 255, 0.8)
+
+.footer-description
+  color rgba(255, 255, 255, 0.8)
+  font-size font-size-small
+  font-weight 300
+  line-height 1.6
+  margin 0
+  margin-bottom spacing-sm
+  max-width 250px
+
+.social-icons
+  display flex
+  gap spacing-xs
+  align-items center
+
+.social-icon
+  text-decoration none
+  display inline-block
+
+.social-icon-placeholder
+  display flex
+  align-items center
+  justify-content center
+  width 40px
+  height 40px
+  background-color rgba(255, 255, 255, 0.1)
+  border 1px dashed rgba(255, 255, 255, 0.3)
+  border-radius 50%
+  color rgba(255, 255, 255, 0.8)
+  font-size 12px
+  font-weight 500
+  transition all 0.3s ease
+
+  &:hover
+    background-color rgba(255, 255, 255, 0.15)
+    border-color rgba(255, 255, 255, 0.5)
+    color #fff
+
+.footer-column
+  display flex
+  flex-direction column
+
+.footer-title
+  font-size font-size-base
+  font-weight 700
+  color #fff
+  margin-bottom spacing-sm
+  text-transform uppercase
+  letter-spacing 1px
+
+.footer-links
+  list-style none
+  padding 0
+  margin 0
+
+  li
+    margin-bottom spacing-xs
+
+.footer-link
+  color rgba(255, 255, 255, 0.8)
+  text-decoration none
+  font-size font-size-small
+  font-weight 300
+  transition all 0.3s ease
+
+  &:hover
+    color #fff
+    text-decoration underline
+
+.footer-contact
+  display flex
+  flex-direction column
+  gap spacing-xs
+
+.footer-text
+  color rgba(255, 255, 255, 0.8)
+  font-size font-size-small
+  font-weight 300
+  margin 0
+  line-height 1.6
+
+.footer-bottom
+  border-top 1px solid rgba(255, 255, 255, 0.1)
+  padding-top spacing-lg
+  text-align center
+
+.site-footer__copy
+  color rgba(255, 255, 255, 0.6)
+  font-size font-size-small
+  font-weight 300
+  margin 0
+
+// 響應式設計
+@media (max-width: breakpoint-mobile)
+  .site-header
+    height auto
+    min-height 78px
+
+  .header-content
+    flex-direction column
+    height auto
+    padding spacing-sm 0
+    gap spacing-sm
+
+  .site-nav
+    flex-wrap wrap
+    justify-content center
+    gap spacing-xs
+
+  .logo-placeholder
+    height 32px
+    min-width 100px
+
+  .hero-title
+    font-size 2rem
+
+  .hero-actions
+    flex-direction column
+    align-items center
+
+  .footer-content
+    grid-template-columns 1fr
+    gap spacing-md
+
+  .footer-column
+    margin-bottom spacing-md
+
+  .solutions-grid
+    grid-template-columns 1fr
+
+  .expertise-content
+    grid-template-columns 1fr
+
+  .expertise-features
+    grid-template-columns 1fr
+
+  .expertise-stats
+    grid-template-columns 1fr
+    margin-top spacing-lg
+
+  .insight-grid
+    grid-template-columns 1fr
+
+  .about-content
+    grid-template-columns 1fr
+
+  .support-grid
+    grid-template-columns 1fr
+
+  .cta-contact-info
+    flex-direction column
+    gap spacing-md
+
+@media (min-width: breakpoint-mobile) and (max-width: breakpoint-tablet)
+  .footer-content
+    grid-template-columns 2fr repeat(2, 1fr)
+    gap spacing-md
+
+  .footer-brand
+    grid-column span 2
+    margin-bottom spacing-md
+
+  .solutions-grid
+    grid-template-columns repeat(2, 1fr)
+
+  .expertise-content
+    grid-template-columns 1fr
+
+  .expertise-features
+    grid-template-columns 1fr
+
+  .expertise-stats
+    grid-template-columns repeat(2, 1fr)
+
+  .insight-grid
+    grid-template-columns 1fr
+
+  .about-content
+    grid-template-columns 1fr
+
+  .support-grid
+    grid-template-columns repeat(2, 1fr)

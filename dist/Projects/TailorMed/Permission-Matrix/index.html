@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TailorMed 資料庫權限矩陣</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Noto+Sans:wght@300;400;500;700&amp;display=swap">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="brand">
+          <h1> TailorMed 資料庫系統總覽暨權限矩陣</h1>
+          <p class="subtitle">資料庫權限矩陣規劃</p>
+        </div>
+        <nav class="nav"><a class="nav-link" href="#overview">總覽</a><a class="nav-link" href="#matrix">權限矩陣</a></nav>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <section class="section" id="overview">
+          <h2> 系統總覽</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-content">
+                <h3 id="totalUsers">5</h3>
+                <p>總使用者數</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <h3 id="totalDatabases">3</h3>
+                <p>資料庫數量</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <h3 id="totalPermissions">12</h3>
+                <p>權限項目</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <h3 id="totalFields">516</h3>
+                <p>欄位總計</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section" id="matrix">
+          <h2> 權限矩陣</h2>
+          <div class="matrix-controls">
+            <div class="filter-group">
+              <label for="roleFilter">角色篩選：</label>
+              <select class="filter-select" id="roleFilter">
+                <option value="">全部角色</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="dbFilter">資料庫篩選：</label>
+              <select class="filter-select" id="dbFilter">
+                <option value="">全部資料庫</option>
+              </select>
+            </div>
+          </div>
+          <div class="matrix-container">
+            <div class="matrix-table" id="permissionMatrix"></div>
+          </div>
+        </section>
+        <section class="section" id="crm-overview">
+          <h2> CRM 表單總覽
+            <div class="database-stats"><span>資料表：9</span><span>欄位數：180</span></div>
+          </h2>
+          <div class="crm-tables-grid">
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Quotations</h3>
+                <p>報價單管理</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">55</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"><span class="sensitive-field" id="quotations-total-amount">Total Amount</span><span class="sensitive-field" id="quotations-net-amount">Net Amount</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Partners</h3>
+                <p>合作夥伴資料</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">24</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Contacts</h3>
+                <p>Shipper/Consignee 往來客戶</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">17</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>ATTNs</h3>
+                <p>經辦人</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">19</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Locations</h3>
+                <p>地點管理</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">9</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Package Items</h3>
+                <p>包裹項目</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">18</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Charge Items</h3>
+                <p>收費項目</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">14</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Non-Taxable Charges</h3>
+                <p>免稅項目</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">12</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Staffs</h3>
+                <p>員工資料</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">12</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section" id="oms-overview">
+          <h2> OMS 表單總覽
+            <div class="database-stats"><span>資料表：10</span><span>欄位數：207</span></div>
+          </h2>
+          <div class="oms-tables-grid">
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Orders</h3>
+                <p>訂單管理</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">43</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>AIRWAYBILL/POD</h3>
+                <p>空運提單/交貨證明</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">32</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Tracking</h3>
+                <p>貨件追蹤</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">27</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Flights</h3>
+                <p>航班管理</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">14</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Package Items</h3>
+                <p>包裹項目</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">20</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Driver</h3>
+                <p>司機管理</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">8</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Release Check List for Collection</h3>
+                <p>收貨檢查清單</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">21</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Sample R/R Checklist</h3>
+                <p>樣品收發檢查清單</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">16</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Chain of Custody</h3>
+                <p>監管鏈</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">14</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Dry Ice Label</h3>
+                <p>乾冰標籤</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">12</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section" id="fin-overview">
+          <h2> FIN 表單總覽
+            <div class="database-stats"><span>資料表：6</span><span>欄位數：129</span></div>
+          </h2>
+          <div class="fin-tables-grid">
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Debit Notes</h3>
+                <p>借項通知單</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">60</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields" id="debit-notes-sensitive"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Charge Items</h3>
+                <p>收費項目</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">14</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Non-Taxable Charges</h3>
+                <p>非應稅費用</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">12</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Profit & Cost Summary</h3>
+                <p>利潤與成本摘要</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">13</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields" id="profit-cost-summary-sensitive"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Charge Catalog</h3>
+                <p>收費項目目錄表</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">19</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields" id="charge-catalog-sensitive"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Bene</h3>
+                <p>銀行匯款資訊</p>
+              </div>
+              <div class="table-stats">
+                <div class="stat-item"><span class="label">欄位總數：</span><span class="value">11</span></div>
+                <div class="stat-item"><span class="label">機敏欄位：</span>
+                  <div class="sensitive-fields"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 TailorMed. 權限管理系統 - 內部使用</p>
+      </div>
+    </footer>
+    <script src="./js/data.js"></script>
+    <script src="./js/matrix.js"></script>
+    <script src="./js/roles.js"></script>
+    <script src="./js/audit.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

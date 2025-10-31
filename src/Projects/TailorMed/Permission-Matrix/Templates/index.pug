@@ -1,0 +1,438 @@
+doctype html
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title TailorMed 資料庫權限矩陣
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap")
+    link(rel="stylesheet", href="./css/main.css")
+  body
+    header.header
+      .container
+        .brand
+          h1
+            |  TailorMed 資料庫系統總覽暨權限矩陣
+          p.subtitle 資料庫權限矩陣規劃
+        nav.nav
+          a.nav-link(href="#overview") 總覽
+          a.nav-link(href="#matrix") 權限矩陣
+          //- a.nav-link(href="#roles") 角色管理
+          //- a.nav-link(href="#audit") 審計報告
+
+    main.main
+      .container
+        //- 總覽區域
+        section#overview.section
+          h2
+            |  系統總覽
+          .stats-grid
+            .stat-card
+              .stat-content
+                h3#totalUsers 5
+                p 總使用者數
+            .stat-card
+              .stat-content
+                h3#totalDatabases 3
+                p 資料庫數量
+            .stat-card
+              .stat-content
+                h3#totalPermissions 12
+                p 權限項目
+            .stat-card
+              .stat-content
+                h3#totalFields 516
+                p 欄位總計
+            //- .stat-card
+            //-   .stat-icon
+            //-     i.fas.fa-exclamation-triangle
+            //-   .stat-content
+            //-     h3#securityIssues 0
+            //-     p 安全問題
+
+        //- 權限矩陣區域
+        section#matrix.section
+          h2
+            |  權限矩陣
+          .matrix-controls
+            .filter-group
+              label(for="roleFilter") 角色篩選：
+              select#roleFilter.filter-select
+                option(value="") 全部角色
+            .filter-group
+              label(for="dbFilter") 資料庫篩選：
+              select#dbFilter.filter-select
+                option(value="") 全部資料庫
+          .matrix-container
+            #permissionMatrix.matrix-table
+              //- 權限矩陣表格將由 JavaScript 動態生成
+
+        //- CRM 表單總覽區域
+        section#crm-overview.section
+          h2
+            |  CRM 表單總覽
+            .database-stats
+              span 資料表：9
+              span 欄位數：180
+          .crm-tables-grid
+            .table-card
+              .table-header
+                h3 Quotations
+                p 報價單管理
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 55
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    span.sensitive-field#quotations-total-amount Total Amount
+                    span.sensitive-field#quotations-net-amount Net Amount
+            .table-card
+              .table-header
+                h3 Partners
+                p 合作夥伴資料
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 24
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Contacts
+                p Shipper/Consignee 往來客戶
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 17
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 ATTNs
+                p 經辦人
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 19
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Locations
+                p 地點管理
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 9
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Package Items
+                p 包裹項目
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 18
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Charge Items
+                p 收費項目
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 14
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Non-Taxable Charges
+                p 免稅項目
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 12
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Staffs
+                p 員工資料
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 12
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+
+        //- OMS 表單總覽區域
+        section#oms-overview.section
+          h2
+            |  OMS 表單總覽
+            .database-stats
+              span 資料表：10
+              span 欄位數：207
+          .oms-tables-grid
+            .table-card
+              .table-header
+                h3 Orders
+                p 訂單管理
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 43
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 AIRWAYBILL/POD
+                p 空運提單/交貨證明
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 32
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Tracking
+                p 貨件追蹤
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 27
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Flights
+                p 航班管理
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 14
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Package Items
+                p 包裹項目
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 20
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Driver
+                p 司機管理
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 8
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Release Check List for Collection
+                p 收貨檢查清單
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 21
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Sample R/R Checklist
+                p 樣品收發檢查清單
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 16
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Chain of Custody
+                p 監管鏈
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 14
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Dry Ice Label
+                p 乾冰標籤
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 12
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+
+        //- FIN 表單總覽
+        section#fin-overview.section
+          h2
+            |  FIN 表單總覽
+            .database-stats
+              span 資料表：6
+              span 欄位數：129
+          .fin-tables-grid
+            .table-card
+              .table-header
+                h3 Debit Notes
+                p 借項通知單
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 60
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields#debit-notes-sensitive
+                    //- 機敏欄位將由 JavaScript 動態生成
+            .table-card
+              .table-header
+                h3 Charge Items
+                p 收費項目
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 14
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Non-Taxable Charges
+                p 非應稅費用
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 12
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+            .table-card
+              .table-header
+                h3 Profit & Cost Summary
+                p 利潤與成本摘要
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 13
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields#profit-cost-summary-sensitive
+                    //- 機敏欄位將由 JavaScript 動態生成
+            .table-card
+              .table-header
+                h3 Charge Catalog
+                p 收費項目目錄表
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 19
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields#charge-catalog-sensitive
+                    //- 機敏欄位將由 JavaScript 動態生成
+            .table-card
+              .table-header
+                h3 Bene
+                p 銀行匯款資訊
+              .table-stats
+                .stat-item
+                  span.label 欄位總數：
+                  span.value 11
+                .stat-item
+                  span.label 機敏欄位：
+                  .sensitive-fields
+                    //- 機敏欄位待定，暫時留空
+
+        //- 角色管理區域
+        //- section#roles.section
+        //-   h2
+        //-     i.fas.fa-user-tag
+        //-     |  角色管理
+        //-   .roles-container
+        //-     .role-list#roleList
+        //-       //- 角色列表將由 JavaScript 動態生成
+        //-     .role-details#roleDetails
+        //-       h3 選擇角色查看詳細資訊
+        //-       p 點擊左側角色以查看其權限詳情
+
+        //- 審計報告區域
+        //- section#audit.section
+        //-   h2
+        //-     i.fas.fa-clipboard-check
+        //-     |  審計報告
+        //-   .audit-container
+        //-     .audit-filters
+        //-       .filter-group
+        //-         label(for="dateFrom") 開始日期：
+        //-         input#dateFrom.filter-input(type="date")
+        //-       .filter-group
+        //-         label(for="dateTo") 結束日期：
+        //-         input#dateTo.filter-input(type="date")
+        //-       button#generateReport.btn.btn-secondary
+        //-         i.fas.fa-file-alt
+        //-         |  生成報告
+        //-     .audit-results#auditResults
+        //-       //- 審計結果將由 JavaScript 動態生成
+
+    footer.footer
+      .container
+        p &copy; 2025 TailorMed. 權限管理系統 - 內部使用
+
+    script(src="./js/data.js")
+    script(src="./js/matrix.js")
+    script(src="./js/roles.js")
+    script(src="./js/audit.js")
+    script(src="./js/main.js")

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TailorMed 表格權限管理</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="brand">
+          <h1><i class="fas fa-table"></i> TailorMed 表格權限管理</h1>
+          <p class="subtitle">基於 Airtable 結構的細分權限控制</p>
+        </div>
+        <nav class="nav"><a class="nav-link" href="#overview">總覽</a><a class="nav-link" href="#database-matrix">資料庫權限</a><a class="nav-link" href="#table-matrix">表格權限</a><a class="nav-link" href="#field-matrix">欄位權限</a></nav>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <section class="section" id="overview">
+          <h2><i class="fas fa-chart-pie"></i> 權限總覽</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-database"></i></div>
+              <div class="stat-content">
+                <h3 id="totalDatabases">0</h3>
+                <p>資料庫數量</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-table"></i></div>
+              <div class="stat-content">
+                <h3 id="totalTables">0</h3>
+                <p>表格總數</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div class="stat-content">
+                <h3 id="totalUsers">0</h3>
+                <p>使用者數量</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-key"></i></div>
+              <div class="stat-content">
+                <h3 id="totalPermissions">0</h3>
+                <p>權限項目</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section" id="database-matrix">
+          <h2><i class="fas fa-database"></i> 資料庫權限矩陣</h2>
+          <div class="matrix-controls">
+            <div class="filter-group">
+              <label for="roleFilter">角色篩選：</label>
+              <select class="filter-select" id="roleFilter">
+                <option value="">全部角色</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="exportDbBtn"><i class="fas fa-download"></i> 匯出資料庫權限</button>
+          </div>
+          <div class="matrix-container">
+            <div class="matrix-table" id="databaseMatrix"></div>
+          </div>
+        </section>
+        <section class="section" id="table-matrix">
+          <h2><i class="fas fa-table"></i> 表格權限矩陣</h2>
+          <div class="matrix-controls">
+            <div class="filter-group">
+              <label for="dbFilter">資料庫篩選：</label>
+              <select class="filter-select" id="dbFilter">
+                <option value="">全部資料庫</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="tableRoleFilter">角色篩選：</label>
+              <select class="filter-select" id="tableRoleFilter">
+                <option value="">全部角色</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="exportTableBtn"><i class="fas fa-download"></i> 匯出表格權限</button>
+          </div>
+          <div class="matrix-container">
+            <div class="matrix-table" id="tableMatrix"></div>
+          </div>
+        </section>
+        <section class="section" id="field-matrix">
+          <h2><i class="fas fa-columns"></i> 欄位權限矩陣</h2>
+          <div class="matrix-controls">
+            <div class="filter-group">
+              <label for="fieldTableFilter">表格篩選：</label>
+              <select class="filter-select" id="fieldTableFilter">
+                <option value="">選擇表格</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="fieldRoleFilter">角色篩選：</label>
+              <select class="filter-select" id="fieldRoleFilter">
+                <option value="">全部角色</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="exportFieldBtn"><i class="fas fa-download"></i> 匯出欄位權限</button>
+          </div>
+          <div class="matrix-container">
+            <div class="matrix-table" id="fieldMatrix"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 TailorMed. 表格權限管理系統 - 內部使用</p>
+      </div>
+    </footer>
+    <script src="./js/data.js"></script>
+    <script src="./js/table-permissions.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+doctype html
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title TailorMed 表格權限管理
+    link(rel="stylesheet", href="./css/main.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css")
+  body
+    header.header
+      .container
+        .brand
+          h1
+            i.fas.fa-table
+            |  TailorMed 表格權限管理
+          p.subtitle 基於 Airtable 結構的細分權限控制
+        nav.nav
+          a.nav-link(href="#overview") 總覽
+          a.nav-link(href="#database-matrix") 資料庫權限
+          a.nav-link(href="#table-matrix") 表格權限
+          a.nav-link(href="#field-matrix") 欄位權限
+
+    main.main
+      .container
+        //- 總覽區域
+        section#overview.section
+          h2
+            i.fas.fa-chart-pie
+            |  權限總覽
+          .stats-grid
+            .stat-card
+              .stat-icon
+                i.fas.fa-database
+              .stat-content
+                h3#totalDatabases 0
+                p 資料庫數量
+            .stat-card
+              .stat-icon
+                i.fas.fa-table
+              .stat-content
+                h3#totalTables 0
+                p 表格總數
+            .stat-card
+              .stat-icon
+                i.fas.fa-users
+              .stat-content
+                h3#totalUsers 0
+                p 使用者數量
+            .stat-card
+              .stat-icon
+                i.fas.fa-key
+              .stat-content
+                h3#totalPermissions 0
+                p 權限項目
+
+        //- 資料庫權限矩陣
+        section#database-matrix.section
+          h2
+            i.fas.fa-database
+            |  資料庫權限矩陣
+          .matrix-controls
+            .filter-group
+              label(for="roleFilter") 角色篩選：
+              select#roleFilter.filter-select
+                option(value="") 全部角色
+            button#exportDbBtn.btn.btn-primary
+              i.fas.fa-download
+              |  匯出資料庫權限
+          .matrix-container
+            #databaseMatrix.matrix-table
+              //- 資料庫權限矩陣將由 JavaScript 生成
+
+        //- 表格權限矩陣
+        section#table-matrix.section
+          h2
+            i.fas.fa-table
+            |  表格權限矩陣
+          .matrix-controls
+            .filter-group
+              label(for="dbFilter") 資料庫篩選：
+              select#dbFilter.filter-select
+                option(value="") 全部資料庫
+            .filter-group
+              label(for="tableRoleFilter") 角色篩選：
+              select#tableRoleFilter.filter-select
+                option(value="") 全部角色
+            button#exportTableBtn.btn.btn-primary
+              i.fas.fa-download
+              |  匯出表格權限
+          .matrix-container
+            #tableMatrix.matrix-table
+              //- 表格權限矩陣將由 JavaScript 生成
+
+        //- 欄位權限矩陣（進階功能）
+        section#field-matrix.section
+          h2
+            i.fas.fa-columns
+            |  欄位權限矩陣
+          .matrix-controls
+            .filter-group
+              label(for="fieldTableFilter") 表格篩選：
+              select#fieldTableFilter.filter-select
+                option(value="") 選擇表格
+            .filter-group
+              label(for="fieldRoleFilter") 角色篩選：
+              select#fieldRoleFilter.filter-select
+                option(value="") 全部角色
+            button#exportFieldBtn.btn.btn-primary
+              i.fas.fa-download
+              |  匯出欄位權限
+          .matrix-container
+            #fieldMatrix.matrix-table
+              //- 欄位權限矩陣將由 JavaScript 生成
+
+    footer.footer
+      .container
+        p &copy; 2025 TailorMed. 表格權限管理系統 - 內部使用
+
+    script(src="./js/data.js")
+    script(src="./js/table-permissions.js")
+    script(src="./js/main.js")
+
+
