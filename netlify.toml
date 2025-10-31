@@ -1,0 +1,56 @@
+[build]
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/api/tracking"
+  to = "/.netlify/functions/tracking"
+  status = 200
+
+[[redirects]]
+  from = "/api/tracking-public"
+  to = "/.netlify/functions/tracking"
+  status = 200
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/tracking"
+  status = 200
+
+[[redirects]]
+  from = "/api/monitoring/stats"
+  to = "/.netlify/functions/tracking"
+  status = 200
+
+[[redirects]]
+  from = "/design"
+  to = "/design_ui.html"
+  status = 200
+
+[[redirects]]
+  from = "/basic"
+  to = "/basic.html"
+  status = 200
+
+[[redirects]]
+  from = "/standard"
+  to = "/standard.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+
