@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timeline Test - TailorMed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        background: linear-gradient(135deg, #143463 0%, #97d3df 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      .test-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        color: #143463;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+      }
+      .subtitle {
+        color: #666;
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+      }
+      .timeline-nodes-container {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2rem 0;
+        border-top: 2px solid #e0e0e0;
+        border-bottom: 2px solid #e0e0e0;
+      }
+      .test-section {
+        margin-bottom: 4rem;
+      }
+      .test-section h2 {
+        color: #143463;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <div class="test-section">
+        <h1>Timeline 節點預覽</h1>
+        <p class="subtitle">展示不同狀態的 Timeline 節點樣式</p>
+        <h2>完整範例</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--completed">
+                      <div class="node-date"><span class="month">Oct</span><span class="day">10</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--completed"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">訂單已建立</div>
+                        <p class="node-time">10:16</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--processing">
+                      <div class="node-date"><span class="month">Oct</span><span class="day">11</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--processing"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">運輸中</div>
+                        <p class="node-time">14:30</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--pending">
+                      <div class="node-date"><span class="month">Oct</span><span class="day">12</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--pending"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">等待派送</div>
+                        <p class="node-time">09:00</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--warning">
+                      <div class="node-date"><span class="month">Oct</span><span class="day">13</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--warning"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">需要確認</div>
+                        <p class="node-time">11:20</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--error">
+                      <div class="node-date"><span class="month">Oct</span><span class="day">14</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--error"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">派送失敗</div>
+                        <p class="node-time">15:45</p>
+                      </div>
+                    </div>
+        </div>
+        <h2>已完成狀態 (completed)</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--completed">
+                      <div class="node-date"><span class="month">Jan</span><span class="day">15</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--completed"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">訂單已建立</div>
+                        <p class="node-time">09:00</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--completed">
+                      <div class="node-date"><span class="month">Jan</span><span class="day">16</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--completed"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">貨件已收件</div>
+                        <p class="node-time">10:30</p>
+                      </div>
+                    </div>
+                    <div class="timeline-node timeline-node--completed">
+                      <div class="node-date"><span class="month">Jan</span><span class="day">17</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--completed"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">已出貨</div>
+                        <p class="node-time">14:20</p>
+                      </div>
+                    </div>
+        </div>
+        <h2>處理中狀態 (processing)</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--processing">
+                      <div class="node-date"><span class="month">Feb</span><span class="day">18</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--processing"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">運輸中</div>
+                        <p class="node-time">16:00</p>
+                      </div>
+                    </div>
+        </div>
+        <h2>等待中狀態 (pending)</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--pending">
+                      <div class="node-date"><span class="month">Mar</span><span class="day">19</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--pending"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">等待派送</div>
+                        <p class="node-time">09:00</p>
+                      </div>
+                    </div>
+        </div>
+        <h2>警告狀態 (warning)</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--warning">
+                      <div class="node-date"><span class="month">Apr</span><span class="day">20</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--warning"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">需簽收確認</div>
+                        <p class="node-time">11:30</p>
+                      </div>
+                    </div>
+        </div>
+        <h2>錯誤狀態 (error)</h2>
+        <div class="timeline-nodes-container">
+                    <div class="timeline-node timeline-node--error">
+                      <div class="node-date"><span class="month">May</span><span class="day">21</span></div>
+                      <div class="node-icon">
+                        <div class="node-circle node-circle--error"></div>
+                      </div>
+                      <div class="node-info">
+                        <div class="node-status">派送失敗</div>
+                        <p class="node-time">15:45</p>
+                      </div>
+                    </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

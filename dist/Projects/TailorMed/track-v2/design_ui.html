@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TailorMed｜Shipment Tracking System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="brand"><img class="brand-logo" src="./images/logo.png" alt="TailorMed"></div><a class="header-btn" href="https://www.tailormed-intl.com">Back Home</a>
+      </div>
+    </header>
+    <section class="hero-banner">
+      <div class="hero-overlay"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">Track Your TailorMed™ Shipments Anytime</h1>
+            <p class="hero-subtitle hero-subtitle--desktop">Use your order number and job ID to review the most recent shipment status available from TailorMed.</p>
+            <p class="hero-subtitle hero-subtitle--mobile">Use your order number and job ID to review the most recent shipment status available from TailorMed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="hero-summary">
+      <div class="tracking-lookup-panel">
+        <div class="summary-title">Shipment Tracking Lookup</div>
+        <div class="summary-search"> 
+          <div class="summary-form">
+            <div class="form-row">
+              <div class="input-group">
+                <div class="input-label">Order No.</div>
+                <input type="text" placeholder="e.g. TM111234" name="orderNo" required>
+              </div>
+              <div class="input-group">
+                <div class="input-label">Tracking No.</div>
+                <input type="text" placeholder="e.g. CXXXD3XX" name="trackingNo" required>
+              </div>
+              <div class="input-group">
+                <button class="btn--primary" type="submit">Status Check</button>
+              </div>
+            </div>
+            <div class="form-helper">Need Help? Contact your TailorMed logistic specialist at <span class="contact-phone">+8862-2694-6168</span> for priority support.</div>
+          </div>
+        </div>
+      </div>
+      <div class="results-panel">
+        <div class="results-title">Latest shipment updates</div>
+        <div class="results-description">Review the most recent update TailorMed has received for this shipment</div>
+        <div class="results-container">
+          <div class="results-highlight">
+            <div class="summary-grid">
+              <div class="summary-field">
+                <div class="field-label">Order No.</div>
+                <div class="field-value">TM439812</div>
+              </div>
+              <div class="summary-field">
+                <div class="field-label">ORIGIN/DESTINATION</div>
+                <div class="field-value">PVG → TPE</div>
+              </div>
+              <div class="summary-field">
+                <div class="field-label">PACKAGE COUNT</div>
+                <div class="field-value">1</div>
+              </div>
+              <div class="summary-field">
+                <div class="field-label">WEIGHT</div>
+                <div class="field-value">25 KG</div>
+              </div>
+              <div class="summary-field">
+                <div class="field-label">ETA</div>
+                <div class="field-value">06/10/2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="status-info">
+            <div class="summary-field">
+              <div class="field-label">TRACKING NO.</div>
+              <div class="field-value">EX39DAF9</div>
+            </div>
+            <div class="summary-field">
+              <div class="field-label">Current Status</div>
+              <div class="field-value status-value-wrapper"><span class="status-inline">Out for Delivery</span>
+                <div class="status-icon-wrapper" data-tooltip="Dry ice refilled">
+                  <div class="status-icon"><img src="./images/icon-dryice.svg" alt="Dry Ice" width="40" height="40"></div>
+                </div>
+              </div>
+            </div>
+            <div class="summary-field">
+              <div class="field-label">Last Update</div>
+              <div class="field-value">11/10/2025 14:30 (local)</div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <h3 class="timeline-title">Shipment History</h3>
+          <p class="timeline-description">Track your shipment through each milestone</p>
+          <div class="timeline-visual">
+            <div class="timeline-track"></div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-nodes-container">
+                      <div class="timeline-node">
+                        <div class="node-date"><span class="month">Oct</span><span class="day">10</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">Order Created</div>
+                          <p class="node-time">10:16</p>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-node--processing">
+                        <div class="node-date"><span class="month"></span><span class="day">TBD</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle node-circle--processing"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">Destination Customs Process</div>
+                          <p class="node-time">Processing...</p>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-node--processing">
+                        <div class="node-date"><span class="month"></span><span class="day">TBD</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle node-circle--processing"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">In Transit</div>
+                          <p class="node-time">Processing...</p>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-node--pending">
+                        <div class="node-date"><span class="month"></span><span class="day">TBD</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle node-circle--pending"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">Out for Delivery</div>
+                          <p class="node-time">--:--</p>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-node--completed">
+                        <div class="node-date"><span class="month">Oct</span><span class="day">13</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle node-circle--completed"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">In Transit</div>
+                          <p class="node-time">09:00</p>
+                        </div>
+                      </div>
+                      <div class="timeline-node timeline-node--completed">
+                        <div class="node-date"><span class="month">Oct</span><span class="day">13</span></div>
+                        <div class="node-icon">
+                          <div class="node-circle node-circle--completed"></div>
+                        </div>
+                        <div class="node-info">
+                          <div class="node-status">Shipment Completed</div>
+                          <p class="node-time">09:00</p>
+                        </div>
+                      </div>
+            </div>
+            <div class="timeline-events">
+              <div class="event-dryice-refilled">
+                <div class="event-circle"></div>
+                <div class="event-tag"><span class="event-tag-text">Dry ice refilled (Terminal)</span><img class="event-tag-icon" src="./images/icon-dryice.svg" alt="Dry Ice Refilled"></div>
+              </div>
+              <div class="event-dryice-refilled">
+                <div class="event-circle"></div>
+                <div class="event-tag"><span class="event-tag-text">Dry ice refilled</span><img class="event-tag-icon" src="./images/icon-dryice.svg" alt="Dry Ice Refilled"></div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-icon-legend">
+            <div class="legend-items-container">
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-complet.png" alt="Executed"></div>
+                <div class="legend-text">Executed</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-processing-DOM.png" alt="On the Road"></div>
+                <div class="legend-text">On the Road</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-processing-ImportAndExport.png" alt="In Transit"></div>
+                <div class="legend-text">In Transit</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-pending.png" alt="Pending"></div>
+                <div class="legend-text">Pending</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-acompishment.png" alt="Task Completed"></div>
+                <div class="legend-text">Task Completed</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-tailormed-mark.png" alt="Shipment Delivered"></div>
+                <div class="legend-text">Shipment Delivered</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-description-node-tbd.png" alt="To be Determined"></div>
+                <div class="legend-text">To be Determined</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-icon"><img src="./images/icon-dryice.svg" alt="Dry ice Refilled"></div>
+                <div class="legend-text">Dry ice Refilled</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="results-note">This information is NOT updated in real-time. For the most current status, please refresh this page or contact our customer service team.</div>
+      </div>
+      <section class="system-description">
+        <div class="container">
+          <div class="description-content">
+            <h3 class="description-title">TailorMed™ Shipment Tracking Notice｜Cold Chain Dedicated Service</h3>
+            <div class="description-text-section">
+              <p class="description-text">This tracking system is exclusively provided by TailorMed for authorized clients to access current shipment information. Data is updated daily and accessible across multiple devices and platforms—no software installation required. Clients can monitor cold chain shipments anytime, anywhere.</p>
+              <p class="description-text">To protect the integrity and confidentiality of your shipment data, all queries are access-controlled and transmitted securely. Tracking records are used solely for logistics coordination and customer support purposes and are stored securely on our authorized data platforms.</p>
+              <p class="description-text">For questions or urgent inquiries, please contact your project coordinator directly. Contact us at <strong>+8862-2694-6168 </strong>or email <strong>customer-service@tailormed-intl.com</strong>. TailorMed is committed to providing reliable systems, transparent tracking, and professional service for every shipment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <footer class="site-footer">
+      <div class="container">
+        <p class="site-footer__copy">© 2025 TailorMed. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

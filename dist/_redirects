@@ -1,0 +1,18 @@
+# Netlify Redirects for track-v2
+
+# API to Netlify Functions
+/api/tracking  /.netlify/functions/tracking  200
+/api/tracking-public  /.netlify/functions/tracking  200
+/api/health  /.netlify/functions/tracking  200
+
+# Redirect /design to design_ui.html
+/design  /design_ui.html  200
+
+# Redirect backend pages
+/basic  /basic.html  200
+/standard  /standard.html  200
+/admin  /admin.html  200
+
+# Fallback for SPA routing
+/*  /index.html  200
+
